@@ -3,523 +3,748 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#bcd4e4">
+<meta name="theme-color" content="#f7d6dd">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="小猫工作台">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<title>小猫工作台 · 考研双专业×财务×减脂</title>
+<title>小猫工作台 · 考研双专业</title>
 <style>
 :root{
-  --bg:#fbf6f2; --bg2:#f4eef0;
-  --card:#ffffff; --card-soft:#faf6f4;
-  --blue:#bcd4e4; --blue-deep:#8fa8b8; --blue-text:#5a7a90;
-  --pink:#f4d4d0; --pink-deep:#d4a8a4; --pink-text:#a06868;
-  --lilac:#d4c8dc; --mint:#c8dcd8;
-  --ink:#6a6a78; --ink-soft:#9a8a98; --ink-faint:#b8b0bc;
-  --line:#ece4e8; --shadow:0 4px 18px rgba(180,160,170,.10);
-  --radius:18px; --sidebar-w:200px;
-  --gold:#e8c87a;
+  --bg1:#fce8ed; --bg2:#fdf0f4; --bg3:#fff5f8;
+  --card:#ffffff; --card-soft:#faf6f8;
+  --pink:#f7a8b8; --pink-soft:#fcd5dd; --pink-deep:#e8849a; --pink-text:#c46080;
+  --blue:#b5d4e0; --blue-soft:#dceaf0; --blue-deep:#7fa8ba; --blue-text:#4a7a90;
+  --gold:#e8c87a; --mint:#a8d8c0;
+  --ink:#4a4a5a; --ink-soft:#8a8a9a; --ink-faint:#b8b8c8;
+  --line:#f0e8ec; --shadow:0 6px 20px rgba(200,140,160,.08);
+  --shadow-lg:0 8px 30px rgba(200,140,160,.12);
+  --radius:22px; --radius-sm:14px;
+  --sidebar-w:230px;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0;height:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,var(--bg) 0%, var(--bg2) 100%);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow:hidden}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg3) 100%);color:var(--ink);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;font-size:14px}
 
-.app{display:flex;height:100vh;height:100dvh}
-.sidebar{width:var(--sidebar-w);flex-shrink:0;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:18px 12px;overflow-y:auto}
-.sidebar .logo{text-align:center;padding:8px 0 12px;border-bottom:1px dashed var(--line);margin-bottom:10px}
-.sidebar .logo .paw{font-size:20px;opacity:.7}
-.sidebar .logo h1{margin:4px 0 0;font-size:15px;font-weight:700;color:var(--blue-text)}
-.sidebar .logo .sub{font-size:10.5px;color:var(--ink-faint);margin:2px 0 0}
-.nav-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;cursor:pointer;color:var(--ink-soft);font-size:14px;font-weight:500;transition:all .18s;margin-bottom:4px;user-select:none}
-.nav-item .ic{font-size:17px;width:22px;text-align:center}
-.nav-item:hover{background:rgba(188,212,228,.25);color:var(--blue-text)}
-.nav-item.active{background:linear-gradient(135deg,var(--blue),var(--pink));color:#fff;box-shadow:0 3px 12px rgba(150,130,140,.2)}
-.nav-item .badge{margin-left:auto;font-size:10px;background:var(--pink-deep);color:#fff;padding:1px 7px;border-radius:10px;font-weight:600}
-.nav-item.active .badge{background:rgba(255,255,255,.4)}
-.sidebar .foot{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font-size:10.5px;color:var(--ink-faint);text-align:center;line-height:1.6}
+.app{display:flex;height:100dvh}
+/* === 侧边栏 === */
+.sidebar{width:var(--sidebar-w);flex-shrink:0;background:rgba(255,255,255,.75);backdrop-filter:blur(16px);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:16px 12px;overflow-y:auto;z-index:30}
+.sidebar .logo{display:flex;align-items:center;gap:10px;padding:8px 10px 18px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.sidebar .logo .av{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--pink),var(--blue));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sidebar .logo .info h1{font-size:15px;font-weight:700;color:var(--ink)}
+.sidebar .logo .info p{font-size:10px;color:var(--ink-faint)}
+.nav-section{font-size:10px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:1px;padding:10px 12px 4px;font-weight:600}
+.nav-item{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:12px;cursor:pointer;color:var(--ink-soft);font-size:13.5px;font-weight:500;transition:all .18s;margin-bottom:2px;user-select:none}
+.nav-item .ic{font-size:16px;width:20px;text-align:center}
+.nav-item:hover{background:rgba(247,168,184,.12);color:var(--pink-text)}
+.nav-item.active{background:linear-gradient(135deg,var(--pink),var(--pink-soft));color:#fff;box-shadow:0 4px 14px rgba(232,132,154,.3)}
+.nav-item .badge{margin-left:auto;font-size:10px;background:var(--pink);color:#fff;padding:1px 7px;border-radius:10px;font-weight:600}
+.nav-item.active .badge{background:rgba(255,255,255,.35)}
+.sidebar .foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:10.5px;color:var(--ink-faint);text-align:center;line-height:1.6}
 
-.main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;position:relative}
-.main-inner{max-width:680px;margin:0 auto;padding:14px 14px 90px}
+/* === 主区 === */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.topbar{display:flex;align-items:center;gap:12px;padding:14px 20px;background:rgba(255,255,255,.55);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);flex-shrink:0;z-index:20}
+.topbar .menu-btn{display:none;font-size:20px;cursor:pointer;color:var(--ink-soft);background:none;border:none}
+.topbar .date-block{display:flex;flex-direction:column}
+.topbar .date-block .d{font-size:15px;font-weight:700;color:var(--ink)}
+.topbar .date-block .t{font-size:11px;color:var(--ink-faint)}
+.topbar .search{flex:1;max-width:260px;margin-left:auto;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:7px 14px;font-size:12px;color:var(--ink-faint)}
+.topbar .search input{border:none;outline:none;background:none;flex:1;font-size:12px;color:var(--ink)}
+.topbar .top-actions{display:flex;gap:8px;margin-left:auto}
+.topbar .ta{width:34px;height:34px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:all .15s}
+.topbar .ta:hover{background:var(--pink-soft);border-color:var(--pink)}
 
-.page{display:none;animation:fade .25s ease}
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.content-inner{max-width:720px;margin:0 auto;padding:18px 18px 80px}
+
+/* === 页面 === */
+.page{display:none;animation:fade .3s ease}
 .page.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-.page-head{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding:4px 0;flex-wrap:wrap}
-.page-head .emoji{font-size:22px}
-.page-head h2{margin:0;font-size:18px;font-weight:700;color:var(--blue-text)}
-.page-head .desc{font-size:12px;color:var(--ink-soft);margin-left:auto}
+.page-title{font-size:20px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.page-sub{font-size:12px;color:var(--ink-soft);margin-bottom:16px}
 
-/* 倒计时 */
-.countdown{background:linear-gradient(135deg,var(--blue),var(--pink));border-radius:var(--radius);padding:16px;text-align:center;color:#fff;margin-bottom:13px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
-.countdown .cd-label{font-size:12px;opacity:.9}
-.countdown .cd-num{font-size:42px;font-weight:800;line-height:1.1;margin:2px 0}
-.countdown .cd-unit{font-size:14px;opacity:.9}
-.countdown .cat-bg{position:absolute;right:10px;bottom:-6px;font-size:50px;opacity:.25}
+/* === 卡片 === */
+.card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card-h{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.card-h .ic{font-size:18px}
+.card-h h3{font-size:15px;font-weight:700;color:var(--ink);flex:1}
+.card-h .more{font-size:11px;color:var(--ink-faint);cursor:pointer}
+.card-h .num{font-size:11px;color:#fff;background:var(--pink);padding:2px 9px;border-radius:12px;font-weight:600}
 
-.card{background:var(--card);border-radius:var(--radius);padding:16px 15px;margin-bottom:13px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.card.pink-tag{border-top:3px solid var(--pink)}
-.card.blue-tag{border-top:3px solid var(--blue)}
-.card.lilac-tag{border-top:3px solid var(--lilac)}
-.card.gold-tag{border-top:3px solid var(--gold)}
-.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.sec-head .emoji{font-size:18px}
-.sec-head h3{margin:0;font-size:15.5px;font-weight:700;color:var(--blue-text)}
-.sec-head .num{margin-left:auto;font-size:11px;color:#fff;background:var(--blue-deep);padding:2px 9px;border-radius:20px;font-weight:600}
+/* === 统计卡片组 === */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat-card{background:var(--card);border-radius:var(--radius-sm);padding:14px 12px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.stat-card .sc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.stat-card .sc-ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.stat-card .sc-trend{font-size:10px;font-weight:600;padding:2px 6px;border-radius:8px}
+.stat-card .sc-trend.up{color:#5aa870;background:#e0f0e8}
+.stat-card .sc-trend.down{color:var(--pink-text);background:var(--pink-soft)}
+.stat-card .sc-val{font-size:22px;font-weight:800;color:var(--ink);line-height:1.1}
+.stat-card .sc-val small{font-size:12px;font-weight:500;color:var(--ink-faint)}
+.stat-card .sc-lab{font-size:10.5px;color:var(--ink-faint);margin-top:2px}
 
-.sub-title{font-size:13.5px;font-weight:700;color:var(--pink-text);margin:14px 0 8px;padding-left:9px;border-left:3px solid var(--pink);display:flex;align-items:center;gap:6px}
-.sub-title.blue{color:var(--blue-text);border-color:var(--blue-deep)}
-.sub-title .tiny{font-size:11px;color:var(--ink-faint);font-weight:400}
-
-/* 进度条组 */
-.prog-group{display:flex;flex-direction:column;gap:10px;margin:8px 0}
-.prog-item{font-size:12px}
-.prog-item .pl{display:flex;justify-content:space-between;margin-bottom:3px;color:var(--ink-soft)}
-.prog-item .pl b{color:var(--blue-text)}
-.bar-wrap{height:12px;background:var(--card-soft);border-radius:8px;overflow:hidden;border:1px solid var(--line)}
-.bar-fill{height:100%;background:linear-gradient(90deg,var(--blue-deep),var(--pink-deep));border-radius:8px;transition:width .6s ease}
+/* 进度条 */
+.prog{margin:8px 0}
+.prog .pl{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;color:var(--ink-soft)}
+.prog .pl b{color:var(--pink-text)}
+.bar-wrap{height:10px;background:var(--card-soft);border-radius:6px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-soft));border-radius:6px;transition:width .6s ease}
 .bar-fill.blue{background:linear-gradient(90deg,var(--blue-deep),var(--blue))}
-.bar-fill.pink{background:linear-gradient(90deg,var(--pink-deep),var(--pink))}
 .bar-fill.gold{background:linear-gradient(90deg,#d4a44a,var(--gold))}
 
-.checklist{display:flex;flex-direction:column;gap:7px}
-.task{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--card-soft);border-radius:12px;border:1px solid var(--line);transition:all .2s;cursor:pointer}
-.task:hover{border-color:var(--blue)}
-.task .box{width:20px;height:20px;border:2px solid var(--blue-deep);border-radius:6px;flex-shrink:0;margin-top:1px;position:relative;transition:all .2s;background:#fff}
-.task.done .box{background:var(--blue-deep)}
-.task.done .box::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
-.task .txt{flex:1;font-size:13.5px;line-height:1.45}
-.task.done .txt{color:var(--ink-faint);text-decoration:line-through}
-.task .tag{font-size:10px;padding:1px 7px;border-radius:8px;font-weight:600;flex-shrink:0;margin-top:1px}
-.tag.en{background:#e8f0f6;color:var(--blue-text)}
-.tag.pro{background:#f6e8e8;color:var(--pink-text)}
-.tag.pol{background:#f0e8f0;color:#7d5d8d}
-.tag.wuj{background:#e8f0ed;color:#5a8a70}
-.tag.wuh{background:#e8e8f0;color:#5a5d8d}
+/* 圆环图 */
+.donut-wrap{display:flex;align-items:center;gap:16px;justify-content:center;padding:8px 0}
+.donut-legend{display:flex;flex-direction:column;gap:6px;font-size:11px}
+.donut-legend .li{display:flex;align-items:center;gap:6px;color:var(--ink-soft)}
+.donut-legend .dot{width:10px;height:10px;border-radius:3px}
 
-.input,.select,.textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:13.5px;font-family:inherit;color:var(--ink);background:#fff;outline:none;transition:border-color .2s}
-.input:focus,.select:focus,.textarea:focus{border-color:var(--blue-deep)}
-.textarea{resize:vertical;min-height:54px;line-height:1.5}
+/* 输入 */
+.input,.select,.textarea{width:100%;padding:10px 13px;border:1px solid var(--line);border-radius:12px;font-size:13px;font-family:inherit;color:var(--ink);background:#fff;outline:none;transition:border-color .2s}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--pink)}
+.textarea{resize:vertical;min-height:50px;line-height:1.5}
 .row{display:flex;gap:8px;flex-wrap:wrap}
 .row>*{flex:1;min-width:0}
 .row.fix>*{flex:0 0 auto}
-label.lab{display:block;font-size:11.5px;color:var(--ink-soft);margin:8px 0 4px;font-weight:600}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 16px;background:linear-gradient(135deg,var(--blue),var(--pink));color:#fff;border:none;border-radius:24px;font-size:13px;font-weight:600;cursor:pointer;transition:transform .15s,box-shadow .2s;font-family:inherit;box-shadow:0 3px 10px rgba(150,130,140,.18)}
-.btn:hover{transform:translateY(-1px)}
+label.lab{display:block;font-size:11px;color:var(--ink-soft);margin:8px 0 4px;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 18px;background:linear-gradient(135deg,var(--pink),var(--pink-deep));color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;box-shadow:0 3px 12px rgba(232,132,154,.25)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(232,132,154,.35)}
 .btn:active{transform:translateY(0)}
-.btn.ghost{background:#fff;color:var(--blue-text);border:1px solid var(--line);box-shadow:none}
-.btn.sm{padding:6px 12px;font-size:12px}
+.btn.ghost{background:#fff;color:var(--pink-text);border:1px solid var(--line);box-shadow:none}
+.btn.sm{padding:6px 13px;font-size:12px}
+.btn.full{width:100%}
 
-table{width:100%;border-collapse:collapse;font-size:12.5px}
-table th,table td{padding:7px 6px;text-align:left;border-bottom:1px solid var(--line)}
-table th{color:var(--ink-soft);font-weight:600;font-size:11.5px;background:var(--card-soft)}
+/* 表格 */
+table{width:100%;border-collapse:collapse;font-size:12px}
+table th,table td{padding:8px 7px;text-align:left;border-bottom:1px solid var(--line)}
+table th{color:var(--ink-faint);font-weight:600;font-size:11px}
 .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.chip{font-size:11.5px;padding:4px 10px;border-radius:14px;background:#fff;border:1px solid var(--line);color:var(--ink-soft);cursor:pointer;transition:all .15s}
-.chip.on{background:var(--blue);color:#fff;border-color:var(--blue-deep)}
-.chip.on.pink{background:var(--pink);border-color:var(--pink-deep);color:#fff}
+/* 任务清单 */
+.checklist{display:flex;flex-direction:column;gap:6px}
+.task{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--card-soft);border-radius:12px;border:1px solid var(--line);transition:all .2s;cursor:pointer}
+.task:hover{border-color:var(--pink)}
+.task .box{width:20px;height:20px;border:2px solid var(--pink);border-radius:6px;flex-shrink:0;margin-top:1px;position:relative;background:#fff;transition:all .2s}
+.task.done .box{background:var(--pink)}
+.task.done .box::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.task .txt{flex:1;font-size:13px;line-height:1.45}
+.task.done .txt{color:var(--ink-faint);text-decoration:line-through}
+.task .tag{font-size:9px;padding:1px 6px;border-radius:6px;font-weight:600;flex-shrink:0;margin-top:2px}
+.tag.en{background:var(--blue-soft);color:var(--blue-text)}
+.tag.wj{background:#fce8e8;color:var(--pink-text)}
+.tag.wh{background:#e8e8f0;color:#5a5d8d}
+.tag.pol{background:#f0e8f0;color:#7d5d8d}
+.tag.health{background:#e8f0e8;color:#5a8a70}
 
-.note{font-size:12px;color:var(--ink-soft);background:linear-gradient(90deg,#fff5f5,#f0f7fb);border-left:3px solid var(--pink-deep);padding:9px 12px;border-radius:8px;margin-top:10px;line-height:1.55}
-.note .cat{float:right;font-size:16px;opacity:.8}
+/* chips */
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:11px;padding:4px 11px;border-radius:14px;background:#fff;border:1px solid var(--line);color:var(--ink-soft);cursor:pointer;transition:all .15s}
+.chip.on{background:var(--pink);color:#fff;border-color:var(--pink-deep)}
 
-tr.today td{background:#fff8f5 !important}
-tr.today td:first-child{box-shadow:inset 3px 0 0 var(--pink-deep);font-weight:700}
-.badge-today{display:inline-block;font-size:10px;background:var(--pink-deep);color:#fff;padding:1px 6px;border-radius:8px;margin-left:4px}
+/* note */
+.note{font-size:11.5px;color:var(--ink-soft);background:linear-gradient(90deg,var(--bg1),var(--bg3));border-radius:12px;padding:10px 13px;margin-top:10px;line-height:1.55}
+.note b{color:var(--pink-text)}
 
-.stats{display:flex;gap:8px;margin-top:10px}
-.stats .st{flex:1;background:var(--card-soft);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
-.stats .st .v{font-size:17px;font-weight:700;color:var(--blue-text)}
-.stats .st.p .v{color:var(--pink-text)}
-.stats .st .k{font-size:10.5px;color:var(--ink-faint);margin-top:2px}
-
-.cat-deco{position:absolute;font-size:30px;opacity:.18;pointer-events:none;z-index:0}
-.cat-deco.tr{top:8px;right:10px;transform:rotate(15deg)}
-.cat-deco.bl{bottom:8px;left:10px;transform:rotate(-12deg)}
+/* 装饰 */
+.cat-deco{position:absolute;font-size:28px;opacity:.12;pointer-events:none;z-index:0}
+.cat-deco.tr{top:8px;right:12px;transform:rotate(12deg)}
 .card>*{position:relative;z-index:1}
 
-.fold-head{display:flex;align-items:center;cursor:pointer;user-select:none;padding:2px 0}
-.fold-head .arrow{margin-left:auto;transition:transform .3s;font-size:12px;color:var(--ink-soft)}
-.fold-head.open .arrow{transform:rotate(90deg)}
-.fold-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.fold-body.open{max-height:5000px}
+/* 折叠 */
+.fold-h{display:flex;align-items:center;cursor:pointer;user-select:none;padding:2px 0}
+.fold-h .arr{margin-left:auto;transition:transform .3s;font-size:11px;color:var(--ink-faint)}
+.fold-h.open .arr{transform:rotate(90deg)}
+.fold-b{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.fold-b.open{max-height:4000px}
 
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}
-.toggle-row:last-child{border-bottom:none}
+/* switch */
+.sw-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.sw-row:last-child{border-bottom:none}
 .switch{position:relative;width:40px;height:22px;background:var(--line);border-radius:20px;cursor:pointer;transition:background .2s;flex-shrink:0}
-.switch::after{content:"";position:absolute;left:2px;top:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.switch.on{background:var(--blue-deep)}
+.switch::after{content:"";position:absolute;left:2px;top:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.switch.on{background:var(--pink)}
 .switch.on::after{left:20px}
-.queued{font-size:11px;color:var(--ink-faint);margin-top:2px}
+.queued{font-size:10.5px;color:var(--ink-faint);margin-top:2px}
 hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
-.muted{color:var(--ink-faint);font-size:11.5px}
-.cat-float{position:fixed;bottom:78px;right:16px;font-size:26px;opacity:.5;z-index:40;pointer-events:none}
-
-/* 错题本 */
-.err-item{background:var(--card-soft);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px;font-size:12.5px}
-.err-item .err-q{color:var(--ink);font-weight:500;margin-bottom:4px;white-space:pre-wrap}
-.err-item .err-r{color:var(--pink-text);font-size:11.5px;margin-bottom:2px}
-.err-item .err-s{color:var(--blue-text);font-size:11.5px;white-space:pre-wrap}
-.err-item .err-m{color:var(--ink-faint);font-size:10.5px;margin-top:4px}
+.muted{color:var(--ink-faint);font-size:11px}
 
 /* 成就 */
-.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
-.ach{background:var(--card-soft);border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center;position:relative;opacity:.45;transition:all .3s}
-.ach.unlocked{opacity:1;background:linear-gradient(135deg,#fff8e8,#fff0f0);border-color:var(--gold)}
-.ach .ach-ic{font-size:24px}
-.ach.unlocked .ach-ic{animation:bounce 1.5s ease infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.ach .ach-n{font-size:10px;color:var(--ink-soft);margin-top:4px;line-height:1.3}
+.ach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ach{background:var(--card-soft);border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center;opacity:.4;transition:all .3s}
+.ach.unlocked{opacity:1;background:linear-gradient(135deg,#fff8e8,var(--bg3));border-color:var(--gold)}
+.ach .ach-ic{font-size:22px}
+.ach.unlocked .ach-ic{animation:bn 1.5s ease infinite}
+@keyframes bn{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.ach .ach-n{font-size:9.5px;color:var(--ink-soft);margin-top:3px;line-height:1.3}
 .ach.unlocked .ach-n{color:var(--pink-text);font-weight:600}
 
-/* 体重图 */
-.wt-chart{margin-top:8px}
+/* 错题 */
+.err-item{background:var(--card-soft);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px;font-size:12px}
+.err-item .eq{color:var(--ink);font-weight:500;margin-bottom:4px;white-space:pre-wrap}
+.err-item .er{color:var(--pink-text);font-size:11px}
+.err-item .es{color:var(--blue-text);font-size:11px;white-space:pre-wrap}
+.err-item .em{color:var(--ink-faint);font-size:10px;margin-top:4px}
 
-.tabbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around;align-items:stretch}
-.tabbar .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 2px;cursor:pointer;color:var(--ink-faint);font-size:10.5px;transition:color .15s;user-select:none}
-.tab .ic{font-size:20px}
-.tab.active{color:var(--blue-text)}
+/* 底部 tab */
+.tabbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+.tabbar .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 2px;cursor:pointer;color:var(--ink-faint);font-size:10px;user-select:none}
+.tab .ic{font-size:19px}
+.tab.active{color:var(--pink-text)}
 .tab.active .ic{transform:scale(1.1)}
 
+/* 移动端 */
 @media(max-width:760px){
-  .sidebar{display:none}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);transition:transform .3s;z-index:60;width:230px}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:55}
+  .sidebar-overlay.show{display:block}
+  .topbar .menu-btn{display:block}
+  .topbar .search{display:none}
+  .content-inner{padding:14px 12px 84px}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .ach-grid{grid-template-columns:repeat(3,1fr)}
   .tabbar{display:flex}
-  .main-inner{padding:14px 12px 90px}
-  .cat-float{display:none}
-  .ach-grid{grid-template-columns:repeat(2,1fr)}
+  .topbar .date-block .t{display:none}
 }
 </style>
 </head>
 <body>
 
 <div class="app">
-  <!-- 侧边栏 -->
-  <aside class="sidebar">
-    <div class="logo"><div class="paw">🐾</div><h1>小猫工作台</h1><div class="sub">考研双专业×财务×减脂</div></div>
-    <div class="nav-item active" data-page="home" onclick="goPage('home')"><span class="ic">🏠</span>今日清单<span class="badge" id="navHome">0</span></div>
-    <div class="nav-item" data-page="study" onclick="goPage('study')"><span class="ic">📚</span>考研学习</div>
-    <div class="nav-item" data-page="money" onclick="goPage('money')"><span class="ic">💸</span>财务台账</div>
-    <div class="nav-item" data-page="health" onclick="goPage('health')"><span class="ic">🌿</span>减脂记录</div>
-    <div class="foot">数据存本机 🐾<br>状态不好就少做点</div>
-  </aside>
+<!-- 侧边栏 -->
+<aside class="sidebar" id="sidebar">
+  <div class="logo">
+    <div class="av">🐱</div>
+    <div class="info"><h1>小猫工作台</h1><p>考研双专业版</p></div>
+  </div>
+  <div class="nav-section">学习</div>
+  <div class="nav-item active" data-page="overview" onclick="goPage('overview')"><span class="ic">📊</span>总览<span class="badge" id="navOv">0</span></div>
+  <div class="nav-item" data-page="daily" onclick="goPage('daily')"><span class="ic">📋</span>每日计划<span class="badge" id="navDaily">0/0</span></div>
+  <div class="nav-item" data-page="english" onclick="goPage('english')"><span class="ic">🔤</span>英语</div>
+  <div class="nav-item" data-page="inorganic" onclick="goPage('inorganic')"><span class="ic">⚗️</span>无机化学</div>
+  <div class="nav-item" data-page="physical" onclick="goPage('physical')"><span class="ic">📐</span>物理化学</div>
+  <div class="nav-item" data-page="politics" onclick="goPage('politics')"><span class="ic">🇨🇳</span>政治</div>
+  <div class="nav-item" data-page="notes" onclick="goPage('notes')"><span class="ic">📝</span>笔记日记</div>
+  <div class="nav-section">生活</div>
+  <div class="nav-item" data-page="finance" onclick="goPage('finance')"><span class="ic">💰</span>理财记账</div>
+  <div class="nav-item" data-page="diet" onclick="goPage('diet')"><span class="ic">🍱</span>饮食管理</div>
+  <div class="nav-item" data-page="fitness" onclick="goPage('fitness')"><span class="ic">🏃</span>健身打卡</div>
+  <div class="nav-item" data-page="sleep" onclick="goPage('sleep')"><span class="ic">😴</span>睡眠管理</div>
+  <div class="nav-item" data-page="habits" onclick="goPage('habits')"><span class="ic">⭐</span>习惯养成</div>
+  <div class="nav-section">其他</div>
+  <div class="nav-item" data-page="settings" onclick="goPage('settings')"><span class="ic">⚙️</span>设置</div>
+  <div class="foot">数据存本机 🐾<br>状态不好就少做点</div>
+</aside>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-  <main class="main">
-    <div class="main-inner">
+<!-- 主区 -->
+<main class="main">
+  <header class="topbar">
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="date-block"><div class="d" id="topDate">加载中</div><div class="t" id="topTime"></div></div>
+    <div class="search">🔍 <input placeholder="搜索任务、资料…"></div>
+    <div class="top-actions"><div class="ta">🔔</div><div class="ta">🐱</div></div>
+  </header>
 
-    <!-- ===== 首页 ===== -->
-    <section class="page active" id="page-home">
-      <div class="countdown">
-        <div class="cd-label">📅 距离考研还有</div>
-        <div class="cd-num" id="cdNum">--</div>
-        <div class="cd-unit">天</div>
-        <div class="cat-bg">🐱</div>
-      </div>
+  <div class="content">
+    <div class="content-inner">
 
-      <div class="card blue-tag">
-        <span class="cat-deco tr">🐱</span>
-        <div class="sec-head"><span class="emoji">✨</span><h3>今日学习清单</h3><span class="num" id="todayProgress">0/0</span></div>
-        <div class="checklist" id="todayList"></div>
-        <div class="note">今天状态不好（熬夜/身体不适）？<b>自主减量完全OK</b>，完成多少都值得鼓励 💕 <span class="cat">🐈</span></div>
-      </div>
+<!-- ===== 总览页 ===== -->
+<section class="page active" id="page-overview">
+  <div class="page-title">早上好，考研人！🐱</div>
+  <div class="page-sub" id="ovSub">今天是冲刺的一天，加油</div>
 
-      <div class="card pink-tag">
-        <div class="sec-head"><span class="emoji">📊</span><h3>今日数据概览</h3></div>
-        <div id="homeSummary"></div>
-      </div>
+  <!-- 倒计时 -->
+  <div class="card" style="background:linear-gradient(135deg,var(--pink),var(--blue));color:#fff;border:none">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div><div style="font-size:12px;opacity:.9">📅 距离考研还有</div><div style="font-size:36px;font-weight:800;line-height:1.1" id="cdNum">--</div><div style="font-size:12px;opacity:.9">天</div></div>
+      <div style="font-size:48px;opacity:.3">🎓</div>
+    </div>
+  </div>
 
-      <div class="card gold-tag">
-        <span class="cat-deco tr">🏆</span>
-        <div class="sec-head"><span class="emoji">🏅</span><h3>成就激励</h3></div>
-        <div class="ach-grid" id="achGrid"></div>
-        <div class="muted" style="margin-top:6px">达成成就会解锁小猫动画 🐱</div>
-      </div>
-    </section>
+  <!-- 统计卡片 -->
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📚</div><div class="sc-trend up">今日</div></div><div class="sc-val" id="ovTask">0<small>/0</small></div><div class="sc-lab">今日任务</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✏️</div><div class="sc-trend up">累计</div></div><div class="sc-val" id="ovDati">0<small>题</small></div><div class="sc-lab">大题刷题</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">🧪</div><div class="sc-trend up">累计</div></div><div class="sc-val" id="ovEq">0<small>个</small></div><div class="sc-lab">方程/公式</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">⚖️</div><div class="sc-trend" id="ovWtTrend">—</div></div><div class="sc-val" id="ovWt">0<small>kg</small></div><div class="sc-lab">最新体重</div></div>
+  </div>
 
-    <!-- ===== 学习板块 ===== -->
-    <section class="page" id="page-study">
-      <div class="page-head"><span class="emoji">📚</span><h2>考研学习系统</h2><span class="desc">无机+物化 双专业</span></div>
+  <!-- 本周走势 -->
+  <div class="card">
+    <span class="cat-deco tr">🐾</span>
+    <div class="card-h"><span class="ic">📈</span><h3>本周学习走势</h3></div>
+    <div id="weekChart" style="min-height:120px"></div>
+  </div>
 
-      <!-- 英语 -->
-      <div class="card pink-tag">
-        <span class="cat-deco bl">🐾</span>
-        <div class="sec-head"><span class="emoji">🔤</span><h3>一、英语</h3></div>
+  <!-- 今日任务 -->
+  <div class="card">
+    <div class="card-h"><span class="ic">✨</span><h3>今日任务</h3><span class="num" id="ovProg">0/0</span></div>
+    <div class="checklist" id="ovTasks"></div>
+    <div class="note">状态不好（熬夜/身体不适）？<b>自主减量完全OK</b> 💕</div>
+  </div>
 
-        <div class="prog-group">
-          <div class="prog-item"><div class="pl"><span>单词单元完成率</span><b id="pWordTxt">5/10</b></div><div class="bar-wrap"><div class="bar-fill pink" id="pWordBar" style="width:50%"></div></div></div>
-          <div class="prog-item"><div class="pl"><span>基础阅读完成率</span><b id="pReadTxt">0/58</b></div><div class="bar-wrap"><div class="bar-fill blue" id="pReadBar" style="width:0%"></div></div></div>
-          <div class="prog-item"><div class="pl"><span>真题阅读完成率</span><b id="pZtTxt">0篇</b></div><div class="bar-wrap"><div class="bar-fill" id="pZtBar" style="width:0%"></div></div></div>
-        </div>
+  <!-- 成就 -->
+  <div class="card">
+    <span class="cat-deco tr">🏆</span>
+    <div class="card-h"><span class="ic">🏅</span><h3>成就激励</h3></div>
+    <div class="ach-grid" id="achGrid"></div>
+  </div>
+</section>
 
-        <div class="fold-head open" onclick="toggleFold(this)"><span>📌 单词规划（刘晓艳 10 单元）</span><span class="arrow">▶</span></div>
-        <div class="fold-body open">
-          <div class="muted" style="margin:6px 0">前五单元已熟练 · 每日不背单词 APP 20min（新词100+复习100）</div>
-          <div class="muted" style="margin:4px 0">后五单元：听课+手抄，按艾宾浩斯复习（当日/2/4/7/15/30天）</div>
-          <label class="lab">+ 记录某单元首次学习日期</label>
-          <div class="row">
-            <select class="select" id="unitSel" style="flex:0 0 90px"><option value="6">第6单元</option><option value="7">第7单元</option><option value="8">第8单元</option><option value="9">第9单元</option><option value="10">第10单元</option></select>
-            <input type="date" class="input" id="unitDate">
-            <button class="btn sm" onclick="addUnit()">记录</button>
-          </div>
-          <div class="scroll" style="margin-top:10px"><table id="wordTable"><thead><tr><th>单元</th><th>首次学习</th><th>复习节点（点击✓）</th><th></th></tr></thead><tbody></tbody></table></div>
-          <div class="muted" style="margin-top:6px">🟧 橙底行 = 今日需复习单元</div>
-        </div>
+<!-- ===== 每日计划页 ===== -->
+<section class="page" id="page-daily">
+  <div class="page-title">每日计划</div>
+  <div class="page-sub">自动汇总当天所有学习任务，完成后自动统计</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📋</div></div><div class="sc-val" id="dpTotal">0</div><div class="sc-lab">总任务</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">✅</div></div><div class="sc-val" id="dpDone">0</div><div class="sc-lab">已完成</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">⏳</div></div><div class="sc-val" id="dpTodo">0</div><div class="sc-lab">待完成</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📊</div></div><div class="sc-val" id="dpRate">0<small>%</small></div><div class="sc-lab">完成率</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📝</span><h3>今日任务清单</h3></div>
+    <div class="checklist" id="dpTasks"></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">🗓️</span><h3>周复盘区域</h3><span class="more">每周日填写</span></div>
+    <label class="lab">本周完成情况</label><textarea class="textarea" id="wk_done" placeholder="完成的内容…"></textarea>
+    <label class="lab">拖欠任务</label><textarea class="textarea" id="wk_owe" placeholder="欠下的…"></textarea>
+    <label class="lab">下周调整方向</label><textarea class="textarea" id="wk_adj" placeholder="调整策略…"></textarea>
+    <button class="btn sm" style="margin-top:8px" onclick="saveWeek()">保存本周复盘</button>
+    <div id="wkHistory" style="margin-top:10px;font-size:12px"></div>
+  </div>
+</section>
 
-        <hr class="soft">
-        <div class="toggle-row"><div><b>语法课</b><div class="queued">剩余 4 节，近期完成后退出长期计划</div></div><div class="switch" id="sw_gram" onclick="toggleSwitch('gram')"></div></div>
-        <div class="toggle-row"><div><b>基础阅读</b><div class="queued">共58篇 · 目标 8.1–8.31 全部完成</div></div><div style="text-align:right"><input type="number" class="input" id="readDone" placeholder="已完成篇数" style="width:80px;padding:6px 8px;font-size:12px"><div class="queued" id="readInfo">/ 58 篇</div></div></div>
-        <div class="toggle-row"><div><b>真题阅读</b><div class="queued">一套3天（做题/精读/单词巩固）每周≥2篇</div></div><div style="text-align:right"><input type="number" class="input" id="ztDone" placeholder="已完成篇数" style="width:80px;padding:6px 8px;font-size:12px"><div class="queued" id="ztInfo">/ 套</div></div></div>
-        <div class="note" style="margin-top:8px"><b>⏰ 时间线</b>：8月下旬开阅读课 → 真题模式 → 依次安排作文、小三门。</div>
-      </div>
+<!-- ===== 英语页 ===== -->
+<section class="page" id="page-english">
+  <div class="page-title">英语</div>
+  <div class="page-sub">刘晓艳单词10单元 · 基础阅读58篇 · 真题模式</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📖</div></div><div class="sc-val" id="enWordPct">50<small>%</small></div><div class="sc-lab">单词单元</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">📚</div></div><div class="sc-val" id="enReadPct">0<small>%</small></div><div class="sc-lab">基础阅读</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📝</div></div><div class="sc-val" id="enZtPct">0<small>%</small></div><div class="sc-lab">真题阅读</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">🎧</div></div><div class="sc-val">4<small>节</small></div><div class="sc-lab">语法剩余</div></div>
+  </div>
 
-      <!-- 无机化学 -->
-      <div class="card pink-tag" id="wjCard">
-        <span class="cat-deco tr">⚗️</span>
-        <div class="sec-head"><span class="emoji">⚗️</span><h3>二、专业课1 · 无机化学</h3></div>
-        <div class="muted">基础+元素资料已成册 · 刷题背诵阶段 · 目标10月中旬前一轮</div>
+  <div class="card">
+    <span class="cat-deco tr">🐾</span>
+    <div class="card-h"><span class="ic">📌</span><h3>单词规划（刘晓艳10单元）</h3></div>
+    <div class="muted" style="margin-bottom:8px">前五单元已熟练 · 每日不背单词APP 20min（新词100+复习100）。后五单元按艾宾浩斯复习。</div>
+    <div class="row" style="margin-bottom:10px">
+      <select class="select" id="unitSel" style="flex:0 0 90px"><option value="6">第6单元</option><option value="7">第7单元</option><option value="8">第8单元</option><option value="9">第9单元</option><option value="10">第10单元</option></select>
+      <input type="date" class="input" id="unitDate">
+      <button class="btn sm" onclick="addUnit()">记录</button>
+    </div>
+    <div class="scroll"><table id="wordTable"><thead><tr><th>单元</th><th>首次学习</th><th>复习节点（点击✓）</th><th></th></tr></thead><tbody></tbody></table></div>
+    <div class="muted" style="margin-top:6px">🟧 橙底=今日需复习</div>
+  </div>
 
-        <div class="prog-group">
-          <div class="prog-item"><div class="pl"><span>章节完成率</span><b id="wjChTxt">0/12</b></div><div class="bar-wrap"><div class="bar-fill pink" id="wjChBar" style="width:0%"></div></div></div>
-          <div class="prog-item"><div class="pl"><span>习题完成率</span><b id="wjExTxt">0题</b></div><div class="bar-wrap"><div class="bar-fill blue" id="wjExBar" style="width:0%"></div></div></div>
-          <div class="prog-item"><div class="pl"><span>方程式背诵</span><b id="wjEqTxt">0个</b></div><div class="bar-wrap"><div class="bar-fill gold" id="wjEqBar" style="width:0%"></div></div></div>
-        </div>
-        <div class="row" style="margin-top:4px">
-          <div style="flex:1"><label class="lab">章节完成数 / 总章节</label><div class="row"><input class="input" id="wjChDone" type="number" placeholder="已完成" style="flex:1"><input class="input" id="wjChTotal" type="number" placeholder="总数" style="flex:1"></div></div>
-          <button class="btn sm" style="flex:0 0 56px;align-self:flex-end" onclick="saveWjCh()">设定</button>
-        </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📊</span><h3>进度</h3></div>
+    <div class="prog"><div class="pl"><span>单词单元</span><b id="pWordTxt">5/10</b></div><div class="bar-wrap"><div class="bar-fill" id="pWordBar" style="width:50%"></div></div></div>
+    <div class="prog"><div class="pl"><span>基础阅读</span><b id="pReadTxt">0/58</b></div><div class="bar-wrap"><div class="bar-fill blue" id="pReadBar" style="width:0%"></div></div></div>
+    <div class="prog"><div class="pl"><span>真题阅读</span><b id="pZtTxt">0套</b></div><div class="bar-wrap"><div class="bar-fill gold" id="pZtBar" style="width:0%"></div></div></div>
+    <hr class="soft">
+    <div class="sw-row"><div><b>语法课</b><div class="queued">剩余4节，近期完成后退出</div></div><div class="switch" id="sw_gram" onclick="toggleSwitch('gram')"></div></div>
+    <div class="sw-row"><div><b>基础阅读</b><div class="queued">目标8.1-8.31完成58篇</div></div><div style="text-align:right"><input type="number" class="input" id="readDone" placeholder="已完成" style="width:70px;padding:5px 8px;font-size:11px"></div></div>
+    <div class="sw-row"><div><b>真题阅读</b><div class="queued">一套3天 每周≥2篇</div></div><div style="text-align:right"><input type="number" class="input" id="ztDone" placeholder="已完成" style="width:70px;padding:5px 8px;font-size:11px"></div></div>
+  </div>
+  <div class="note"><b>⏰ 时间线</b>：8月下旬开阅读课→真题模式（做题/精读/单词巩固）→作文→小三门</div>
+</section>
 
-        <div class="sub-title">📚 每日任务区</div>
-        <div class="row"><div style="flex:1.3"><label class="lab">大题刷题打卡</label><input class="input" id="wj_dq_input" placeholder="如：振宇P12 配位滴定"></div><div style="flex:0 0 70px"><label class="lab">题量</label><input class="input" id="wj_dq_num" type="number" placeholder="3"></div></div>
-        <button class="btn sm" style="margin-top:6px" onclick="addDaTi('wj')">+ 记录刷题</button>
-        <div id="wj_dqList" style="margin-top:8px"></div>
-        <hr class="soft">
-        <div><label class="lab">🧪 方程式背诵</label><div class="row"><input class="input" id="wj_eq_input" placeholder="如：Cr2O7²⁻ + 6Fe²⁺ + 14H⁺ → ..."><button class="btn sm" onclick="addEq('wj')" style="flex:0 0 60px">背诵</button></div><div id="wj_eqList" style="margin-top:6px;font-size:12px"></div></div>
-        <hr class="soft">
-        <div><label class="lab">⚠️ 薄弱知识点</label><input class="input" id="wj_weak_input" placeholder="如：晶体场理论"><button class="btn sm" style="margin-top:6px" onclick="addWeak('wj')">登记</button><div id="wj_weakList" style="margin-top:6px;font-size:12px;color:var(--pink-text)"></div></div>
+<!-- ===== 无机化学页 ===== -->
+<section class="page" id="page-inorganic">
+  <div class="page-title">无机化学</div>
+  <div class="page-sub">基础+元素资料成册 · 刷题背诵阶段 · 目标10月中旬前一轮</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📖</div></div><div class="sc-val" id="wjChPct">0<small>%</small></div><div class="sc-lab">章节</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✏️</div></div><div class="sc-val" id="wjExNum">0<small>题</small></div><div class="sc-lab">习题</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">🧪</div></div><div class="sc-val" id="wjEqNum">0<small>个</small></div><div class="sc-lab">方程式</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">⚠️</div></div><div class="sc-val" id="wjWeakNum">0</div><div class="sc-lab">薄弱点</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📊</span><h3>进度</h3></div>
+    <div class="prog"><div class="pl"><span>章节完成率</span><b id="wjChTxt">0/12</b></div><div class="bar-wrap"><div class="bar-fill" id="wjChBar" style="width:0%"></div></div></div>
+    <div class="prog"><div class="pl"><span>习题完成率</span><b id="wjExTxt">0题</b></div><div class="bar-wrap"><div class="bar-fill blue" id="wjExBar" style="width:0%"></div></div></div>
+    <div class="prog"><div class="pl"><span>方程式背诵</span><b id="wjEqTxt">0个</b></div><div class="bar-wrap"><div class="bar-fill gold" id="wjEqBar" style="width:0%"></div></div></div>
+    <div class="row" style="margin-top:6px"><div style="flex:1"><label class="lab">已完成章节</label><input class="input" id="wjChDone" type="number" placeholder="0"></div><div style="flex:1"><label class="lab">总章节</label><input class="input" id="wjChTotal" type="number" placeholder="12"></div><button class="btn sm" style="flex:0 0 56px;align-self:flex-end" onclick="saveWjCh('wj')">设定</button></div>
+  </div>
 
-        <div class="sub-title">🎬 待决策栏（相图等2-3章）</div>
-        <div class="chips" id="wj_courseChips"><div class="chip on" onclick="pickCourse('wj',this,'继续听课')">继续听课</div><div class="chip" onclick="pickCourse('wj',this,'直接刷题查漏补缺')">直接刷题查漏</div><div class="chip" onclick="pickCourse('wj',this,'待定')">待定</div></div>
+  <div class="card">
+    <span class="cat-deco tr">⚗️</span>
+    <div class="card-h"><span class="ic">📚</span><h3>每日任务区</h3></div>
+    <div class="row"><div style="flex:1.3"><label class="lab">大题刷题打卡</label><input class="input" id="wj_dq_input" placeholder="如：振宇P12 配位滴定"></div><div style="flex:0 0 60px"><label class="lab">题量</label><input class="input" id="wj_dq_num" type="number" placeholder="3"></div></div>
+    <button class="btn sm" style="margin-top:6px" onclick="addDaTi('wj')">+ 记录刷题</button>
+    <div id="wj_dqList" style="margin-top:8px"></div>
+    <hr class="soft">
+    <label class="lab">🧪 方程式背诵</label>
+    <div class="row"><input class="input" id="wj_eq_input" placeholder="如：Cr2O7²⁻ + 6Fe²⁺ → ..."><button class="btn sm" onclick="addEq('wj')" style="flex:0 0 56px">背诵</button></div>
+    <div id="wj_eqList" style="margin-top:6px;font-size:12px"></div>
+    <hr class="soft">
+    <label class="lab">⚠️ 薄弱知识点</label>
+    <input class="input" id="wj_weak_input" placeholder="如：晶体场理论">
+    <button class="btn sm" style="margin-top:6px" onclick="addWeak('wj')">登记</button>
+    <div id="wj_weakList" style="margin-top:6px;font-size:12px;color:var(--pink-text)"></div>
+  </div>
 
-        <div class="sub-title">📖 错题记录本</div>
-        <textarea class="textarea" id="wj_err_q" placeholder="粘贴题目…"></textarea>
-        <label class="lab">错误原因</label><input class="input" id="wj_err_r" placeholder="如：方程式记错/计算失误">
-        <label class="lab">思路总结</label><textarea class="textarea" id="wj_err_s" placeholder="正确思路…"></textarea>
-        <div class="row" style="margin-top:6px"><button class="btn sm" onclick="addErr('wj')">+ 加入错题本</button><button class="btn ghost sm" onclick="genReview('wj')">📋 生成本周复盘卷</button></div>
-        <div id="wj_errList" style="margin-top:10px"></div>
-      </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">🎬</span><h3>待决策栏（相图等2-3章）</h3></div>
+    <div class="chips" id="wj_courseChips"><div class="chip on" onclick="pickCourse('wj',this,'继续听课')">继续听课</div><div class="chip" onclick="pickCourse('wj',this,'直接刷题查漏补缺')">直接刷题查漏</div><div class="chip" onclick="pickCourse('wj',this,'待定')">待定</div></div>
+  </div>
 
-      <!-- 物理化学 -->
-      <div class="card pink-tag" id="whCard">
-        <span class="cat-deco bl">📐</span>
-        <div class="sec-head"><span class="emoji">📐</span><h3>三、专业课2 · 物理化学</h3></div>
-        <div class="muted">基础理论已学完 · 剩余2-3章未完成 · 目标10月中旬前一轮</div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📖</span><h3>错题记录本</h3></div>
+    <textarea class="textarea" id="wj_err_q" placeholder="粘贴题目…"></textarea>
+    <label class="lab">错误原因</label><input class="input" id="wj_err_r" placeholder="如：方程式记错">
+    <label class="lab">思路总结</label><textarea class="textarea" id="wj_err_s" placeholder="正确思路…"></textarea>
+    <div class="row" style="margin-top:6px"><button class="btn sm" onclick="addErr('wj')">+ 加入错题本</button><button class="btn ghost sm" onclick="genReview('wj')">📋 本周复盘卷</button></div>
+    <div id="wj_errList" style="margin-top:10px"></div>
+  </div>
+</section>
 
-        <div class="prog-group">
-          <div class="prog-item"><div class="pl"><span>章节完成率</span><b id="whChTxt">0/12</b></div><div class="bar-wrap"><div class="bar-fill pink" id="whChBar" style="width:0%"></div></div></div>
-          <div class="prog-item"><div class="pl"><span>习题完成率</span><b id="whExTxt">0题</b></div><div class="bar-wrap"><div class="bar-fill blue" id="whExBar" style="width:0%"></div></div></div>
-          <div class="prog-item"><div class="pl"><span>公式背诵</span><b id="whEqTxt">0个</b></div><div class="bar-wrap"><div class="bar-fill gold" id="whEqBar" style="width:0%"></div></div></div>
-        </div>
-        <div class="row" style="margin-top:4px">
-          <div style="flex:1"><label class="lab">章节完成数 / 总章节</label><div class="row"><input class="input" id="whChDone" type="number" placeholder="已完成" style="flex:1"><input class="input" id="whChTotal" type="number" placeholder="总数" style="flex:1"></div></div>
-          <button class="btn sm" style="flex:0 0 56px;align-self:flex-end" onclick="saveWjCh('wh')">设定</button>
-        </div>
+<!-- ===== 物理化学页 ===== -->
+<section class="page" id="page-physical">
+  <div class="page-title">物理化学</div>
+  <div class="page-sub">基础理论已学完 · 剩余2-3章未完成 · 目标10月中旬前一轮</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📖</div></div><div class="sc-val" id="whChPct">0<small>%</small></div><div class="sc-lab">章节</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✏️</div></div><div class="sc-val" id="whExNum">0<small>题</small></div><div class="sc-lab">习题</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📝</div></div><div class="sc-val" id="whEqNum">0<small>个</small></div><div class="sc-lab">公式</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">⚠️</div></div><div class="sc-val" id="whWeakNum">0</div><div class="sc-lab">薄弱点</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📊</span><h3>进度</h3></div>
+    <div class="prog"><div class="pl"><span>章节完成率</span><b id="whChTxt">0/12</b></div><div class="bar-wrap"><div class="bar-fill" id="whChBar" style="width:0%"></div></div></div>
+    <div class="prog"><div class="pl"><span>习题完成率</span><b id="whExTxt">0题</b></div><div class="bar-wrap"><div class="bar-fill blue" id="whExBar" style="width:0%"></div></div></div>
+    <div class="prog"><div class="pl"><span>公式背诵</span><b id="whEqTxt">0个</b></div><div class="bar-wrap"><div class="bar-fill gold" id="whEqBar" style="width:0%"></div></div></div>
+    <div class="row" style="margin-top:6px"><div style="flex:1"><label class="lab">已完成章节</label><input class="input" id="whChDone" type="number" placeholder="0"></div><div style="flex:1"><label class="lab">总章节</label><input class="input" id="whChTotal" type="number" placeholder="12"></div><button class="btn sm" style="flex:0 0 56px;align-self:flex-end" onclick="saveWjCh('wh')">设定</button></div>
+  </div>
+  <div class="card">
+    <span class="cat-deco bl">📐</span>
+    <div class="card-h"><span class="ic">📚</span><h3>每日任务区</h3></div>
+    <div class="row"><div style="flex:1.3"><label class="lab">大题刷题打卡</label><input class="input" id="wh_dq_input" placeholder="如：热力学ΔG计算"></div><div style="flex:0 0 60px"><label class="lab">题量</label><input class="input" id="wh_dq_num" type="number" placeholder="3"></div></div>
+    <button class="btn sm" style="margin-top:6px" onclick="addDaTi('wh')">+ 记录刷题</button>
+    <div id="wh_dqList" style="margin-top:8px"></div>
+    <hr class="soft">
+    <label class="lab">📝 公式背诵</label>
+    <div class="row"><input class="input" id="wh_eq_input" placeholder="如：ΔG=ΔH-TΔS"><button class="btn sm" onclick="addEq('wh')" style="flex:0 0 56px">背诵</button></div>
+    <div id="wh_eqList" style="margin-top:6px;font-size:12px"></div>
+    <hr class="soft">
+    <label class="lab">⚠️ 薄弱知识点</label>
+    <input class="input" id="wh_weak_input" placeholder="如：相图、化学势">
+    <button class="btn sm" style="margin-top:6px" onclick="addWeak('wh')">登记</button>
+    <div id="wh_weakList" style="margin-top:6px;font-size:12px;color:var(--pink-text)"></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">🎬</span><h3>待决策栏（剩余课程）</h3></div>
+    <div class="chips" id="wh_courseChips"><div class="chip on" onclick="pickCourse('wh',this,'继续听课')">继续听课</div><div class="chip" onclick="pickCourse('wh',this,'直接刷题查漏补缺')">直接刷题查漏</div><div class="chip" onclick="pickCourse('wh',this,'待定')">待定</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📖</span><h3>错题记录本</h3></div>
+    <textarea class="textarea" id="wh_err_q" placeholder="粘贴题目…"></textarea>
+    <label class="lab">错误原因</label><input class="input" id="wh_err_r" placeholder="如：公式套错">
+    <label class="lab">思路总结</label><textarea class="textarea" id="wh_err_s" placeholder="正确思路…"></textarea>
+    <div class="row" style="margin-top:6px"><button class="btn sm" onclick="addErr('wh')">+ 加入错题本</button><button class="btn ghost sm" onclick="genReview('wh')">📋 本周复盘卷</button></div>
+    <div id="wh_errList" style="margin-top:10px"></div>
+  </div>
+</section>
 
-        <div class="sub-title">📚 每日任务区</div>
-        <div class="row"><div style="flex:1.3"><label class="lab">大题刷题打卡</label><input class="input" id="wh_dq_input" placeholder="如：热力学ΔG计算"></div><div style="flex:0 0 70px"><label class="lab">题量</label><input class="input" id="wh_dq_num" type="number" placeholder="3"></div></div>
-        <button class="btn sm" style="margin-top:6px" onclick="addDaTi('wh')">+ 记录刷题</button>
-        <div id="wh_dqList" style="margin-top:8px"></div>
-        <hr class="soft">
-        <div><label class="lab">📝 公式背诵</label><div class="row"><input class="input" id="wh_eq_input" placeholder="如：ΔG=ΔH-TΔS"><button class="btn sm" onclick="addEq('wh')" style="flex:0 0 60px">背诵</button></div><div id="wh_eqList" style="margin-top:6px;font-size:12px"></div></div>
-        <hr class="soft">
-        <div><label class="lab">⚠️ 薄弱知识点</label><input class="input" id="wh_weak_input" placeholder="如：相图、化学势"><button class="btn sm" style="margin-top:6px" onclick="addWeak('wh')">登记</button><div id="wh_weakList" style="margin-top:6px;font-size:12px;color:var(--pink-text)"></div></div>
+<!-- ===== 政治页 ===== -->
+<section class="page" id="page-politics">
+  <div class="page-title">政治</div>
+  <div class="page-sub">零碎时间刷肖1000 · 10月重心转政治 · 技巧班网课，冲刺/押题班再付费</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📝</div></div><div class="sc-val" id="polDoneNum">0<small>/1000</small></div><div class="sc-lab">肖1000题</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">🎯</div></div><div class="sc-val" id="polMasNum">0<small>%</small></div><div class="sc-lab">知识点掌握</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📅</div></div><div class="sc-val">10月</div><div class="sc-lab">重心转移</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">✅</div></div><div class="sc-val" id="polTodayNum">0</div><div class="sc-lab">今日打卡</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📊</span><h3>进度</h3></div>
+    <div class="prog"><div class="pl"><span>肖1000题完成率</span><b id="polBarTxt">0/1000</b></div><div class="bar-wrap"><div class="bar-fill" id="polBarBar" style="width:0%"></div></div></div>
+    <div class="prog"><div class="pl"><span>知识点掌握率</span><b id="polMasTxt">0%</b></div><div class="bar-wrap"><div class="bar-fill blue" id="polMasBar" style="width:0%"></div></div></div>
+    <div class="row" style="margin-top:6px"><div style="flex:1"><label class="lab">肖1000已完成</label><input class="input" id="pol_done" type="number" placeholder="0"></div><div style="flex:1"><label class="lab">掌握率(%)</label><input class="input" id="pol_mas" type="number" placeholder="0"></div><button class="btn sm" style="flex:0 0 56px;align-self:flex-end" onclick="savePol()">设定</button></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">✏️</span><h3>每日打卡</h3></div>
+    <div class="row"><div style="flex:1"><label class="lab">今日刷题进度</label><input class="input" id="pol_num" type="number" placeholder="题数"></div><div style="flex:2"><label class="lab">易混淆知识点</label><input class="input" id="pol_conf" placeholder="如：资本有机构成 vs 技术构成"></div></div>
+    <button class="btn sm" style="margin-top:6px" onclick="addPol()">打卡</button>
+    <div id="polList" style="margin-top:8px;font-size:12px"></div>
+  </div>
+</section>
 
-        <div class="sub-title">🎬 待决策栏（剩余课程）</div>
-        <div class="chips" id="wh_courseChips"><div class="chip on" onclick="pickCourse('wh',this,'继续听课')">继续听课</div><div class="chip" onclick="pickCourse('wh',this,'直接刷题查漏补缺')">直接刷题查漏</div><div class="chip" onclick="pickCourse('wh',this,'待定')">待定</div></div>
+<!-- ===== 笔记日记页（资料库+错题汇总） ===== -->
+<section class="page" id="page-notes">
+  <div class="page-title">笔记日记</div>
+  <div class="page-sub">资料库快捷入口 · 错题汇总</div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📁</span><h3>资料库快捷入口</h3></div>
+    <div class="row"><input class="input" id="res_name" placeholder="名称（无机考点/物化公式/思维导图）"><input class="input" id="res_url" placeholder="链接 https://" style="flex:1.5"><button class="btn sm" onclick="addRes()" style="flex:0 0 52px">加入</button></div>
+    <div id="resList" style="margin-top:10px;font-size:12.5px"></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📖</span><h3>无机化学错题</h3></div>
+    <div id="notes_wj_err"></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📖</span><h3>物理化学错题</h3></div>
+    <div id="notes_wh_err"></div>
+  </div>
+</section>
 
-        <div class="sub-title">📖 错题记录本</div>
-        <textarea class="textarea" id="wh_err_q" placeholder="粘贴题目…"></textarea>
-        <label class="lab">错误原因</label><input class="input" id="wh_err_r" placeholder="如：公式套错/概念混淆">
-        <label class="lab">思路总结</label><textarea class="textarea" id="wh_err_s" placeholder="正确思路…"></textarea>
-        <div class="row" style="margin-top:6px"><button class="btn sm" onclick="addErr('wh')">+ 加入错题本</button><button class="btn ghost sm" onclick="genReview('wh')">📋 生成本周复盘卷</button></div>
-        <div id="wh_errList" style="margin-top:10px"></div>
-      </div>
+<!-- ===== 理财记账页 ===== -->
+<section class="page" id="page-finance">
+  <div class="page-title">理财记账</div>
+  <div class="page-sub">固定负债总额 6000 元</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">💸</div></div><div class="sc-val" id="finOut">0</div><div class="sc-lab">本月支出</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">💰</div></div><div class="sc-val" id="finIn">0</div><div class="sc-lab">本月收入</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">📉</div></div><div class="sc-val" id="finDebt">6000</div><div class="sc-lab">剩余负债</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📊</div></div><div class="sc-val" id="finRate">0<small>%</small></div><div class="sc-lab">还款进度</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📉</span><h3>还款进度</h3></div>
+    <div class="prog"><div class="pl"><span>还款进度</span><b id="debtInfo">0 / 6000</b></div><div class="bar-wrap" style="height:14px"><div class="bar-fill" id="debtBar" style="width:0%"></div></div></div>
+    <hr class="soft">
+    <div class="row"><div style="flex:0 0 70px"><label class="lab">金额</label><input class="input" id="ex_amt" type="number" placeholder="0"></div><div style="flex:1"><label class="lab">分类</label><select class="select" id="ex_cat"><option>餐饮</option><option>油费</option><option>日用品</option><option>学习</option><option>交通</option><option>其他支出</option><option>还款（抵负债）</option><option>收入</option></select></div><div style="flex:1.3"><label class="lab">备注</label><input class="input" id="ex_note" placeholder="如：午餐"></div></div>
+    <button class="btn sm" style="margin-top:6px" onclick="addExp()">记一笔</button>
+    <div class="scroll" style="margin-top:10px"><table id="exTable"><thead><tr><th>日期</th><th>分类</th><th>金额</th><th>备注</th><th></th></tr></thead><tbody></tbody></table></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">🗓️</span><h3>月度预算</h3></div>
+    <div class="row"><input class="input" id="bud_in" type="number" placeholder="预算收入"><input class="input" id="bud_out" type="number" placeholder="预算支出"><button class="btn sm" style="flex:0 0 52px" onclick="saveBudget()">设定</button></div>
+    <div class="muted" id="budInfo" style="margin-top:8px"></div>
+  </div>
+</section>
 
-      <!-- 政治 -->
-      <div class="card pink-tag">
-        <div class="sec-head"><span class="emoji">🇨🇳</span><h3>四、政治</h3></div>
-        <div class="muted">零碎时间刷肖1000 · 10月重心转政治 · 技巧班网课，冲刺/押题班再付费</div>
-        <div class="prog-group">
-          <div class="prog-item"><div class="pl"><span>肖1000题完成率</span><b id="polBarTxt">0/1000</b></div><div class="bar-wrap"><div class="bar-fill pink" id="polBarBar" style="width:0%"></div></div></div>
-          <div class="prog-item"><div class="pl"><span>知识点掌握率</span><b id="polMasTxt">0%</b></div><div class="bar-wrap"><div class="bar-fill blue" id="polMasBar" style="width:0%"></div></div></div>
-        </div>
-        <div class="row" style="margin-top:4px">
-          <div style="flex:1"><label class="lab">肖1000已完成题数</label><input class="input" id="pol_done" type="number" placeholder="如 120"></div>
-          <div style="flex:1"><label class="lab">知识点掌握率(%)</label><input class="input" id="pol_mas" type="number" placeholder="如 15"></div>
-          <button class="btn sm" style="flex:0 0 56px;align-self:flex-end" onclick="savePol()">设定</button>
-        </div>
-        <hr class="soft">
-        <div class="row"><div style="flex:1"><label class="lab">今日刷题进度</label><input class="input" id="pol_num" type="number" placeholder="题数"></div><div style="flex:2"><label class="lab">易混淆知识点</label><input class="input" id="pol_conf" placeholder="如：资本有机构成 vs 技术构成"></div></div>
-        <button class="btn sm" style="margin-top:6px" onclick="addPol()">打卡</button>
-        <div id="polList" style="margin-top:8px;font-size:12px"></div>
-      </div>
+<!-- ===== 饮食管理页 ===== -->
+<section class="page" id="page-diet">
+  <div class="page-title">饮食管理</div>
+  <div class="page-sub">三餐打卡 · 热量估算</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">🔥</div></div><div class="sc-val" id="dietKcal">0<small>kcal</small></div><div class="sc-lab">今日摄入</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">🍱</div></div><div class="sc-val" id="dietMeals">0<small>餐</small></div><div class="sc-lab">今日打卡</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">💧</div></div><div class="sc-val" id="dietWater">0<small>杯</small></div><div class="sc-lab">饮水</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">⚖️</div></div><div class="sc-val" id="dietWt">0<small>kg</small></div><div class="sc-lab">最新体重</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">🍱</span><h3>今日饮食</h3></div>
+    <div class="row"><input class="input" id="meal_b" placeholder="早餐（如：鸡蛋+牛奶 ≈200kcal）"><input class="input" id="meal_l" placeholder="午餐"></div>
+    <div class="row" style="margin-top:6px"><input class="input" id="meal_d" placeholder="晚餐"><button class="btn sm" style="flex:0 0 52px" onclick="addMeal()">打卡</button></div>
+    <div class="muted" style="margin-top:4px">热量粗估：鸡蛋+牛奶≈200，正餐≈500-700</div>
+    <div id="mealInfo" style="margin-top:8px;font-size:12px"></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">💧</span><h3>饮水打卡</h3></div>
+    <div class="row"><button class="btn ghost sm" onclick="addWater(1)">+1杯</button><button class="btn ghost sm" onclick="addWater(-1)">-1杯</button><div class="muted" style="flex:1;align-self:center;text-align:right" id="waterInfo">今日 0 杯</div></div>
+  </div>
+</section>
 
-      <!-- 通用 -->
-      <div class="card blue-tag">
-        <div class="sec-head"><span class="emoji">🗂️</span><h3>五、通用学习功能</h3></div>
-        <div class="fold-head open" onclick="toggleFold(this)"><span>📝 周复盘区域（每周日填写）</span><span class="arrow">▶</span></div>
-        <div class="fold-body open">
-          <label class="lab">本周完成情况</label><textarea class="textarea" id="wk_done" placeholder="完成的内容、进度…"></textarea>
-          <label class="lab">拖欠任务</label><textarea class="textarea" id="wk_owe" placeholder="没完成的…"></textarea>
-          <label class="lab">下周调整方向</label><textarea class="textarea" id="wk_adj" placeholder="调整策略…"></textarea>
-          <button class="btn sm" onclick="saveWeek()">保存本周复盘</button>
-          <div id="wkHistory" style="margin-top:8px;font-size:12px"></div>
-        </div>
-        <hr class="soft">
-        <div class="fold-head open" onclick="toggleFold(this)"><span>📁 资料库快捷入口</span><span class="arrow">▶</span></div>
-        <div class="fold-body open">
-          <div class="row"><input class="input" id="res_name" placeholder="名称（无机考点/物化公式/思维导图）"><input class="input" id="res_url" placeholder="链接 https://…" style="flex:1.5"><button class="btn sm" onclick="addRes()" style="flex:0 0 56px">加入</button></div>
-          <div id="resList" style="margin-top:8px;font-size:12.5px"></div>
-        </div>
-      </div>
-    </section>
+<!-- ===== 健身打卡页 ===== -->
+<section class="page" id="page-fitness">
+  <div class="page-title">健身打卡</div>
+  <div class="page-sub">普拉提 · 跳舞 · 热量消耗</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">🔥</div></div><div class="sc-val" id="fitKcal">0<small>kcal</small></div><div class="sc-lab">今日消耗</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">⏱️</div></div><div class="sc-val" id="fitMin">0<small>min</small></div><div class="sc-lab">今日时长</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">🏃</div></div><div class="sc-val" id="fitTimes">0</div><div class="sc-lab">累计次数</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">📊</div></div><div class="sc-val" id="fitTotalKcal">0</div><div class="sc-lab">累计消耗</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">🏃</span><h3>运动记录</h3></div>
+    <div class="muted">普拉提≈3.5kcal/min · 跳舞≈5kcal/min</div>
+    <div class="row" style="margin-top:6px"><select class="select" id="sp_type" style="flex:0 0 88px"><option>普拉提</option><option>跳舞</option><option>其他</option></select><input class="input" id="sp_min" type="number" placeholder="时长(分钟)" style="flex:1"><button class="btn sm" style="flex:0 0 52px" onclick="addSport()">记录</button></div>
+    <div id="spInfo" style="margin-top:8px;font-size:12px"></div>
+  </div>
+</section>
 
-    <!-- ===== 财务 ===== -->
-    <section class="page" id="page-money">
-      <div class="page-head"><span class="emoji">💸</span><h2>财务负债台账</h2><span class="desc">固定负债 6000 元</span></div>
-      <div class="card lilac-tag">
-        <span class="cat-deco tr">💰</span>
-        <div class="sec-head"><span class="emoji">📉</span><h3>还款进度</h3></div>
-        <div style="margin:6px 0 4px;display:flex;justify-content:space-between;font-size:12px"><span>还款进度</span><span id="debtInfo">0 / 6000</span></div>
-        <div class="bar-wrap"><div class="bar-fill pink" id="debtBar" style="width:0%"></div></div>
-        <div class="row" style="margin-top:10px">
-          <div style="flex:0 0 78px"><label class="lab">金额</label><input class="input" id="ex_amt" type="number" placeholder="0"></div>
-          <div style="flex:1"><label class="lab">分类</label><select class="select" id="ex_cat"><option>餐饮</option><option>油费</option><option>日用品</option><option>学习</option><option>交通</option><option>其他支出</option><option>还款（抵负债）</option><option>收入</option></select></div>
-          <div style="flex:1.4"><label class="lab">备注</label><input class="input" id="ex_note" placeholder="如：午餐"></div>
-        </div>
-        <button class="btn sm" style="margin-top:6px" onclick="addExp()">记一笔</button>
-        <div class="scroll" style="margin-top:10px"><table id="exTable"><thead><tr><th>日期</th><th>分类</th><th>金额</th><th>备注</th><th></th></tr></thead><tbody></tbody></table></div>
-        <div class="stats" id="exStats"></div>
-        <hr class="soft">
-        <label class="lab">月度简易预算（本月）</label>
-        <div class="row"><input class="input" id="bud_in" type="number" placeholder="预算收入"><input class="input" id="bud_out" type="number" placeholder="预算支出"><button class="btn sm" style="flex:0 0 56px" onclick="saveBudget()">设定</button></div>
-        <div class="muted" id="budInfo" style="margin-top:6px"></div>
-      </div>
-    </section>
+<!-- ===== 睡眠管理页 ===== -->
+<section class="page" id="page-sleep">
+  <div class="page-title">睡眠管理</div>
+  <div class="page-sub">记录睡眠时长 · 保证备考精力</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">😴</div></div><div class="sc-val" id="slToday">0<small>h</small></div><div class="sc-lab">昨晚睡眠</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">📊</div></div><div class="sc-val" id="slAvg">0<small>h</small></div><div class="sc-lab">本周平均</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">🌙</div></div><div class="sc-val" id="slQuality">—</div><div class="sc-lab">睡眠质量</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">📅</div></div><div class="sc-val" id="slDays">0</div><div class="sc-lab">记录天数</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">😴</span><h3>今日睡眠记录</h3></div>
+    <div class="row"><div style="flex:1"><label class="lab">睡眠时长(小时)</label><input class="input" id="sl_hours" type="number" step="0.1" placeholder="如 7.5"></div><div style="flex:1"><label class="lab">睡眠质量</label><select class="select" id="sl_q"><option>好</option><option>一般</option><option>差</option></select></div><button class="btn sm" style="flex:0 0 52px;align-self:flex-end" onclick="addSleep()">记录</button></div>
+    <div id="slList" style="margin-top:10px;font-size:12px"></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📊</span><h3>本周睡眠走势</h3></div>
+    <div id="slChart" style="min-height:100px"></div>
+  </div>
+  <div class="note">熬夜后第二天<b>自主减量</b>，备考是马拉松不是冲刺 🐱</div>
+</section>
 
-    <!-- ===== 减脂 ===== -->
-    <section class="page" id="page-health">
-      <div class="page-head"><span class="emoji">🌿</span><h2>减脂健康记录</h2><span class="desc">极简记录</span></div>
-      <div class="card blue-tag">
-        <span class="cat-deco bl">🌼</span>
-        <div class="sec-head"><span class="emoji">⚖️</span><h3>晨起体重</h3></div>
-        <div class="row"><input class="input" id="wt_input" type="number" step="0.1" placeholder="如 55.2"><button class="btn sm" style="flex:0 0 56px" onclick="addWeight()">记录</button></div>
-        <div id="wtInfo" style="margin-top:6px;font-size:12px"></div>
-        <div class="wt-chart" id="wtChart"></div>
-      </div>
-      <div class="card blue-tag">
-        <div class="sec-head"><span class="emoji">🍱</span><h3>饮食打卡</h3></div>
-        <div class="row"><input class="input" id="meal_b" placeholder="早餐（如：鸡蛋+牛奶）"><input class="input" id="meal_l" placeholder="午餐"></div>
-        <div class="row" style="margin-top:6px"><input class="input" id="meal_d" placeholder="晚餐"><button class="btn sm" style="flex:0 0 56px" onclick="addMeal()">打卡</button></div>
-        <div class="muted" style="margin-top:4px">热量为粗略估算：鸡蛋+牛奶≈200kcal，正餐≈500-700kcal</div>
-        <div id="mealInfo" style="margin-top:6px;font-size:12px"></div>
-      </div>
-      <div class="card blue-tag">
-        <div class="sec-head"><span class="emoji">🏃</span><h3>运动记录</h3></div>
-        <div class="muted">普拉提约 3.5kcal/min · 跳舞约 5kcal/min</div>
-        <div class="row" style="margin-top:6px"><select class="select" id="sp_type" style="flex:0 0 90px"><option>普拉提</option><option>跳舞</option><option>其他</option></select><input class="input" id="sp_min" type="number" placeholder="时长(分钟)" style="flex:1"><button class="btn sm" style="flex:0 0 56px" onclick="addSport()">记录</button></div>
-        <div id="spInfo" style="margin-top:6px;font-size:12px"></div>
-      </div>
-    </section>
+<!-- ===== 习惯养成页 ===== -->
+<section class="page" id="page-habits">
+  <div class="page-title">习惯养成</div>
+  <div class="page-sub">每日小习惯 · 坚持就是胜利</div>
+  <div class="card">
+    <div class="card-h"><span class="ic">⭐</span><h3>我的习惯</h3></div>
+    <div class="row"><input class="input" id="hb_name" placeholder="如：早起、背单词、运动"><button class="btn sm" onclick="addHabit()" style="flex:0 0 52px">添加</button></div>
+    <div id="hbList" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<!-- ===== 设置页 ===== -->
+<section class="page" id="page-settings">
+  <div class="page-title">设置</div>
+  <div class="page-sub">个性化你的工作台</div>
+  <div class="card">
+    <div class="card-h"><span class="ic">🎨</span><h3>外观</h3></div>
+    <div class="sw-row"><div><b>考研倒计时</b><div class="queued">显示在总览页</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
+    <div class="sw-row"><div><b>小猫装饰</b><div class="queued">板块角落点缀</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
+    <div class="sw-row"><div><b>温馨提示</b><div class="queued">状态不好减量提醒</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">📅</span><h3>考研日期</h3></div>
+    <label class="lab">考研日期（用于倒计时）</label>
+    <input type="date" class="input" id="examDate" onchange="saveExamDate()">
+    <div class="muted" style="margin-top:6px">默认设为12月26日</div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">💾</span><h3>数据管理</h3></div>
+    <button class="btn ghost sm" onclick="exportData()">📥 导出全部数据</button>
+    <button class="btn ghost sm" style="margin-left:6px;color:var(--pink-text)" onclick="clearData()">🗑️ 清空所有数据</button>
+    <div class="muted" style="margin-top:8px">数据保存在本机浏览器，换设备需导出</div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">ℹ️</span><h3>关于</h3></div>
+    <div class="muted">小猫工作台 · 考研双专业版<br>无机化学+物理化学 · 英语 · 政治 · 财务 · 减脂<br>数据本地存储 · 支持添加到手机桌面</div>
+  </div>
+</section>
 
     </div>
-  </main>
+  </div>
+</main>
 </div>
 
 <nav class="tabbar">
-  <div class="tab active" data-page="home" onclick="goPage('home')"><span class="ic">🏠</span>今日</div>
-  <div class="tab" data-page="study" onclick="goPage('study')"><span class="ic">📚</span>学习</div>
-  <div class="tab" data-page="money" onclick="goPage('money')"><span class="ic">💸</span>财务</div>
-  <div class="tab" data-page="health" onclick="goPage('health')"><span class="ic">🌿</span>健康</div>
+  <div class="tab active" data-page="overview" onclick="goPage('overview')"><span class="ic">📊</span>总览</div>
+  <div class="tab" data-page="daily" onclick="goPage('daily')"><span class="ic">📋</span>计划</div>
+  <div class="tab" data-page="english" onclick="goPage('english')"><span class="ic">📚</span>学习</div>
+  <div class="tab" data-page="finance" onclick="goPage('finance')"><span class="ic">💰</span>财务</div>
+  <div class="tab" data-page="diet" onclick="goPage('diet')"><span class="ic">🌿</span>生活</div>
 </nav>
-<div class="cat-float">🐾</div>
 
 <script>
 const DB={get(k,d){try{const v=JSON.parse(localStorage.getItem('kbb_'+k));return v===null?d:v}catch(e){return d}},set(k,v){localStorage.setItem('kbb_'+k,JSON.stringify(v))}};
-const todayStr=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
-const addDays=(s,n)=>{const d=new Date(s);d.setDate(d.getDate()+n);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const todayStr=()=>{const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const addDays=(s,n)=>{const d=new Date(s);d.setDate(d.getDate()+n);return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
 const WEEKDAYS=['日','一','二','三','四','五','六'];
-const escapeHtml=s=>(s||'').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+const eh=s=>(s||'').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
 
+/* 侧边栏 */
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('show')}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show')}
+
+/* 页面切换 */
 function goPage(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
+  const pg=document.getElementById('page-'+name);if(pg)pg.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===name));
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.page===name));
-  document.querySelector('.main').scrollTop=0;
-  if(name==='home'){renderSummary();renderAchievements();}
+  document.querySelector('.content').scrollTop=0;
+  closeSidebar();
+  if(name==='overview'){renderOverview();renderAchievements();}
   DB.set('curPage',name);
 }
+
+/* 顶部日期 */
+function renderTopDate(){
+  const d=new Date();const wd=WEEKDAYS[d.getDay()];
+  document.getElementById('topDate').textContent=`${d.getMonth()+1}月${d.getDate()}日 周${wd}`;
+  document.getElementById('topTime').textContent=`距离考研 ${getCountdown()}天`;
+}
+function getCountdown(){
+  const now=new Date();let y=now.getFullYear();
+  let exam=DB.get('examDate',null);
+  if(!exam){let e=new Date(y,11,26);if(now>e)e=new Date(y+1,11,26);exam=e.toISOString().slice(0,10)}
+  const diff=Math.ceil((new Date(exam)-now)/(1000*60*60*24));
+  return diff>0?diff:0;
+}
+function saveExamDate(){const v=document.getElementById('examDate').value;if(v)DB.set('examDate',v);renderTopDate();renderOverview()}
+
+/* 折叠/开关 */
 function toggleFold(el){const b=el.nextElementSibling;el.classList.toggle('open');b.classList.toggle('open')}
-function toggleSwitch(id){const sw=document.getElementById('sw_'+id);sw.classList.toggle('on');DB.set('sw_'+id,sw.classList.contains('on'));renderToday();renderSummary()}
+function toggleSwitch(id){const sw=document.getElementById('sw_'+id);sw.classList.toggle('on');DB.set('sw_'+id,sw.classList.contains('on'));renderOverview();renderDaily()}
 function initSwitches(){['gram'].forEach(id=>{if(DB.get('sw_'+id,false))document.getElementById('sw_'+id).classList.add('on')})}
 
-/* 倒计时 - 考研日期设为当年12月底 */
-function renderCountdown(){
-  const now=new Date();
-  let year=now.getFullYear();
-  // 如果当前月份已经过了12月，目标改为下一年
-  let exam=new Date(year,11,26); // 12月26日为典型考研日
-  if(now>exam)exam=new Date(year+1,11,26);
-  const days=Math.ceil((exam-now)/(1000*60*60*24));
-  document.getElementById('cdNum').textContent=days;
-}
-
-/* 今日清单 */
+/* 今日任务 */
 function todayTasks(){
   const t=todayStr();const wd=new Date().getDay();const tasks=[];
-  tasks.push({id:'en_word',txt:'不背单词 APP 20min（新词100+复习100）',tag:'en',cat:'英语'});
+  tasks.push({id:'en_word',txt:'不背单词APP 20min（新词100+复习100）',tag:'en',cat:'英语'});
   const units=DB.get('units',[]);const todayUnits=units.filter(u=>u.review.includes(t));
-  if(todayUnits.length)tasks.push({id:'en_review',txt:`复习单词：第 ${todayUnits.map(u=>u.unit).join('、')} 单元`,tag:'en',cat:'英语'});
+  if(todayUnits.length)tasks.push({id:'en_review',txt:`复习单词：第${todayUnits.map(u=>u.unit).join('、')}单元`,tag:'en',cat:'英语'});
   if(!DB.get('sw_gram',false))tasks.push({id:'en_gram',txt:'语法课（剩余4节）',tag:'en',cat:'英语'});
   tasks.push({id:'en_read',txt:'基础阅读（目标8.31前58篇）',tag:'en',cat:'英语'});
-  tasks.push({id:'wj_dq',txt:'无机大题刷题（看思路→背方程→独立做对）',tag:'wuj',cat:'无机化学'});
-  tasks.push({id:'wj_eq',txt:'无机方程式背诵',tag:'wuj',cat:'无机化学'});
-  tasks.push({id:'wh_dq',txt:'物化大题刷题（看思路→背公式→独立做对）',tag:'wuh',cat:'物理化学'});
-  tasks.push({id:'wh_eq',txt:'物化公式背诵',tag:'wuh',cat:'物理化学'});
+  tasks.push({id:'wj_dq',txt:'无机大题刷题（看思路→背方程→独立做对）',tag:'wj',cat:'无机'});
+  tasks.push({id:'wj_eq',txt:'无机方程式背诵',tag:'wj',cat:'无机'});
+  tasks.push({id:'wh_dq',txt:'物化大题刷题（看思路→背公式→独立做对）',tag:'wh',cat:'物化'});
+  tasks.push({id:'wh_eq',txt:'物化公式背诵',tag:'wh',cat:'物化'});
   if(wd===0)tasks.push({id:'pol_review',txt:'填写本周复盘',tag:'pol',cat:'通用'});
   tasks.push({id:'pol_brush',txt:'肖1000题 零碎时间刷题',tag:'pol',cat:'政治'});
-  tasks.push({id:'health_wt',txt:'晨起称重 + 饮食/运动打卡',tag:'pol',cat:'健康'});
+  tasks.push({id:'health',txt:'晨起称重+饮食/运动打卡',tag:'health',cat:'健康'});
   return tasks;
 }
-function renderToday(){
+function renderTasks(elId){
   const done=DB.get('today_done',{});const tasks=todayTasks();
-  document.getElementById('todayList').innerHTML=tasks.map(t=>`<div class="task ${done[t.id]?'done':''}" onclick="toggleToday('${t.id}')"><div class="box"></div><div class="txt">${t.txt}<br><span class="muted" style="font-size:10.5px">${t.cat}</span></div><span class="tag ${t.tag}">${t.cat}</span></div>`).join('')||'<div class="muted">今天没有任务 🐾</div>';
-  const cnt=tasks.filter(t=>done[t.id]).length;
-  document.getElementById('todayProgress').textContent=`${cnt}/${tasks.length}`;
-  document.getElementById('navHome').textContent=cnt+'/'+tasks.length;
+  document.getElementById(elId).innerHTML=tasks.map(t=>`<div class="task ${done[t.id]?'done':''}" onclick="toggleToday('${t.id}')"><div class="box"></div><div class="txt">${t.txt}<br><span class="muted" style="font-size:10px">${t.cat}</span></div><span class="tag ${t.tag}">${t.cat}</span></div>`).join('')||'<div class="muted">今天没有任务 🐾</div>';
+  return{cnt:tasks.filter(t=>done[t.id]).length,total:tasks.length};
 }
-function toggleToday(id){const d=DB.get('today_done',{});d[id]=!d[id];d.__date=todayStr();DB.set('today_done',d);renderToday();renderSummary();renderAchievements();}
+function toggleToday(id){const d=DB.get('today_done',{});d[id]=!d[id];d.__date=todayStr();DB.set('today_done',d);renderOverview();renderDaily();renderAchievements()}
 function checkDailyReset(){const d=DB.get('today_done',{});if(d.__date&&d.__date!==todayStr())DB.set('today_done',{})}
 
-function renderSummary(){
-  const el=document.getElementById('homeSummary');if(!el)return;
-  const t=todayStr();const done=DB.get('today_done',{});const tasks=todayTasks();
-  const cnt=tasks.filter(x=>done[x.id]).length;
-  const wjDati=DB.get('wj_dati',[]);const whDati=DB.get('wh_dati',[]);
-  const wjEq=DB.get('wj_eqs',[]);const whEq=DB.get('wh_eqs',[]);
-  const pol=DB.get('pol',[]).filter(x=>x.date===t);
-  const wt=DB.get('weights',[]);const todayWt=wt.filter(x=>x.date===t);
-  let html=`<div class="stats"><div class="st"><div class="v">${cnt}/${tasks.length}</div><div class="k">今日任务</div></div>`;
-  html+=`<div class="st p"><div class="v">${wjDati.filter(x=>x.date===t).reduce((s,x)=>s+(x.num||0),0)+whDati.filter(x=>x.date===t).reduce((s,x)=>s+(x.num||0),0)}</div><div class="k">今日大题</div></div>`;
-  html+=`<div class="st"><div class="v">${wjEq.filter(x=>x.date===t).length+whEq.filter(x=>x.date===t).length}</div><div class="k">今日背诵</div></div></div>`;
-  html+=`<div style="margin-top:8px;font-size:12px;color:var(--ink-soft)">`;
-  if(todayWt.length)html+=`⚖️ 今日体重 <b>${todayWt[todayWt.length-1].v}kg</b>　`;
-  if(pol.length)html+=`🇨🇳 今日政治 ${pol[pol.length-1].num||0} 题`;
-  html+=`</div>`;
-  if(new Date().getDay()===0)html+=`<div class="note" style="margin-top:8px"><b>今天是周日</b>，记得填写本周复盘 📝</div>`;
-  el.innerHTML=html;
+/* 总览页 */
+function renderOverview(){
+  const cd=getCountdown();document.getElementById('cdNum').textContent=cd;
+  const done=DB.get('today_done',{});const tasks=todayTasks();const cnt=tasks.filter(t=>done[t.id]).length;
+  document.getElementById('ovTask').innerHTML=`${cnt}<small>/${tasks.length}</small>`;
+  document.getElementById('navOv').textContent=cnt+'/'+tasks.length;
+  document.getElementById('ovProg').textContent=`${cnt}/${tasks.length}`;
+  const wjDati=DB.get('wj_dati',[]),whDati=DB.get('wh_dati',[]);
+  document.getElementById('ovDati').innerHTML=`${wjDati.reduce((s,x)=>s+(x.num||0),0)+whDati.reduce((s,x)=>s+(x.num||0),0)}<small>题</small>`;
+  const wjEq=DB.get('wj_eqs',[]),whEq=DB.get('wh_eqs',[]);
+  document.getElementById('ovEq').innerHTML=`${wjEq.length+whEq.length}<small>个</small>`;
+  const wt=DB.get('weights',[]);
+  if(wt.length){const last=wt[wt.length-1];document.getElementById('ovWt').innerHTML=`${last.v}<small>kg</small>`;if(wt.length>=2){const d=last.v-wt[wt.length-2].v;const el=document.getElementById('ovWtTrend');el.textContent=d>0?'↑':'↓';el.className='sc-trend '+(d>0?'down':'up')}}
+  const r=renderTasks('ovTasks');
+  renderWeekChart();
+}
+function renderWeekChart(){
+  // 本周每日完成率折线
+  const days=[];const now=new Date();
+  for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);const ds=d.toISOString().slice(0,10);days.push(ds)}
+  // 这里简化：用每天的大题数作为走势
+  const wjDati=DB.get('wj_dati',[]),whDati=DB.get('wh_dati',[]);
+  const data=days.map(ds=>wjDati.filter(x=>x.date===ds).reduce((s,x)=>s+(x.num||0),0)+whDati.filter(x=>x.date===ds).reduce((s,x)=>s+(x.num||0),0));
+  const w=320,h=120,pad=20;const mx=Math.max(...data,1);
+  const pts=data.map((v,i)=>[pad+(i/6)*(w-2*pad),h-pad-(v/mx)*(h-2*pad)]);
+  const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const area=path+` L${pts[6][0].toFixed(1)} ${h-pad} L${pts[0][0].toFixed(1)} ${h-pad} Z`;
+  const labels=days.map(ds=>parseInt(ds.slice(5)));
+  document.getElementById('weekChart').innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:${w}px"><defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a8b8" stop-opacity="0.4"/><stop offset="100%" stop-color="#f7a8b8" stop-opacity="0"/></linearGradient></defs><path d="${area}" fill="url(#wg)"/><path d="${path}" fill="none" stroke="#e8849a" stroke-width="2" stroke-linejoin="round"/>${pts.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="#e8849a"/>`).join('')}<text x="${pad}" y="${h-4}" font-size="9" fill="#b8b8c8">${labels[0]}日</text><text x="${w-pad}" y="${h-4}" text-anchor="end" font-size="9" fill="#b8b8c8">${labels[6]}日</text></svg>`;
+}
+
+/* 每日计划页 */
+function renderDaily(){
+  const done=DB.get('today_done',{});const tasks=todayTasks();const cnt=tasks.filter(t=>done[t.id]).length;
+  document.getElementById('dpTotal').textContent=tasks.length;
+  document.getElementById('dpDone').textContent=cnt;
+  document.getElementById('dpTodo').textContent=tasks.length-cnt;
+  document.getElementById('dpRate').innerHTML=`${tasks.length?Math.round(cnt/tasks.length*100):0}<small>%</small>`;
+  document.getElementById('navDaily').textContent=cnt+'/'+tasks.length;
+  renderTasks('dpTasks');
 }
 
 /* 单词 */
@@ -529,242 +754,142 @@ function addUnit(){
   if(!date){alert('请选择首次学习日期');return}
   let units=DB.get('units',[]);const ex=units.find(u=>u.unit===unit);
   if(ex){ex.date=date;ex.review=REVIEW_DAYS.map(n=>addDays(date,n));ex.done=REVIEW_DAYS.map(()=>false)}
-  else{units.push({unit,date,review:REVIEW_DAYS.map(n=>addDays(date,n)),done:REVIEW_DAYS.map(()=>false)})}
-  units.sort((a,b)=>a.unit-b.unit);DB.set('units',units);document.getElementById('unitDate').value='';renderUnits();renderToday();renderAllProgress();
+  else units.push({unit,date,review:REVIEW_DAYS.map(n=>addDays(date,n)),done:REVIEW_DAYS.map(()=>false)});
+  units.sort((a,b)=>a.unit-b.unit);DB.set('units',units);document.getElementById('unitDate').value='';renderUnits();renderAllProgress();renderOverview();renderDaily();
 }
 function renderUnits(){
   const units=DB.get('units',[]);const t=todayStr();const tb=document.querySelector('#wordTable tbody');
-  if(!units.length){tb.innerHTML='<tr><td colspan="4" class="muted" style="text-align:center">暂无后五单元记录</td></tr>';return}
+  if(!units.length){tb.innerHTML='<tr><td colspan="4" class="muted" style="text-align:center">暂无记录</td></tr>';return}
   tb.innerHTML=units.map(u=>{
     const isToday=u.review.includes(t);
     const cells=u.review.map((r,i)=>{const di=u.done[i];const isT=r===t;return `<span style="${isT?'color:var(--pink-text);font-weight:700':''};text-decoration:${di?'line-through':'none'};opacity:${di?'.5':'1'};cursor:pointer" onclick="markReview(${u.unit},${i})">${r.slice(5)}</span>`}).join(' · ');
-    return `<tr class="${isToday?'today':''}"><td>第${u.unit}单元${isToday?'<span class="badge-today">今日</span>':''}</td><td>${u.date}</td><td style="font-size:11px;line-height:1.8">${cells}</td><td><button class="btn ghost sm" style="padding:2px 8px;font-size:10px" onclick="delUnit(${u.unit})">✕</button></td></tr>`;
+    return `<tr style="${isToday?'background:#fff5f8':''}"><td>第${u.unit}单元${isToday?' <span style="font-size:9px;background:var(--pink);color:#fff;padding:1px 5px;border-radius:5px">今日</span>':''}</td><td>${u.date}</td><td style="font-size:11px;line-height:1.8">${cells}</td><td><button class="btn ghost sm" style="padding:2px 7px;font-size:10px" onclick="delUnit(${u.unit})">✕</button></td></tr>`;
   }).join('');
 }
-function markReview(unit,i){const units=DB.get('units',[]);const u=units.find(x=>x.unit===unit);if(!u)return;u.done[i]=!u.done[i];DB.set('units',units);renderUnits();renderToday()}
-function delUnit(unit){if(!confirm('删除第'+unit+'单元？'))return;DB.set('units',DB.get('units',[]).filter(u=>u.unit!==unit));renderUnits();renderToday();renderAllProgress()}
+function markReview(unit,i){const u=DB.get('units',[]).find(x=>x.unit===unit);if(!u)return;u.done[i]=!u.done[i];DB.set('units',DB.get('units',[]));renderUnits();renderAllProgress()}
+function delUnit(unit){if(!confirm('删除第'+unit+'单元？'))return;DB.set('units',DB.get('units',[]).filter(u=>u.unit!==unit));renderUnits();renderAllProgress()}
 
-/* 阅读/真题 */
-function initRead(){const v=DB.get('read_done',0);document.getElementById('readDone').value=v||'';document.getElementById('ztDone').value=DB.get('zt_done',0)||'';updateRead()}
-function updateRead(){
-  const v=parseInt(document.getElementById('readDone').value)||0;DB.set('read_done',v);document.getElementById('readInfo').textContent=`${v} / 58 篇`;
-  const z=parseInt(document.getElementById('ztDone').value)||0;DB.set('zt_done',z);document.getElementById('ztInfo').textContent=`${z} 套`;
-  renderAllProgress();
-}
-document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{const r=document.getElementById('readDone');if(r)r.oninput=updateRead;const z=document.getElementById('ztDone');if(z)z.oninput=updateRead;},100)});
+function initRead(){const r=document.getElementById('readDone');if(r){r.value=DB.get('read_done',0)||'';r.oninput=()=>{DB.set('read_done',parseInt(r.value)||0);renderAllProgress()}}const z=document.getElementById('ztDone');if(z){z.value=DB.get('zt_done',0)||'';z.oninput=()=>{DB.set('zt_done',parseInt(z.value)||0);renderAllProgress()}}}
 
-/* 大题（无机/物化通用） */
-function addDaTi(p){
-  const txt=document.getElementById(p+'_dq_input').value.trim();const num=parseInt(document.getElementById(p+'_dq_num').value)||0;
-  if(!txt)return;
-  const list=DB.get(p+'_dati',[]);list.push({txt,num,date:todayStr(),ts:Date.now()});DB.set(p+'_dati',list);
-  document.getElementById(p+'_dq_input').value='';document.getElementById(p+'_dq_num').value='';
-  renderDaTi(p);renderSummary();renderAllProgress();renderAchievements();
-}
-function renderDaTi(p){
-  const list=DB.get(p+'_dati',[]).slice(-8).reverse();const el=document.getElementById(p+'_dqList');
-  if(!list.length){el.innerHTML='<div class="muted">还没有刷题记录</div>';return}
-  el.innerHTML=list.map(d=>`<div style="padding:6px 8px;background:var(--card-soft);border-radius:8px;margin-bottom:5px;font-size:12.5px"><b>${d.date}</b> · ${d.num?d.num+'题 · ':''}${escapeHtml(d.txt)}</div>`).join('');
-}
+/* 大题 */
+function addDaTi(p){const txt=document.getElementById(p+'_dq_input').value.trim();const num=parseInt(document.getElementById(p+'_dq_num').value)||0;if(!txt)return;const l=DB.get(p+'_dati',[]);l.push({txt,num,date:todayStr()});DB.set(p+'_dati',l);document.getElementById(p+'_dq_input').value='';document.getElementById(p+'_dq_num').value='';renderDaTi(p);renderAllProgress();renderOverview();renderAchievements()}
+function renderDaTi(p){const l=DB.get(p+'_dati',[]).slice(-6).reverse();const el=document.getElementById(p+'_dqList');if(!el)return;if(!l.length){el.innerHTML='<div class="muted">还没有刷题记录</div>';return}el.innerHTML=l.map(d=>`<div style="padding:6px 8px;background:var(--card-soft);border-radius:10px;margin-bottom:5px;font-size:12px"><b>${d.date}</b> · ${d.num?d.num+'题 · ':''}${eh(d.txt)}</div>`).join('')}
 
 /* 方程式/公式 */
-function addEq(p){
-  const txt=document.getElementById(p+'_eq_input').value.trim();if(!txt)return;
-  const list=DB.get(p+'_eqs',[]);list.push({txt,date:todayStr()});DB.set(p+'_eqs',list);
-  document.getElementById(p+'_eq_input').value='';renderEq(p);renderSummary();renderAllProgress();renderAchievements();
-}
-function renderEq(p){
-  const list=DB.get(p+'_eqs',[]).slice(-12).reverse();const el=document.getElementById(p+'_eqList');
-  if(!list.length){el.innerHTML='<div class="muted">暂无</div>';return}
-  el.innerHTML=list.map(d=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:8px;margin-bottom:4px">${d.date} · ${escapeHtml(d.txt)}</div>`).join('');
-}
+function addEq(p){const txt=document.getElementById(p+'_eq_input').value.trim();if(!txt)return;const l=DB.get(p+'_eqs',[]);l.push({txt,date:todayStr()});DB.set(p+'_eqs',l);document.getElementById(p+'_eq_input').value='';renderEq(p);renderAllProgress();renderOverview();renderAchievements()}
+function renderEq(p){const l=DB.get(p+'_eqs',[]).slice(-8).reverse();const el=document.getElementById(p+'_eqList');if(!el)return;if(!l.length){el.innerHTML='<div class="muted">暂无</div>';return}el.innerHTML=l.map(d=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:10px;margin-bottom:4px">${d.date} · ${eh(d.txt)}</div>`).join('')}
 
 /* 薄弱 */
-function addWeak(p){
-  const txt=document.getElementById(p+'_weak_input').value.trim();if(!txt)return;
-  const list=DB.get(p+'_weak',[]);list.push({txt,date:todayStr()});DB.set(p+'_weak',list);
-  document.getElementById(p+'_weak_input').value='';renderWeak(p);
-}
-function renderWeak(p){
-  const list=DB.get(p+'_weak',[]).slice(-12).reverse();const el=document.getElementById(p+'_weakList');
-  if(!list.length){el.innerHTML='<div class="muted">暂无</div>';return}
-  el.innerHTML=list.map(d=>`<div style="padding:5px 8px;background:#fff5f5;border-radius:8px;margin-bottom:4px">⚠️ ${escapeHtml(d.txt)} <span class="muted">(${d.date})</span></div>`).join('');
-}
+function addWeak(p){const txt=document.getElementById(p+'_weak_input').value.trim();if(!txt)return;const l=DB.get(p+'_weak',[]);l.push({txt,date:todayStr()});DB.set(p+'_weak',l);document.getElementById(p+'_weak_input').value='';renderWeak(p);renderAllProgress()}
+function renderWeak(p){const l=DB.get(p+'_weak',[]).slice(-8).reverse();const el=document.getElementById(p+'_weakList');if(!el)return;if(!l.length){el.innerHTML='<div class="muted">暂无</div>';return}el.innerHTML=l.map(d=>`<div style="padding:5px 8px;background:#fff5f8;border-radius:10px;margin-bottom:4px">⚠️ ${eh(d.txt)} <span class="muted">(${d.date})</span></div>`).join('')}
 
-/* 课程选择 */
-function pickCourse(p,el,val){document.querySelectorAll('#'+p+'_courseChips .chip').forEach(c=>c.classList.remove('on','pink'));el.classList.add('on','pink');DB.set(p+'_course',val)}
-function initCourse(p){const v=DB.get(p+'_course','继续听课');document.querySelectorAll('#'+p+'_courseChips .chip').forEach(c=>{if(c.textContent===v)c.classList.add('on','pink')})}
+/* 课程 */
+function pickCourse(p,el,v){document.querySelectorAll('#'+p+'_courseChips .chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');DB.set(p+'_course',v)}
+function initCourse(p){const v=DB.get(p+'_course','继续听课');document.querySelectorAll('#'+p+'_courseChips .chip').forEach(c=>{if(c.textContent===v)c.classList.add('on')})}
 
-/* 错题本 */
-function addErr(p){
-  const q=document.getElementById(p+'_err_q').value.trim();const r=document.getElementById(p+'_err_r').value.trim();const s=document.getElementById(p+'_err_s').value.trim();
-  if(!q)return;
-  const list=DB.get(p+'_err',[]);list.push({q,r,s,date:todayStr(),ts:Date.now()});DB.set(p+'_err',list);
-  document.getElementById(p+'_err_q').value='';document.getElementById(p+'_err_r').value='';document.getElementById(p+'_err_s').value='';
-  renderErr(p);
-}
-function renderErr(p){
-  const list=DB.get(p+'_err',[]).slice(-10).reverse();const el=document.getElementById(p+'_errList');
-  if(!list.length){el.innerHTML='<div class="muted">暂无错题</div>';return}
-  el.innerHTML=list.map((e,i)=>`<div class="err-item"><div class="err-q">📝 ${escapeHtml(e.q)}</div>${e.r?`<div class="err-r">❌ ${escapeHtml(e.r)}</div>`:''}${e.s?`<div class="err-s">💡 ${escapeHtml(e.s)}</div>`:''}<div class="err-m">${e.date} <button class="btn ghost sm" style="float:right;padding:1px 6px;font-size:10px" onclick="delErr('${p}',${DB.get(p+'_err',[]).length-1-i})">✕</button></div></div>`).join('');
-}
-function delErr(p,idx){if(!confirm('删除这道错题？'))return;const all=DB.get(p+'_err',[]);all.splice(idx,1);DB.set(p+'_err',all);renderErr(p)}
-function genReview(p){
-  const now=new Date();const weekStart=new Date(now);weekStart.setDate(now.getDate()-7);
-  const all=DB.get(p+'_err',[]);const recent=all.filter(e=>new Date(e.date)>=weekStart);
-  if(!recent.length){alert('本周暂无错题，继续加油！🐱');return}
-  let txt=`【${p==='wj'?'无机化学':'物理化学'} 本周错题复盘卷】\n生成日期：${todayStr()}\n共 ${recent.length} 道错题\n\n`;
-  recent.forEach((e,i)=>{txt+=`--- 第${i+1}题 ---\n题目：${e.q}\n错误原因：${e.r||'—'}\n思路总结：${e.s||'—'}\n\n`});
-  const blob=new Blob([txt],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${p==='wj'?'无机':'物化'}_错题复盘_${todayStr()}.txt`;a.click();
-}
+/* 错题 */
+function addErr(p){const q=document.getElementById(p+'_err_q').value.trim();const r=document.getElementById(p+'_err_r').value.trim();const s=document.getElementById(p+'_err_s').value.trim();if(!q)return;const l=DB.get(p+'_err',[]);l.push({q,r,s,date:todayStr()});DB.set(p+'_err',l);document.getElementById(p+'_err_q').value='';document.getElementById(p+'_err_r').value='';document.getElementById(p+'_err_s').value='';renderErr(p);renderErrNotes()}
+function renderErr(p){const l=DB.get(p+'_err',[]).slice(-8).reverse();const el=document.getElementById(p+'_errList');if(!el)return;if(!l.length){el.innerHTML='<div class="muted">暂无错题</div>';return}const all=DB.get(p+'_err',[]);el.innerHTML=l.map((e,i)=>`<div class="err-item"><div class="eq">📝 ${eh(e.q)}</div>${e.r?`<div class="er">❌ ${eh(e.r)}</div>`:''}${e.s?`<div class="es">💡 ${eh(e.s)}</div>`:''}<div class="em">${e.date} <button class="btn ghost sm" style="float:right;padding:1px 5px;font-size:9px" onclick="delErr('${p}',${all.length-1-i})">✕</button></div></div>`).join('')}
+function delErr(p,idx){if(!confirm('删除？'))return;const a=DB.get(p+'_err',[]);a.splice(idx,1);DB.set(p+'_err',a);renderErr(p);renderErrNotes()}
+function renderErrNotes(){['wj','wh'].forEach(p=>{const el=document.getElementById('notes_'+p+'_err');if(!el)return;const l=DB.get(p+'_err',[]).slice(-6).reverse();if(!l.length){el.innerHTML='<div class="muted">暂无错题</div>';return}el.innerHTML=l.map(e=>`<div class="err-item"><div class="eq">📝 ${eh(e.q)}</div>${e.r?`<div class="er">❌ ${eh(e.r)}</div>`:''}${e.s?`<div class="es">💡 ${eh(e.s)}</div>`:''}<div class="em">${e.date}</div></div>`).join('')})}
+function genReview(p){const now=new Date();const ws=new Date(now);ws.setDate(now.getDate()-7);const all=DB.get(p+'_err',[]);const r=all.filter(e=>new Date(e.date)>=ws);if(!r.length){alert('本周暂无错题，继续加油！🐱');return}let t=`【${p==='wj'?'无机化学':'物理化学'} 本周错题复盘卷】\n生成：${todayStr()}\n共${r.length}道\n\n`;r.forEach((e,i)=>{t+=`--- 第${i+1}题 ---\n题目：${e.q}\n错误原因：${e.r||'—'}\n思路总结：${e.s||'—'}\n\n`});const b=new Blob([t],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`${p==='wj'?'无机':'物化'}_错题复盘_${todayStr()}.txt`;a.click()}
 
 /* 章节 */
-function saveWjCh(p='wj'){
-  p=p||'wj';
-  const done=parseInt(document.getElementById(p+'ChDone').value)||0;
-  const total=parseInt(document.getElementById(p+'ChTotal').value)||0;
-  DB.set(p+'_ch',{done,total});renderAllProgress();
-}
-function initCh(p){
-  const ch=DB.get(p+'_ch',{done:0,total:12});
-  document.getElementById(p+'ChDone').value=ch.done;document.getElementById(p+'ChTotal').value=ch.total;
-}
+function saveWjCh(p){p=p||'wj';const d=parseInt(document.getElementById(p+'ChDone').value)||0;const t=parseInt(document.getElementById(p+'ChTotal').value)||0;DB.set(p+'_ch',{done:d,total:t});renderAllProgress()}
+function initCh(p){const c=DB.get(p+'_ch',{done:0,total:12});const d=document.getElementById(p+'ChDone'),t=document.getElementById(p+'ChTotal');if(d)d.value=c.done;if(t)t.value=c.total}
 
 /* 政治 */
-function savePol(){
-  const d=parseInt(document.getElementById('pol_done').value)||0;const m=parseInt(document.getElementById('pol_mas').value)||0;
-  DB.set('pol_prog',{done:d,mas:m});renderAllProgress();
-}
-function initPolProg(){const p=DB.get('pol_prog',{done:0,mas:0});document.getElementById('pol_done').value=p.done;document.getElementById('pol_mas').value=p.mas}
-function addPol(){
-  const num=document.getElementById('pol_num').value.trim();const conf=document.getElementById('pol_conf').value.trim();
-  if(!num&&!conf)return;
-  const list=DB.get('pol',[]);list.push({num,conf,date:todayStr()});DB.set('pol',list);
-  document.getElementById('pol_num').value='';document.getElementById('pol_conf').value='';renderPol();renderSummary();
-}
-function renderPol(){
-  const list=DB.get('pol',[]).slice(-10).reverse();const el=document.getElementById('polList');
-  if(!list.length){el.innerHTML='<div class="muted">暂无打卡</div>';return}
-  el.innerHTML=list.map(d=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:8px;margin-bottom:4px"><b>${d.date}</b>${d.num?' · 刷'+d.num+'题':''}${d.conf?' · 混淆：'+escapeHtml(d.conf):''}</div>`).join('');
-}
+function savePol(){const d=parseInt(document.getElementById('pol_done').value)||0;const m=parseInt(document.getElementById('pol_mas').value)||0;DB.set('pol_prog',{done:d,mas:m});renderAllProgress()}
+function initPol(){const p=DB.get('pol_prog',{done:0,mas:0});const d=document.getElementById('pol_done'),m=document.getElementById('pol_mas');if(d)d.value=p.done;if(m)m.value=p.mas}
+function addPol(){const num=document.getElementById('pol_num').value.trim();const conf=document.getElementById('pol_conf').value.trim();if(!num&&!conf)return;const l=DB.get('pol',[]);l.push({num,conf,date:todayStr()});DB.set('pol',l);document.getElementById('pol_num').value='';document.getElementById('pol_conf').value='';renderPol()}
+function renderPol(){const l=DB.get('pol',[]).slice(-8).reverse();const el=document.getElementById('polList');if(!l.length){el.innerHTML='<div class="muted">暂无打卡</div>';return}el.innerHTML=l.map(d=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:10px;margin-bottom:4px"><b>${d.date}</b>${d.num?' · 刷'+d.num+'题':''}${d.conf?' · 混淆：'+eh(d.conf):''}</div>`).join('')}
 
-/* 进度条总渲染 */
+/* 进度总渲染 */
 function renderAllProgress(){
-  // 英语
   const unitsDone=5+DB.get('units',[]).filter(u=>u.done.every(Boolean)).length;
-  document.getElementById('pWordTxt').textContent=`${unitsDone}/10`;
-  document.getElementById('pWordBar').style.width=(unitsDone/10*100)+'%';
-  const rd=DB.get('read_done',0);document.getElementById('pReadTxt').textContent=`${rd}/58`;document.getElementById('pReadBar').style.width=(rd/58*100)+'%';
-  const zt=DB.get('zt_done',0);document.getElementById('pZtTxt').textContent=`${zt}套`;document.getElementById('pZtBar').style.width=Math.min(100,zt*10)+'%';
-
-  // 无机
+  const setBar=(idTxt,idBar,val,max,unit)=>{const e1=document.getElementById(idTxt),e2=document.getElementById(idBar);if(e1)e1.textContent=val+(unit||'')+(max?'/'+max:'');if(e2)e2.style.width=(max?Math.min(100,val/max*100):Math.min(100,val))+'%'};
+  setBar('pWordTxt','pWordBar',unitsDone,10,'');
+  const rd=DB.get('read_done',0);setBar('pReadTxt','pReadBar',rd,58,'');const zt=DB.get('zt_done',0);setBar('pZtTxt','pZtBar',zt,0,'套');
+  // 统计卡百分比
+  const setPct=(id,val,max)=>{const e=document.getElementById(id);if(e)e.innerHTML=Math.round(max?val/max*100:0)+'<small>%</small>'};
+  setPct('enWordPct',unitsDone,10);setPct('enReadPct',rd,58);setPct('enZtPct',Math.min(zt*10,100),100);
   ['wj','wh'].forEach(p=>{
-    const ch=DB.get(p+'_ch',{done:0,total:12});
-    document.getElementById(p+'ChTxt').textContent=`${ch.done}/${ch.total}`;
-    document.getElementById(p+'ChBar').style.width=(ch.done/ch.total*100)+'%';
-    const exNum=DB.get(p+'_dati',[]).reduce((s,x)=>s+(x.num||0),0);
-    document.getElementById(p+'ExTxt').textContent=`${exNum}题`;
-    document.getElementById(p+'ExBar').style.width=Math.min(100,exNum/100*100)+'%';
-    const eqNum=DB.get(p+'_eqs',[]).length;
-    document.getElementById(p+'EqTxt').textContent=`${eqNum}个`;
-    document.getElementById(p+'EqBar').style.width=Math.min(100,eqNum/50*100)+'%';
+    const ch=DB.get(p+'_ch',{done:0,total:12});setBar(p+'ChTxt',p+'ChBar',ch.done,ch.total,'');
+    const ex=DB.get(p+'_dati',[]).reduce((s,x)=>s+(x.num||0),0);setBar(p+'ExTxt',p+'ExBar',ex,100,'题');
+    const eq=DB.get(p+'_eqs',[]).length;setBar(p+'EqTxt',p+'EqBar',eq,50,'个');
+    setPct(p+'ChPct',ch.done,ch.total);
+    const en=document.getElementById(p+'ExNum');if(en)en.innerHTML=ex+'<small>题</small>';
+    const eqn=document.getElementById(p+'EqNum');if(eqn)eqn.innerHTML=eq+'<small>个</small>';
+    const wn=document.getElementById(p+'WeakNum');if(wn)wn.textContent=DB.get(p+'_weak',[]).length;
   });
-  // 政治
-  const pp=DB.get('pol_prog',{done:0,mas:0});
-  document.getElementById('polBarTxt').textContent=`${pp.done}/1000`;document.getElementById('polBarBar').style.width=(pp.done/1000*100)+'%';
-  document.getElementById('polMasTxt').textContent=`${pp.mas}%`;document.getElementById('polMasBar').style.width=pp.mas+'%';
+  const pp=DB.get('pol_prog',{done:0,mas:0});setBar('polBarTxt','polBarBar',pp.done,1000,'');setBar('polMasTxt','polMasBar',pp.mas,100,'');
+  const pn=document.getElementById('polDoneNum');if(pn)pn.innerHTML=pp.done+'<small>/1000</small>';
+  const pm=document.getElementById('polMasNum');if(pm)pm.innerHTML=pp.mas+'<small>%</small>';
+  const pt=document.getElementById('polTodayNum');if(pt)pt.textContent=DB.get('pol',[]).filter(x=>x.date===todayStr()).length;
 }
 
 /* 周复盘 */
 function saveWeek(){const d={done:document.getElementById('wk_done').value,owe:document.getElementById('wk_owe').value,adj:document.getElementById('wk_adj').value,date:todayStr()};if(!d.done&&!d.owe&&!d.adj)return;const l=DB.get('weeks',[]);l.push(d);DB.set('weeks',l);document.getElementById('wk_done').value='';document.getElementById('wk_owe').value='';document.getElementById('wk_adj').value='';renderWeeks()}
-function renderWeeks(){const l=DB.get('weeks',[]).slice(-6).reverse();const el=document.getElementById('wkHistory');if(!l.length){el.innerHTML='<div class="muted">暂无复盘记录</div>';return}el.innerHTML=l.map(w=>`<details style="margin-bottom:6px;padding:6px 8px;background:var(--card-soft);border-radius:8px"><summary style="cursor:pointer;font-weight:600">${w.date} 复盘</summary><div style="margin-top:6px;font-size:12px"><b>完成：</b>${escapeHtml(w.done||'—')}<br><b>拖欠：</b>${escapeHtml(w.owe||'—')}<br><b>调整：</b>${escapeHtml(w.adj||'—')}</div></details>`).join('')}
+function renderWeeks(){const l=DB.get('weeks',[]).slice(-6).reverse();const el=document.getElementById('wkHistory');if(!el)return;if(!l.length){el.innerHTML='<div class="muted">暂无复盘</div>';return}el.innerHTML=l.map(w=>`<details style="margin-bottom:6px;padding:6px 8px;background:var(--card-soft);border-radius:10px"><summary style="cursor:pointer;font-weight:600">${w.date} 复盘</summary><div style="margin-top:6px;font-size:11px"><b>完成：</b>${eh(w.done||'—')}<br><b>拖欠：</b>${eh(w.owe||'—')}<br><b>调整：</b>${eh(w.adj||'—')}</div></details>`).join('')}
 
 /* 资料库 */
-function addRes(){const name=document.getElementById('res_name').value.trim();const url=document.getElementById('res_url').value.trim();if(!name&&!url)return;const l=DB.get('res',[]);l.push({name,url});DB.set('res',l);document.getElementById('res_name').value='';document.getElementById('res_url').value='';renderRes()}
-function renderRes(){const l=DB.get('res',[]);const el=document.getElementById('resList');if(!l.length){el.innerHTML='<div class="muted">暂无入口，可存：无机考点、物化公式、思维导图、电子资料</div>';return}el.innerHTML=l.map(r=>`<div style="padding:6px 0;border-bottom:1px dashed var(--line)"><a href="${escapeHtml(r.url||'#')}" target="_blank" style="color:var(--blue-text);text-decoration:none">${escapeHtml(r.name||r.url)} 🔗</a></div>`).join('')}
+function addRes(){const n=document.getElementById('res_name').value.trim();const u=document.getElementById('res_url').value.trim();if(!n&&!u)return;const l=DB.get('res',[]);l.push({name:n,url:u});DB.set('res',l);document.getElementById('res_name').value='';document.getElementById('res_url').value='';renderRes()}
+function renderRes(){const l=DB.get('res',[]);const el=document.getElementById('resList');if(!l.length){el.innerHTML='<div class="muted">暂无入口，可存：无机考点、物化公式、思维导图</div>';return}el.innerHTML=l.map(r=>`<div style="padding:7px 0;border-bottom:1px dashed var(--line)"><a href="${eh(r.url||'#')}" target="_blank" style="color:var(--pink-text);text-decoration:none">${eh(r.name||r.url)} 🔗</a></div>`).join('')}
 
 /* 财务 */
 const DEBT_TOTAL=6000;
-function addExp(){const amt=parseFloat(document.getElementById('ex_amt').value)||0;const cat=document.getElementById('ex_cat').value;const note=document.getElementById('ex_note').value.trim();if(!amt)return;const l=DB.get('exp',[]);l.push({amt,cat,note,date:todayStr()});DB.set('exp',l);document.getElementById('ex_amt').value='';document.getElementById('ex_note').value='';renderExp()}
-function renderExp(){
-  const l=DB.get('exp',[]).slice(-15).reverse();const tb=document.querySelector('#exTable tbody');const all=DB.get('exp',[]);
-  const paid=all.filter(e=>e.cat==='还款（抵负债）').reduce((s,e)=>s+e.amt,0);const pct=Math.min(100,paid/DEBT_TOTAL*100);
-  document.getElementById('debtInfo').textContent=`已还 ${paid} / ${DEBT_TOTAL}（剩余 ${DEBT_TOTAL-paid}）`;document.getElementById('debtBar').style.width=pct+'%';
-  if(!l.length){tb.innerHTML='<tr><td colspan="5" class="muted" style="text-align:center">暂无记录</td></tr>';renderExpStats();return}
-  tb.innerHTML=l.map((e,i)=>`<tr><td>${e.date.slice(5)}</td><td>${e.cat}</td><td style="color:${e.cat==='收入'?'var(--blue-text)':e.cat.includes('还款')?'var(--pink-text)':'inherit'}">${e.cat==='收入'?'+':'-'}${e.amt}</td><td style="font-size:11px">${escapeHtml(e.note||'')}</td><td><button class="btn ghost sm" style="padding:2px 7px;font-size:10px" onclick="delExp(${all.length-1-i})">✕</button></td></tr>`).join('');
-  renderExpStats();
-}
-function delExp(idx){if(!confirm('删除这笔？'))return;const all=DB.get('exp',[]);all.splice(idx,1);DB.set('exp',all);renderExp()}
-function renderExpStats(){const all=DB.get('exp',[]);const m=todayStr().slice(0,7);const mE=all.filter(e=>e.date.startsWith(m)&&e.cat!=='收入'&&e.cat!=='还款（抵负债）').reduce((s,e)=>s+e.amt,0);const mI=all.filter(e=>e.date.startsWith(m)&&e.cat==='收入').reduce((s,e)=>s+e.amt,0);document.getElementById('exStats').innerHTML=`<div class="st p"><div class="v">${mE}</div><div class="k">本月支出</div></div><div class="st"><div class="v">${mI}</div><div class="k">本月收入</div></div><div class="st p"><div class="v">${all.filter(e=>e.cat==='还款（抵负债）').reduce((s,e)=>s+e.amt,0)}</div><div class="k">累计还款</div></div>`}
+function addExp(){const amt=parseFloat(document.getElementById('ex_amt').value)||0;const cat=document.getElementById('ex_cat').value;const note=document.getElementById('ex_note').value.trim();if(!amt)return;const l=DB.get('exp',[]);l.push({amt,cat,note,date:todayStr()});DB.set('exp',l);document.getElementById('ex_amt').value='';document.getElementById('ex_note').value='';renderExp();renderFin()}
+function renderExp(){const l=DB.get('exp',[]).slice(-12).reverse();const tb=document.querySelector('#exTable tbody');const all=DB.get('exp',[]);const paid=all.filter(e=>e.cat==='还款（抵负债）').reduce((s,e)=>s+e.amt,0);const pct=Math.min(100,paid/DEBT_TOTAL*100);const di=document.getElementById('debtInfo');if(di)di.textContent=`已还 ${paid} / ${DEBT_TOTAL}（剩余 ${DEBT_TOTAL-paid}）`;const db=document.getElementById('debtBar');if(db)db.style.width=pct+'%';if(!tb)return;if(!l.length){tb.innerHTML='<tr><td colspan="5" class="muted" style="text-align:center">暂无记录</td></tr>';return}tb.innerHTML=l.map((e,i)=>`<tr><td>${e.date.slice(5)}</td><td>${e.cat}</td><td style="color:${e.cat==='收入'?'var(--blue-text)':e.cat.includes('还款')?'var(--pink-text)':'inherit'}">${e.cat==='收入'?'+':'-'}${e.amt}</td><td style="font-size:11px">${eh(e.note||'')}</td><td><button class="btn ghost sm" style="padding:2px 6px;font-size:9px" onclick="delExp(${all.length-1-i})">✕</button></td></tr>`).join('')}
+function delExp(idx){if(!confirm('删除？'))return;const a=DB.get('exp',[]);a.splice(idx,1);DB.set('exp',a);renderExp();renderFin()}
+function renderFin(){const all=DB.get('exp',[]);const m=todayStr().slice(0,7);const mE=all.filter(e=>e.date.startsWith(m)&&e.cat!=='收入'&&e.cat!=='还款（抵负债）').reduce((s,e)=>s+e.amt,0);const mI=all.filter(e=>e.date.startsWith(m)&&e.cat==='收入').reduce((s,e)=>s+e.amt,0);const paid=all.filter(e=>e.cat==='还款（抵负债）').reduce((s,e)=>s+e.amt,0);const e1=document.getElementById('finOut');if(e1)e1.textContent=mE;const e2=document.getElementById('finIn');if(e2)e2.textContent=mI;const e3=document.getElementById('finDebt');if(e3)e3.textContent=DEBT_TOTAL-paid;const e4=document.getElementById('finRate');if(e4)e4.innerHTML=Math.round(paid/DEBT_TOTAL*100)+'<small>%</small>'}
 function saveBudget(){const i=document.getElementById('bud_in').value;const o=document.getElementById('bud_out').value;DB.set('budget',{in:i||0,out:o||0,month:todayStr().slice(0,7)});renderBudget()}
-function renderBudget(){const b=DB.get('budget',null);const info=document.getElementById('budInfo');const ins=document.getElementById('bud_in'),outs=document.getElementById('bud_out');if(!b||b.month!==todayStr().slice(0,7)){info.textContent='本月尚未设定预算';ins.value='';outs.value='';return}ins.value=b.in;outs.value=b.out;const all=DB.get('exp',[]);const m=todayStr().slice(0,7);const mE=all.filter(e=>e.date.startsWith(m)&&e.cat!=='收入'&&e.cat!=='还款（抵负债）').reduce((s,e)=>s+e.amt,0);const r=b.out-mE;info.innerHTML=`预算支出 <b>${b.out}</b> · 已花 <b style="color:var(--pink-text)">${mE}</b> · 剩余 <b style="color:${r>=0?'var(--blue-text)':'var(--pink-text)'}">${r}</b>`}
+function renderBudget(){const b=DB.get('budget',null);const info=document.getElementById('budInfo');if(!info)return;if(!b||b.month!==todayStr().slice(0,7)){info.textContent='本月尚未设定预算';return}document.getElementById('bud_in').value=b.in;document.getElementById('bud_out').value=b.out;const all=DB.get('exp',[]);const m=todayStr().slice(0,7);const mE=all.filter(e=>e.date.startsWith(m)&&e.cat!=='收入'&&e.cat!=='还款（抵负债）').reduce((s,e)=>s+e.amt,0);const r=b.out-mE;info.innerHTML=`预算支出 <b>${b.out}</b> · 已花 <b style="color:var(--pink-text)">${mE}</b> · 剩余 <b style="color:${r>=0?'var(--blue-text)':'var(--pink-text)'}">${r}</b>`}
 
-/* 减脂 */
-function addWeight(){const v=parseFloat(document.getElementById('wt_input').value);if(!v)return;const l=DB.get('weights',[]);l.push({v,date:todayStr()});DB.set('weights',l);document.getElementById('wt_input').value='';renderWeight();renderSummary()}
-function renderWeight(){
-  const l=DB.get('weights',[]);const el=document.getElementById('wtInfo');const chart=document.getElementById('wtChart');
-  if(!l.length){el.innerHTML='<div class="muted">暂无记录</div>';chart.innerHTML='';return}
-  const last=l[l.length-1];let trend='';if(l.length>=2){const d=last.v-l[l.length-2].v;trend=d>0?` ↑ ${d.toFixed(1)}kg`:d<0?` ↓ ${Math.abs(d).toFixed(1)}kg`:' 持平'}
-  const min=Math.min(...l.map(x=>x.v));
-  el.innerHTML=`最新 <b>${last.v}kg</b>${trend} · 历史最低 <b style="color:var(--blue-text)">${min}kg</b> · 共记录 ${l.length} 次`;
-  // 趋势图
-  const recent=l.slice(-14);
-  if(recent.length>=2){
-    const w=320,h=120,pad=20;
-    const vs=recent.map(x=>x.v);const mx=Math.max(...vs),mn=Math.min(...vs);const range=(mx-mn)||1;
-    const pts=recent.map((x,i)=>{const px=pad+(i/(recent.length-1))*(w-2*pad);const py=h-pad-((x.v-mn)/range)*(h-2*pad);return [px,py]});
-    const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
-    const area=path+` L${pts[pts.length-1][0].toFixed(1)} ${h-pad} L${pts[0][0].toFixed(1)} ${h-pad} Z`;
-    chart.innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:${w}px"><defs><linearGradient id="wtg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#bcd4e4" stop-opacity="0.5"/><stop offset="100%" stop-color="#bcd4e4" stop-opacity="0"/></linearGradient></defs><path d="${area}" fill="url(#wtg)"/><path d="${path}" fill="none" stroke="#8fa8b8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${pts.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.5" fill="#d4a8a4"/>`).join('')}<text x="${w-5}" y="14" text-anchor="end" font-size="9" fill="#9a8a98">${mn}~${mx}kg</text></svg>`;
-  }else{chart.innerHTML=''}
-}
-function addMeal(){const b=document.getElementById('meal_b').value.trim();const l=document.getElementById('meal_l').value.trim();const d=document.getElementById('meal_d').value.trim();if(!b&&!l&&!d)return;const list=DB.get('meals',[]);list.push({b,l,d,date:todayStr()});DB.set('meals',list);document.getElementById('meal_b').value='';document.getElementById('meal_l').value='';document.getElementById('meal_d').value='';renderMeal()}
-function renderMeal(){const list=DB.get('meals',[]).slice(-5).reverse();const el=document.getElementById('mealInfo');if(!list.length){el.innerHTML='<div class="muted">暂无饮食打卡</div>';return}el.innerHTML=list.map(m=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:8px;margin-bottom:4px;font-size:12px"><b>${m.date}</b> 早:${escapeHtml(m.b||'—')} 中:${escapeHtml(m.l||'—')} 晚:${escapeHtml(m.d||'—')}</div>`).join('')}
-function addSport(){const type=document.getElementById('sp_type').value;const min=parseInt(document.getElementById('sp_min').value)||0;if(!min)return;const rate=type==='普拉提'?3.5:type==='跳舞'?5:4;const kcal=Math.round(min*rate);const l=DB.get('sports',[]);l.push({type,min,kcal,date:todayStr()});DB.set('sports',l);document.getElementById('sp_min').value='';renderSport()}
-function renderSport(){const list=DB.get('sports',[]).slice(-6).reverse();const el=document.getElementById('spInfo');if(!list.length){el.innerHTML='<div class="muted">暂无运动记录</div>';return}const tk=list.filter(s=>s.date===todayStr()).reduce((a,b)=>a+b.kcal,0);el.innerHTML=(tk?`<div style="margin-bottom:5px;color:var(--blue-text)">今日累计消耗约 <b>${tk}</b> kcal</div>`:'')+list.map(s=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:8px;margin-bottom:4px;font-size:12px"><b>${s.date}</b> ${s.type} ${s.min}min · 约 ${s.kcal}kcal</div>`).join('')}
+/* 饮食 */
+function addMeal(){const b=document.getElementById('meal_b').value.trim();const l=document.getElementById('meal_l').value.trim();const d=document.getElementById('meal_d').value.trim();if(!b&&!l&&!d)return;const list=DB.get('meals',[]);list.push({b,l,d,date:todayStr()});DB.set('meals',list);document.getElementById('meal_b').value='';document.getElementById('meal_l').value='';document.getElementById('meal_d').value='';renderMeal();renderDiet()}
+function renderMeal(){const l=DB.get('meals',[]).slice(-4).reverse();const el=document.getElementById('mealInfo');if(!l.length){el.innerHTML='<div class="muted">暂无打卡</div>';return}el.innerHTML=l.map(m=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:10px;margin-bottom:4px;font-size:12px"><b>${m.date}</b> 早:${eh(m.b||'—')} 中:${eh(m.l||'—')} 晚:${eh(m.d||'—')}</div>`).join('')}
+function renderDiet(){const today=todayStr();const meals=DB.get('meals',[]).filter(m=>m.date===today);const e1=document.getElementById('dietMeals');if(e1)e1.innerHTML=meals.length+'<small>餐</small>';const wt=DB.get('weights',[]);const e4=document.getElementById('dietWt');if(e4)e4.innerHTML=(wt.length?wt[wt.length-1].v:0)+'<small>kg</small>'}
+function addWater(n){const w=DB.get('water',0)+n;if(w<0)return;DB.set('water',w);const e=document.getElementById('waterInfo');if(e)e.textContent='今日 '+w+' 杯';const ew=document.getElementById('dietWater');if(ew)ew.innerHTML=w+'<small>杯</small>'}
+
+/* 健身 */
+function addSport(){const t=document.getElementById('sp_type').value;const min=parseInt(document.getElementById('sp_min').value)||0;if(!min)return;const rate=t==='普拉提'?3.5:t==='跳舞'?5:4;const kcal=Math.round(min*rate);const l=DB.get('sports',[]);l.push({type:t,min,kcal,date:todayStr()});DB.set('sports',l);document.getElementById('sp_min').value='';renderSport();renderFit()}
+function renderSport(){const l=DB.get('sports',[]).slice(-5).reverse();const el=document.getElementById('spInfo');if(!l.length){el.innerHTML='<div class="muted">暂无记录</div>';return}const tk=l.filter(s=>s.date===todayStr()).reduce((a,b)=>a+b.kcal,0);el.innerHTML=(tk?`<div style="margin-bottom:5px;color:var(--pink-text)">今日消耗约 <b>${tk}</b> kcal</div>`:'')+l.map(s=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:10px;margin-bottom:4px;font-size:12px"><b>${s.date}</b> ${s.type} ${s.min}min · 约${s.kcal}kcal</div>`).join('')}
+function renderFit(){const today=todayStr();const l=DB.get('sports',[]);const tk=l.filter(s=>s.date===today).reduce((a,b)=>a+b.kcal,0);const tm=l.filter(s=>s.date===today).reduce((a,b)=>a+b.min,0);const e1=document.getElementById('fitKcal');if(e1)e1.innerHTML=tk+'<small>kcal</small>';const e2=document.getElementById('fitMin');if(e2)e2.innerHTML=tm+'<small>min</small>';const e3=document.getElementById('fitTimes');if(e3)e3.textContent=l.length;const e4=document.getElementById('fitTotalKcal');if(e4)e4.textContent=l.reduce((a,b)=>a+b.kcal,0)}
+
+/* 睡眠 */
+function addSleep(){const h=parseFloat(document.getElementById('sl_hours').value)||0;const q=document.getElementById('sl_q').value;if(!h)return;const l=DB.get('sleeps',[]);l.push({h,q,date:todayStr()});DB.set('sleeps',l);document.getElementById('sl_hours').value='';renderSleep();renderSlStats()}
+function renderSleep(){const l=DB.get('sleeps',[]).slice(-6).reverse();const el=document.getElementById('slList');if(!l.length){el.innerHTML='<div class="muted">暂无记录</div>';return}el.innerHTML=l.map(d=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:10px;margin-bottom:4px;font-size:12px"><b>${d.date}</b> ${d.h}h · ${d.q}</div>`).join('')}
+function renderSlStats(){const l=DB.get('sleeps',[]);const today=todayStr();const todaySl=l.filter(s=>s.date===today);const e1=document.getElementById('slToday');if(e1)e1.innerHTML=(todaySl.length?todaySl[0].h:0)+'<small>h</small>';const now=new Date();const week=[];for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);week.push(d.toISOString().slice(0,10))}const weekSl=week.map(ds=>l.filter(s=>s.date===ds)).flat();const avg=weekSl.length?weekSl.reduce((s,x)=>s+x.h,0)/weekSl.length:0;const e2=document.getElementById('slAvg');if(e2)e2.innerHTML=avg.toFixed(1)+'<small>h</small>';const e3=document.getElementById('slQuality');if(e3)e3.textContent=todaySl.length?todaySl[0].q:'—';const e4=document.getElementById('slDays');if(e4)e4.textContent=l.length;renderSlChart(week,weekSl)}
+function renderSlChart(days,data){const w=320,h=100,pad=18;const mx=Math.max(...data.map(x=>x.h),8);const vals=days.map(ds=>{const s=data.filter(x=>x.date===ds);return s.length?s[0].h:0});const bw=(w-2*pad)/7*0.6;const el=document.getElementById('slChart');if(!el)return;el.innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:${w}px">${vals.map((v,i)=>{const x=pad+(i/7)*(w-2*pad);const bh=(v/mx)*(h-2*pad);const y=h-pad-bh;return `<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="3" fill="${v>=7?'#a8d8c0':'#f7a8b8'}"/><text x="${x+bw/2}" y="${h-pad+10}" text-anchor="middle" font-size="8" fill="#b8b8c8">${i+1}</text>`}).join('')}</svg>`}
+
+/* 习惯 */
+function addHabit(){const n=document.getElementById('hb_name').value.trim();if(!n)return;const l=DB.get('habits',[]);l.push({name:n,streak:0,lastDate:''});DB.set('habits',l);document.getElementById('hb_name').value='';renderHabits()}
+function renderHabits(){const l=DB.get('habits',[]);const el=document.getElementById('hbList');if(!l.length){el.innerHTML='<div class="muted">暂无习惯，添加一个开始坚持吧</div>';return}el.innerHTML=l.map((h,i)=>`<div class="sw-row"><div><b>${eh(h.name)}</b><div class="queued">连续 ${h.streak} 天</div></div><button class="btn sm" onclick="checkHabit(${i})">打卡</button></div>`).join('')}
+function checkHabit(i){const l=DB.get('habits',[]);const t=todayStr();if(l[i].lastDate===t){alert('今天已打卡');return}if(l[i].lastDate===addDays(t,-1))l[i].streak++;else l[i].streak=1;l[i].lastDate=t;DB.set('habits',l);renderHabits()}
 
 /* 成就 */
-const ACHIEVEMENTS=[
-  {id:'wj100',ic:'🐱',name:'无机100题',cond:()=>DB.get('wj_dati',[]).reduce((s,x)=>s+(x.num||0),0)>=100},
-  {id:'wh100',ic:'😺',name:'物化100题',cond:()=>DB.get('wh_dati',[]).reduce((s,x)=>s+(x.num||0),0)>=100},
-  {id:'word30',ic:'😻',name:'单词30天',cond:()=>{const done=DB.get('today_done',{});return Object.keys(done).filter(k=>k.startsWith('en_word')||k==='en_word').length>=1&&getWordDays()>=30}},
-  {id:'eq30',ic:'🐈',name:'背诵30个',cond:()=>DB.get('wj_eqs',[]).length+DB.get('wh_eqs',[]).length>=30},
-  {id:'read30',ic:'🐾',name:'阅读30篇',cond:()=>DB.get('read_done',0)>=30},
-  {id:'pol500',ic:'🇨🇳',name:'政治500题',cond:()=>DB.get('pol_prog',{done:0}).done>=500},
-  {id:'debt50',ic:'💰',name:'还款过半',cond:()=>DB.get('exp',[]).filter(e=>e.cat==='还款（抵负债）').reduce((s,e)=>s+e.amt,0)>=3000},
-  {id:'weight7',ic:'🌼',name:'称重7天',cond:()=>DB.get('weights',[]).length>=7},
-  {id:'errFree',ic:'✨',name:'错题清零',cond:()=>DB.get('wj_err',[]).length===0&&DB.get('wh_err',[]).length===0&&DB.get('wj_dati',[]).length>0}
-];
-function getWordDays(){
-  // 统计有 en_word 打卡记录的天数（粗略：today_done 里 __date 不同）
-  return DB.get('word_days',0);
-}
-function renderAchievements(){
-  const el=document.getElementById('achGrid');if(!el)return;
-  // 更新单词天数
-  const done=DB.get('today_done',{});
-  if(done.en_word){DB.set('word_days',getWordDays()+1);done.en_word=false;DB.set('today_done',done)}
-  el.innerHTML=ACHIEVEMENTS.map(a=>{
-    const unlocked=DB.get('ach_'+a.id,false)||a.cond();
-    DB.set('ach_'+a.id,unlocked);
-    return `<div class="ach ${unlocked?'unlocked':''}"><div class="ach-ic">${a.ic}</div><div class="ach-n">${a.name}</div></div>`;
-  }).join('');
-}
+const ACH=[{id:'wj100',ic:'🐱',n:'无机100题',c:()=>DB.get('wj_dati',[]).reduce((s,x)=>s+(x.num||0),0)>=100},{id:'wh100',ic:'😺',n:'物化100题',c:()=>DB.get('wh_dati',[]).reduce((s,x)=>s+(x.num||0),0)>=100},{id:'word30',ic:'😻',n:'单词30天',c:()=>DB.get('word_days',0)>=30},{id:'eq30',ic:'🐈',n:'背诵30个',c:()=>DB.get('wj_eqs',[]).length+DB.get('wh_eqs',[]).length>=30},{id:'read30',ic:'🐾',n:'阅读30篇',c:()=>DB.get('read_done',0)>=30},{id:'pol500',ic:'🇨🇳',n:'政治500题',c:()=>DB.get('pol_prog',{done:0}).done>=500},{id:'debt50',ic:'💰',n:'还款过半',c:()=>DB.get('exp',[]).filter(e=>e.cat==='还款（抵负债）').reduce((s,e)=>s+e.amt,0)>=3000},{id:'wt7',ic:'🌼',n:'称重7天',c:()=>DB.get('weights',[]).length>=7}];
+function renderAchievements(){const el=document.getElementById('achGrid');if(!el)return;const done=DB.get('today_done',{});if(done.en_word){DB.set('word_days',DB.get('word_days',0)+1);done.en_word=false;DB.set('today_done',done)}el.innerHTML=ACH.map(a=>{const u=DB.get('ach_'+a.id,false)||a.c();DB.set('ach_'+a.id,u);return `<div class="ach ${u?'unlocked':''}"><div class="ach-ic">${a.ic}</div><div class="ach-n">${a.n}</div></div>`}).join('')}
 
-/* 日期标签 */
-function renderDate(){const d=new Date();const wd=WEEKDAYS[d.getDay()];const el=document.getElementById('todayLabel');if(el)el.textContent=`📅 ${todayStr()} 周${wd}`}
+/* 数据管理 */
+function exportData(){const d={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('kbb_'))d[k]=localStorage.getItem(k)}const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`小猫工作台_备份_${todayStr()}.json`;a.click()}
+function clearData(){if(!confirm('确定清空所有数据？此操作不可恢复！'))return;for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k.startsWith('kbb_'))localStorage.removeItem(k)}location.reload()}
 
+/* 初始化 */
 function init(){
-  renderCountdown();renderDate();checkDailyReset();initSwitches();renderToday();renderSummary();renderAchievements();
-  renderUnits();initRead();renderDaTi('wj');renderDaTi('wh');renderEq('wj');renderEq('wh');renderWeak('wj');renderWeak('wh');initCourse('wj');initCourse('wh');renderPol();
-  initCh('wj');initCh('wh');initPolProg();
-  renderErr('wj');renderErr('wh');renderWeeks();renderRes();
-  renderAllProgress();
-  renderExp();renderBudget();
-  renderWeight();renderMeal();renderSport();
-  goPage(DB.get('curPage','home'));
+  renderTopDate();checkDailyReset();initSwitches();renderOverview();renderDaily();
+  renderUnits();initRead();['wj','wh'].forEach(p=>{renderDaTi(p);renderEq(p);renderWeak(p);initCourse(p);initCh(p);renderErr(p)});renderErrNotes();
+  renderPol();initPol();renderWeeks();renderRes();renderAllProgress();
+  renderExp();renderBudget();renderFin();
+  renderMeal();renderDiet();renderSport();renderFit();renderSleep();renderSlStats();renderHabits();
+  // 设置页考研日期
+  const ed=DB.get('examDate',null);if(ed&&document.getElementById('examDate'))document.getElementById('examDate').value=ed;
+  // 水杯
+  const w=DB.get('water',0);const we=document.getElementById('waterInfo');if(we)we.textContent='今日 '+w+' 杯';
+  goPage(DB.get('curPage','overview'));
 }
 init();
+setInterval(renderTopDate,60000);
 </script>
 </body>
 </html>
