@@ -1329,25 +1329,34 @@ function renderTimeStats(){
   // 圆环 — 按各模块学习时长汇总
   const cats=[{n:'英语',c:'#f7a8b8',m:'en'},{n:'无机',c:'#b5d4e0',m:'wj'},{n:'物化',c:'#e8c87a',m:'wh'},{n:'政治',c:'#a8d8c0',m:'pol'}];
   const modH=cats.map(c=>logs.filter(x=>x.module===c.m).reduce((s,x)=>s+x.h,0));
-  const total=modH.reduce((s,v)=>s+v,0)||1;
-  let start=0;let svg='<circle cx="60" cy="60" r="24" fill="#fff"/>';let legend='';
-  cats.forEach((c,i)=>{const v=modH[i];const pct=v/total;const end=start+pct*Math.PI*2;
-    const x1=60+40*Math.cos(start),y1=60+40*Math.sin(start),x2=60+40*Math.cos(end),y2=60+40*Math.sin(end);
-    const large=end-start>Math.PI?1:0;
-    svg+=`<path d="M60 60 L${x1} ${y1} A40 40 0 ${large} 1 ${x2} ${y2} Z" fill="${c.c}" opacity="0.85"/>`;
-    legend+=`<div class="li"><span class="dot" style="background:${c.c}"></span>${c.n} ${v.toFixed(1)}h (${Math.round(pct*100)}%)</div>`;
-    start=end;
-  });
+  const total=modH.reduce((s,v)=>s+v,0);
+  let svg='',legend='';
+  if(total<=0){
+    svg=`<circle cx="60" cy="60" r="40" fill="none" stroke="#f0f0f0" stroke-width="20"/><circle cx="60" cy="60" r="24" fill="#fff"/><text x="60" y="64" text-anchor="middle" font-size="11" fill="#b0bcc8">暂无</text>`;
+    legend='<div class="muted">还没有学习时长记录</div>';
+  }else{
+    const R=40,circ=2*Math.PI*R;
+    let offset=0;
+    svg=`<circle cx="60" cy="60" r="${R}" fill="none" stroke="#f0f0f0" stroke-width="20"/>`;
+    cats.forEach((c,i)=>{
+      const v=modH[i];if(v<=0)return;
+      const pct=v/total;const dash=pct*circ;
+      svg+=`<circle cx="60" cy="60" r="${R}" fill="none" stroke="${c.c}" stroke-width="20" stroke-dasharray="${dash.toFixed(2)} ${circ.toFixed(2)}" stroke-dashoffset="-${offset.toFixed(2)}" transform="rotate(-90 60 60)" stroke-linecap="butt"/>`;
+      offset+=dash;
+      legend+=`<div class="li"><span class="dot" style="background:${c.c}"></span>${c.n} ${v.toFixed(1)}h (${Math.round(pct*100)}%)</div>`;
+    });
+    svg+='<circle cx="60" cy="60" r="24" fill="#fff"/>';
+  }
   const dn=document.getElementById('tsDonut');if(dn)dn.innerHTML=svg;
   const lg=document.getElementById('tsLegend');if(lg)lg.innerHTML=legend;
 }
 function backfillTime(){
   const d=document.getElementById('ts_back_date').value;
-  const min=parseFloat(document.getElementById('ts_back_min').value)||0;
+  const min=Math.round(parseFloat(document.getElementById('ts_back_min').value)||0);
   const mod=document.getElementById('ts_back_mod').value;
   const r=document.getElementById('ts_back_reason').value.trim();
   if(!d||!min){alert('请填写日期和时长');return}
-  const h=parseFloat((min/60).toFixed(2));
+  const h=Math.round(min*100/60)/100;
   const l=DB.get('study_time',[]);l.push({date:d,h,module:mod,reason:r});DB.set('study_time',l);
   document.getElementById('ts_back_date').value='';document.getElementById('ts_back_min').value='';document.getElementById('ts_back_reason').value='';
   renderTimeStats();renderCalendar();renderOverview();
