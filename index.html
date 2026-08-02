@@ -669,15 +669,24 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
     <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">🎯</div></div><div class="sc-val" id="dietWt">0<small>kg</small></div><div class="sc-lab">最新体重</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📝</span><h3>今日饮食</h3></div>
-    <div class="row"><input class="input" id="meal_b" placeholder="早餐（如：鸡蛋+牛奶 ≈200kcal）"><input class="input" id="meal_l" placeholder="午餐"></div>
-    <div class="row" style="margin-top:6px"><input class="input" id="meal_d" placeholder="晚餐"><button class="btn sm" style="flex:0 0 52px" onclick="addMeal()">打卡</button></div>
-    <div class="muted" style="margin-top:4px">热量粗估：鸡蛋+牛奶≈200，正餐≈500-700</div>
-    <div id="mealInfo" style="margin-top:8px;font-size:12px"></div>
+    <div class="card-h"><span class="ic">🍽️</span><h3>今日饮食</h3></div>
+    <div class="row"><input class="input" id="meal_b" placeholder="早餐（如：鸡蛋+牛奶）"><input class="input" id="meal_b_kcal" type="number" placeholder="kcal" style="flex:0 0 70px"></div>
+    <div class="row" style="margin-top:6px"><input class="input" id="meal_l" placeholder="午餐"><input class="input" id="meal_l_kcal" type="number" placeholder="kcal" style="flex:0 0 70px"></div>
+    <div class="row" style="margin-top:6px"><input class="input" id="meal_d" placeholder="晚餐"><input class="input" id="meal_d_kcal" type="number" placeholder="kcal" style="flex:0 0 70px"></div>
+    <button class="btn sm" style="margin-top:8px" onclick="addMeal()">📝 打卡三餐</button>
+    <div id="mealInfo" style="margin-top:10px;font-size:12px"></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">✨</span><h3>饮水打卡</h3></div>
+    <div class="card-h"><span class="ic">💧</span><h3>饮水打卡</h3></div>
     <div class="row"><button class="btn ghost sm" onclick="addWater(1)">+1杯</button><button class="btn ghost sm" onclick="addWater(-1)">-1杯</button><div class="muted" style="flex:1;align-self:center;text-align:right" id="waterInfo">今日 0 杯</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">⚖️</span><h3>体重记录</h3></div>
+    <div class="row">
+      <input class="input" id="wt_input" type="number" step="0.1" placeholder="今日体重（kg）" style="flex:1">
+      <button class="btn sm" style="flex:0 0 56px" onclick="addWeight()">记录</button>
+    </div>
+    <div class="scroll" style="margin-top:10px"><table id="wtTable"><thead><tr><th>日期</th><th>体重(kg)</th><th>变化</th><th></th></tr></thead><tbody></tbody></table></div>
   </div>
 </section>
 
@@ -897,7 +906,7 @@ function delTodayTask(id){
   renderOverview();renderDaily();
   ['en','wj','wh','pol'].forEach(renderSubjectTask);
 }
-function toggleToday(id){const d=DB.get('today_done',{});d[id]=!d[id];d.__date=todayStr();DB.set('today_done',d);renderOverview();renderDaily();renderAchievements()}
+function toggleToday(id){const d=DB.get('today_done',{});const wasDone=d[id];d[id]=!d[id];d.__date=todayStr();DB.set('today_done',d);renderOverview();renderDaily();renderAchievements();if(!wasDone&&d[id]){const task=getTodayTasks().find(t=>t.id===id);if(task&&task.cat!=='自定义'&&task.cat!=='健康'){const min=prompt(`✅ 完成了「${task.txt}」\n\n用了多少分钟？（输入数字，不填=跳过）`,'');if(min&&!isNaN(min)){const h=parseFloat((parseFloat(min)/60).toFixed(2));const tl=DB.get('study_time',[]);const catMap={英语:'en',无机:'wj',物化:'wh',政治:'pol'};tl.push({date:todayStr(),h,module:catMap[task.cat]||task.source||'other',taskName:task.txt});DB.set('study_time',tl);renderTimeStats();renderCalendar();renderOverview()}}}}
 function renderTasks(elId){
   const done=DB.get('today_done',{});
   const tasks=getTodayTasks();
@@ -1117,10 +1126,62 @@ function saveBudget(){const i=document.getElementById('bud_in').value;const o=do
 function renderBudget(){const b=DB.get('budget',null);const info=document.getElementById('budInfo');if(!info)return;if(!b||b.month!==todayStr().slice(0,7)){info.textContent='本月尚未设定预算';return}document.getElementById('bud_in').value=b.in;document.getElementById('bud_out').value=b.out;const all=DB.get('exp',[]);const m=todayStr().slice(0,7);const mE=all.filter(e=>e.date.startsWith(m)&&e.cat!=='收入'&&e.cat!=='还款（抵负债）').reduce((s,e)=>s+e.amt,0);const r=b.out-mE;info.innerHTML=`预算支出 <b>${b.out}</b> · 已花 <b style="color:var(--pink-text)">${mE}</b> · 剩余 <b style="color:${r>=0?'var(--blue-text)':'var(--pink-text)'}">${r}</b>`}
 
 /* 饮食 */
-function addMeal(){const b=document.getElementById('meal_b').value.trim();const l=document.getElementById('meal_l').value.trim();const d=document.getElementById('meal_d').value.trim();if(!b&&!l&&!d)return;const list=DB.get('meals',[]);list.push({b,l,d,date:todayStr()});DB.set('meals',list);document.getElementById('meal_b').value='';document.getElementById('meal_l').value='';document.getElementById('meal_d').value='';renderMeal();renderDiet()}
-function renderMeal(){const l=DB.get('meals',[]).slice(-4).reverse();const el=document.getElementById('mealInfo');if(!l.length){el.innerHTML='<div class="muted">暂无打卡</div>';return}el.innerHTML=l.map(m=>`<div style="padding:5px 8px;background:var(--card-soft);border-radius:10px;margin-bottom:4px;font-size:12px"><b>${m.date}</b> 早:${eh(m.b||'—')} 中:${eh(m.l||'—')} 晚:${eh(m.d||'—')}</div>`).join('')}
-function renderDiet(){const today=todayStr();const meals=DB.get('meals',[]).filter(m=>m.date===today);const e1=document.getElementById('dietMeals');if(e1)e1.innerHTML=meals.length+'<small>餐</small>';const wt=DB.get('weights',[]);const e4=document.getElementById('dietWt');if(e4)e4.innerHTML=(wt.length?wt[wt.length-1].v:0)+'<small>kg</small>'}
+function addMeal(){
+  const b=document.getElementById('meal_b').value.trim();
+  const bk=parseInt(document.getElementById('meal_b_kcal').value)||0;
+  const l=document.getElementById('meal_l').value.trim();
+  const lk=parseInt(document.getElementById('meal_l_kcal').value)||0;
+  const d=document.getElementById('meal_d').value.trim();
+  const dk=parseInt(document.getElementById('meal_d_kcal').value)||0;
+  if(!b&&!l&&!d)return;
+  const list=DB.get('meals',[]);
+  list.push({b,l,d,bk,lk,dk,kcal:bk+lk+dk,date:todayStr()});
+  DB.set('meals',list);
+  ['meal_b','meal_l','meal_d','meal_b_kcal','meal_l_kcal','meal_d_kcal'].forEach(id=>document.getElementById(id).value='');
+  renderMeal();renderDiet();
+}
+function renderMeal(){
+  const l=DB.get('meals',[]).slice(-6).reverse();const el=document.getElementById('mealInfo');
+  if(!l.length){el.innerHTML='<div class="muted">暂无打卡</div>';return}
+  el.innerHTML=l.map(m=>`<div style="padding:6px 10px;background:var(--card-soft);border-radius:10px;margin-bottom:4px;font-size:12px"><b>${m.date}</b> 早:${eh(m.b||'—')} 中:${eh(m.l||'—')} 晚:${eh(m.d||'—')} ${m.kcal?`<span style="color:var(--pink-text);font-weight:600">${m.kcal}kcal</span>`:''}</div>`).join('');
+}
+function renderDiet(){
+  const today=todayStr();const meals=DB.get('meals',[]).filter(m=>m.date===today);
+  const e1=document.getElementById('dietMeals');if(e1)e1.innerHTML=meals.length+'<small>餐</small>';
+  const todayKcal=meals.reduce((s,m)=>s+(m.kcal||0),0);
+  const ek=document.getElementById('dietKcal');if(ek)ek.innerHTML=todayKcal+'<small>kcal</small>';
+  const wt=DB.get('weights',[]);const e4=document.getElementById('dietWt');if(e4)e4.innerHTML=(wt.length?wt[wt.length-1].v:'—')+'<small>kg</small>';
+  renderWtTable();
+}
 function addWater(n){const w=DB.get('water',0)+n;if(w<0)return;DB.set('water',w);const e=document.getElementById('waterInfo');if(e)e.textContent='今日 '+w+' 杯';const ew=document.getElementById('dietWater');if(ew)ew.innerHTML=w+'<small>杯</small>'}
+
+/* 体重记录 */
+function addWeight(){
+  const v=parseFloat(document.getElementById('wt_input').value);
+  if(!v||v<=0){alert('请输入有效体重');return}
+  const l=DB.get('weights',[]);
+  l.push({v,date:todayStr()});
+  DB.set('weights',l);
+  document.getElementById('wt_input').value='';
+  renderDiet();renderOverview();
+}
+function renderWtTable(){
+  const el=document.getElementById('wtTable');if(!el)return;
+  const l=DB.get('weights',[]).slice().reverse();
+  const tbody=el.querySelector('tbody');if(!tbody)return;
+  if(!l.length){tbody.innerHTML='<tr><td colspan="4" class="muted">暂无体重记录</td></tr>';return}
+  tbody.innerHTML=l.map((w,i,arr)=>{
+    const prev=arr[i+1];const diff=prev?(w.v-prev.v).toFixed(1):'—';
+    const arrow=prev?(w.v>prev.v?'↑':w.v<prev.v?'↓':'→'):'';
+    const color=prev?(w.v>prev.v?'color:#e8849a':w.v<prev.v?'color:#5aa870':'color:#b0bcc8'):'color:#b0bcc8';
+    return `<tr><td>${w.date}</td><td><b>${w.v}kg</b></td><td style="${color}">${arrow} ${diff!=='—'?diff:''}</td><td><button class="btn ghost sm" style="padding:1px 5px;font-size:9px" onclick="delWeight('${w.date}','${w.v}')">✕</button></td></tr>`;
+  }).join('');
+}
+function delWeight(date,v){
+  if(!confirm(`删除 ${date} 体重记录 ${v}kg？`))return;
+  DB.set('weights',DB.get('weights',[]).filter(w=>!(w.date===date&&w.v===v)));
+  renderDiet();renderOverview();
+}
 
 /* 健身 */
 function addSport(){const t=document.getElementById('sp_type').value;const min=parseInt(document.getElementById('sp_min').value)||0;if(!min)return;const rate=t==='普拉提'?3.5:t==='跳舞'?5:4;const kcal=Math.round(min*rate);const l=DB.get('sports',[]);l.push({type:t,min,kcal,date:todayStr()});DB.set('sports',l);document.getElementById('sp_min').value='';renderSport();renderFit()}
