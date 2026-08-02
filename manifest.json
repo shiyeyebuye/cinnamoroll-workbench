@@ -1,11 +1,11 @@
 {
-  "name": "小猫工作台",
-  "short_name": "小猫工作台",
+  "name": "玉桂狗工作台",
+  "short_name": "玉桂狗工作台",
   "description": "考研学习 × 财务台账 × 减脂记录 三合一",
   "start_url": "/cat-workbench/",
   "display": "standalone",
-  "background_color": "#fbf6f2",
-  "theme_color": "#bcd4e4",
+  "background_color": "#f0f5fc",
+  "theme_color": "#d8ebf7",
   "orientation": "portrait",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },

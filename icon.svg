@@ -1,46 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#bcd4e4"/>
-      <stop offset="100%" stop-color="#f4d4d0"/>
-    </linearGradient>
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d8ebf7"/>
+    </radialGradient>
+    <radialGradient id="cheek" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd0e0"/>
+      <stop offset="100%" stop-color="#f0c4d800"/>
+    </radialGradient>
   </defs>
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <!-- 左耳 -->
-  <path d="M150 150 L120 60 L215 130 Z" fill="#f6c8c8" stroke="#e89a9a" stroke-width="6" stroke-linejoin="round"/>
-  <!-- 右耳 -->
-  <path d="M362 150 L392 60 L297 130 Z" fill="#f6c8c8" stroke="#e89a9a" stroke-width="6" stroke-linejoin="round"/>
-  <!-- 内耳 左 -->
-  <path d="M155 140 L138 85 L195 130 Z" fill="#f4a8a8" opacity="0.6"/>
-  <!-- 内耳 右 -->
-  <path d="M357 140 L374 85 L317 130 Z" fill="#f4a8a8" opacity="0.6"/>
-  <!-- 脸 -->
-  <ellipse cx="256" cy="290" rx="170" ry="150" fill="#ffffff" stroke="#7fb0c8" stroke-width="6"/>
-  <!-- 左眼 -->
-  <ellipse cx="205" cy="275" rx="18" ry="24" fill="#4a7d96"/>
-  <circle cx="210" cy="268" r="6" fill="#ffffff"/>
-  <!-- 右眼 -->
-  <ellipse cx="307" cy="275" rx="18" ry="24" fill="#4a7d96"/>
-  <circle cx="312" cy="268" r="6" fill="#ffffff"/>
-  <!-- 鼻子 -->
-  <path d="M248 320 Q256 328 264 320 L256 332 Z" fill="#e89a9a" stroke="#e89a9a" stroke-width="2"/>
-  <!-- 嘴 -->
-  <path d="M256 332 Q256 350 240 350" fill="none" stroke="#b06868" stroke-width="5" stroke-linecap="round"/>
-  <path d="M256 332 Q256 350 272 350" fill="none" stroke="#b06868" stroke-width="5" stroke-linecap="round"/>
-  <!-- 腮红 -->
-  <ellipse cx="170" cy="330" rx="22" ry="14" fill="#f6c8c8" opacity="0.7"/>
-  <ellipse cx="342" cy="330" rx="22" ry="14" fill="#f6c8c8" opacity="0.7"/>
-  <!-- 胡须 左 -->
-  <line x1="150" y1="320" x2="100" y2="310" stroke="#8a8a9a" stroke-width="3" stroke-linecap="round"/>
-  <line x1="150" y1="335" x2="98" y2="340" stroke="#8a8a9a" stroke-width="3" stroke-linecap="round"/>
-  <!-- 胡须 右 -->
-  <line x1="362" y1="320" x2="412" y2="310" stroke="#8a8a9a" stroke-width="3" stroke-linecap="round"/>
-  <line x1="362" y1="335" x2="414" y2="340" stroke="#8a8a9a" stroke-width="3" stroke-linecap="round"/>
-  <!-- 爪印装饰 -->
-  <circle cx="90" cy="180" r="8" fill="#e89a9a" opacity="0.5"/>
-  <circle cx="75" cy="165" r="5" fill="#e89a9a" opacity="0.5"/>
-  <circle cx="105" cy="165" r="5" fill="#e89a9a" opacity="0.5"/>
-  <circle cx="422" cy="180" r="8" fill="#e89a9a" opacity="0.5"/>
-  <circle cx="407" cy="165" r="5" fill="#e89a9a" opacity="0.5"/>
-  <circle cx="437" cy="165" r="5" fill="#e89a9a" opacity="0.5"/>
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  <!-- 长耳朵（玉桂狗标志） -->
+  <path d="M180 220 Q170 60 220 40 Q260 25 240 100 Q230 140 225 180 Z" fill="#ffffff" stroke="#c8dce8" stroke-width="3"/>
+  <path d="M332 220 Q342 60 292 40 Q252 25 272 100 Q282 140 287 180 Z" fill="#ffffff" stroke="#c8dce8" stroke-width="3"/>
+  <!-- 耳朵内粉色 -->
+  <path d="M188 210 Q180 80 218 58 Q245 42 232 105 Q225 140 222 178 Z" fill="#ffe0ea" stroke="none"/>
+  <path d="M324 210 Q332 80 294 58 Q267 42 280 105 Q287 140 290 178 Z" fill="#ffe0ea" stroke="none"/>
+  <!-- 圆脸 -->
+  <ellipse cx="256" cy="320" rx="110" ry="100" fill="#ffffff" stroke="#c8dce8" stroke-width="4"/>
+  <!-- 头顶云朵帽 -->
+  <circle cx="210" cy="240" r="30" fill="#ffffff" stroke="#c8dce8" stroke-width="2.5"/>
+  <circle cx="256" cy="225" r="35" fill="#ffffff" stroke="#c8dce8" stroke-width="2.5"/>
+  <circle cx="300" cy="240" r="32" fill="#ffffff" stroke="#c8dce8" stroke-width="2.5"/>
+  <!-- 蓝色大眼睛 -->
+  <ellipse cx="215" cy="305" rx="18" ry="22" fill="#4a90c8"/>
+  <ellipse cx="297" cy="305" rx="18" ry="22" fill="#4a90c8"/>
+  <!-- 眼睛高光 -->
+  <circle cx="221" cy="296" r="8" fill="#ffffff"/>
+  <circle cx="303" cy="296" r="8" fill="#ffffff"/>
+  <circle cx="210" cy="310" r="4" fill="#ffffff" opacity="0.7"/>
+  <circle cx="292" cy="310" r="4" fill="#ffffff" opacity="0.7"/>
+  <!-- 粉色腮红 -->
+  <circle cx="178" cy="340" r="18" fill="url(#cheek)"/>
+  <circle cx="334" cy="340" r="18" fill="url(#cheek)"/>
+  <!-- 小嘴巴 -->
+  <path d="M244 345 Q250 338 256 345 Q262 338 268 345" fill="none" stroke="#4a6a8a" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- 鼻子（小白点） -->
+  <ellipse cx="256" cy="335" rx="6" ry="5" fill="#f5f0f0" stroke="#c8dce8" stroke-width="1"/>
+  <!-- 身体云朵 -->
+  <ellipse cx="256" cy="430" rx="80" ry="55" fill="#ffffff" stroke="#c8dce8" stroke-width="3"/>
+  <circle cx="195" cy="400" r="32" fill="#ffffff" stroke="#c8dce8" stroke-width="2.5"/>
+  <circle cx="317" cy="400" r="32" fill="#ffffff" stroke="#c8dce8" stroke-width="2.5"/>
+  <!-- 小脚 -->
+  <ellipse cx="215" cy="470" rx="18" ry="12" fill="#ffffff" stroke="#c8dce8" stroke-width="2"/>
+  <ellipse cx="297" cy="470" rx="18" ry="12" fill="#ffffff" stroke="#c8dce8" stroke-width="2"/>
+  <!-- 翅膀 -->
+  <path d="M160 380 Q120 360 130 400 Q140 420 165 410 Z" fill="#ffffff" stroke="#c8dce8" stroke-width="2"/>
+  <path d="M352 380 Q392 360 382 400 Q372 420 347 410 Z" fill="#ffffff" stroke="#c8dce8" stroke-width="2"/>
+  <!-- 尾巴（小卷卷） -->
+  <path d="M250 470 Q240 500 220 490 Q210 480 230 475" fill="none" stroke="#c8dce8" stroke-width="3" stroke-linecap="round"/>
 </svg>

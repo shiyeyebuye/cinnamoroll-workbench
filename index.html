@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#f7d6dd">
+<meta name="theme-color" content="#d8ebf7">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="小猫工作台">
+<meta name="apple-mobile-web-app-title" content="玉桂狗工作台">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<title>小猫工作台 · 考研双专业</title>
+<title>玉桂狗工作台 · 考研双专业</title>
 <style>
 :root{
-  --bg1:#fce8ed; --bg2:#fdf0f4; --bg3:#fff5f8;
-  --card:#ffffff; --card-soft:#faf6f8;
-  --pink:#f7a8b8; --pink-soft:#fcd5dd; --pink-deep:#e8849a; --pink-text:#c46080;
-  --blue:#b5d4e0; --blue-soft:#dceaf0; --blue-deep:#7fa8ba; --blue-text:#4a7a90;
+  --bg1:#e8f0fb; --bg2:#f0f5fc; --bg3:#f7fafe;
+  --card:#ffffff; --card-soft:#f5f8fc;
+  --pink:#f0c4d8; --pink-soft:#fce4ec; --pink-deep:#e0a0bc; --pink-text:#b07090;
+  --blue:#8fc4e8; --blue-soft:#d8ebf7; --blue-deep:#5fa0c8; --blue-text:#3a6a8a;
   --gold:#e8c87a; --mint:#a8d8c0;
-  --ink:#4a4a5a; --ink-soft:#8a8a9a; --ink-faint:#b8b8c8;
-  --line:#f0e8ec; --shadow:0 6px 20px rgba(200,140,160,.08);
-  --shadow-lg:0 8px 30px rgba(200,140,160,.12);
+  --ink:#3a4a5a; --ink-soft:#7a8a9a; --ink-faint:#b0bcc8;
+  --line:#e4ecf4; --shadow:0 6px 20px rgba(100,140,180,.08);
+  --shadow-lg:0 8px 30px rgba(100,140,180,.12);
   --radius:22px; --radius-sm:14px;
   --sidebar-w:230px;
 }
@@ -210,6 +210,20 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   .tabbar{display:flex}
   .topbar .date-block .t{display:none}
 }
+/* 时间线 */
+.tl-item{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:var(--bg2);border-radius:var(--radius-sm);font-size:12.5px;position:relative}
+.tl-item .tl-time{font-weight:700;color:var(--pink-text);white-space:nowrap;font-size:12px;min-width:44px}
+.tl-item .tl-dot{width:8px;height:8px;border-radius:50%;background:var(--pink);flex-shrink:0;margin-top:4px}
+.tl-item .tl-txt{flex:1;color:var(--ink)}
+.tl-item .tl-del{cursor:pointer;color:var(--ink-faint);font-size:14px;padding:0 2px;opacity:.5;transition:all .15s}
+.tl-item .tl-del:hover{opacity:1;color:var(--pink-deep)}
+/* 每日感想 */
+.mood-item{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;background:var(--bg2);border-radius:var(--radius-sm);font-size:12.5px}
+.mood-item .mood-emoji{font-size:18px;flex-shrink:0;line-height:1.4}
+.mood-item .mood-date{font-size:10px;color:var(--ink-faint);min-width:40px;flex-shrink:0;font-weight:600}
+.mood-item .mood-txt{flex:1;color:var(--ink);line-height:1.5}
+.mood-item .mood-del{cursor:pointer;color:var(--ink-faint);font-size:14px;padding:0 2px;opacity:.5;transition:all .15s;flex-shrink:0}
+.mood-item .mood-del:hover{opacity:1;color:var(--pink-deep)}
 </style>
 </head>
 <body>
@@ -218,26 +232,28 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
 <!-- 侧边栏 -->
 <aside class="sidebar" id="sidebar">
   <div class="logo">
-    <div class="av">🐱</div>
-    <div class="info"><h1>小猫工作台</h1><p>考研双专业版</p></div>
+    <div class="av">☁️</div>
+    <div class="info"><h1>玉桂狗工作台</h1><p>考研双专业版</p></div>
   </div>
   <div class="nav-section">学习</div>
-  <div class="nav-item active" data-page="overview" onclick="goPage('overview')"><span class="ic">📊</span>总览<span class="badge" id="navOv">0</span></div>
-  <div class="nav-item" data-page="daily" onclick="goPage('daily')"><span class="ic">📋</span>每日计划<span class="badge" id="navDaily">0/0</span></div>
-  <div class="nav-item" data-page="english" onclick="goPage('english')"><span class="ic">🔤</span>英语</div>
-  <div class="nav-item" data-page="inorganic" onclick="goPage('inorganic')"><span class="ic">⚗️</span>无机化学</div>
-  <div class="nav-item" data-page="physical" onclick="goPage('physical')"><span class="ic">📐</span>物理化学</div>
-  <div class="nav-item" data-page="politics" onclick="goPage('politics')"><span class="ic">🇨🇳</span>政治</div>
-  <div class="nav-item" data-page="notes" onclick="goPage('notes')"><span class="ic">📝</span>笔记日记</div>
+  <div class="nav-item active" data-page="overview" onclick="goPage('overview')"><span class="ic">☁️</span>总览<span class="badge" id="navOv">0</span></div>
+  <div class="nav-item" data-page="daily" onclick="goPage('daily')"><span class="ic">☁️</span>每日计划<span class="badge" id="navDaily">0/0</span></div>
+  <div class="nav-item" data-page="english" onclick="goPage('english')"><span class="ic">💙</span>英语</div>
+  <div class="nav-item" data-page="inorganic" onclick="goPage('inorganic')"><span class="ic">🧪</span>无机化学</div>
+  <div class="nav-item" data-page="physical" onclick="goPage('physical')"><span class="ic">⭐</span>物理化学</div>
+  <div class="nav-item" data-page="politics" onclick="goPage('politics')"><span class="ic">☁️</span>政治</div>
+  <div class="nav-item" data-page="notes" onclick="goPage('notes')"><span class="ic">✨</span>笔记日记</div>
+  <div class="nav-item" data-page="calendar" onclick="goPage('calendar')"><span class="ic">☁️</span>打卡日历</div>
+  <div class="nav-item" data-page="timestat" onclick="goPage('timestat')"><span class="ic">💙</span>时长统计</div>
   <div class="nav-section">生活</div>
-  <div class="nav-item" data-page="finance" onclick="goPage('finance')"><span class="ic">💰</span>理财记账</div>
-  <div class="nav-item" data-page="diet" onclick="goPage('diet')"><span class="ic">🍱</span>饮食管理</div>
-  <div class="nav-item" data-page="fitness" onclick="goPage('fitness')"><span class="ic">🏃</span>健身打卡</div>
-  <div class="nav-item" data-page="sleep" onclick="goPage('sleep')"><span class="ic">😴</span>睡眠管理</div>
-  <div class="nav-item" data-page="habits" onclick="goPage('habits')"><span class="ic">⭐</span>习惯养成</div>
+  <div class="nav-item" data-page="finance" onclick="goPage('finance')"><span class="ic">💙</span>理财记账</div>
+  <div class="nav-item" data-page="diet" onclick="goPage('diet')"><span class="ic">☁️</span>饮食管理</div>
+  <div class="nav-item" data-page="fitness" onclick="goPage('fitness')"><span class="ic">💙</span>健身打卡</div>
+  <div class="nav-item" data-page="sleep" onclick="goPage('sleep')"><span class="ic">☁️</span>睡眠管理</div>
+  <div class="nav-item" data-page="habits" onclick="goPage('habits')"><span class="ic">💙</span>习惯养成</div>
   <div class="nav-section">其他</div>
-  <div class="nav-item" data-page="settings" onclick="goPage('settings')"><span class="ic">⚙️</span>设置</div>
-  <div class="foot">数据存本机 🐾<br>状态不好就少做点</div>
+  <div class="nav-item" data-page="settings" onclick="goPage('settings')"><span class="ic">☁️</span>设置</div>
+  <div class="foot">数据存本机 ☁️<br>状态不好就少做点</div>
 </aside>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
@@ -247,7 +263,7 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
     <button class="menu-btn" onclick="toggleSidebar()">☰</button>
     <div class="date-block"><div class="d" id="topDate">加载中</div><div class="t" id="topTime"></div></div>
     <div class="search">🔍 <input placeholder="搜索任务、资料…"></div>
-    <div class="top-actions"><div class="ta">🔔</div><div class="ta">🐱</div></div>
+    <div class="top-actions"><div class="ta">💙</div><div class="ta">☁️</div></div>
   </header>
 
   <div class="content">
@@ -255,7 +271,7 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
 
 <!-- ===== 总览页 ===== -->
 <section class="page active" id="page-overview">
-  <div class="page-title">早上好，考研人！🐱</div>
+  <div class="page-title">早上好，考研人！☁️</div>
   <div class="page-sub" id="ovSub">今天是冲刺的一天，加油</div>
 
   <!-- 倒计时 -->
@@ -266,32 +282,50 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
     </div>
   </div>
 
+  <!-- 学习模块概况 -->
+  <div class="card">
+    <div class="card-h"><span class="ic">✨</span><h3>学习模块概况</h3></div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px" id="moduleGrid">
+      <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">💙</div></div><div class="sc-val" id="ovEnPct">0<small>%</small></div><div class="sc-lab">英语 · 单词+阅读</div></div>
+      <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">🧪</div></div><div class="sc-val" id="ovWjPct">0<small>%</small></div><div class="sc-lab">无机化学 · 章节</div></div>
+      <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">⭐</div></div><div class="sc-val" id="ovWhPct">0<small>%</small></div><div class="sc-lab">物理化学 · 章节</div></div>
+      <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">☁️</div></div><div class="sc-val" id="ovPolPct">0<small>%</small></div><div class="sc-lab">政治 · 肖1000</div></div>
+    </div>
+  </div>
+
   <!-- 统计卡片 -->
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📚</div><div class="sc-trend up">今日</div></div><div class="sc-val" id="ovTask">0<small>/0</small></div><div class="sc-lab">今日任务</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✏️</div><div class="sc-trend up">累计</div></div><div class="sc-val" id="ovDati">0<small>题</small></div><div class="sc-lab">大题刷题</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">🧪</div><div class="sc-trend up">累计</div></div><div class="sc-val" id="ovEq">0<small>个</small></div><div class="sc-lab">方程/公式</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">⚖️</div><div class="sc-trend" id="ovWtTrend">—</div></div><div class="sc-val" id="ovWt">0<small>kg</small></div><div class="sc-lab">最新体重</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">☁️</div><div class="sc-trend up">今日</div></div><div class="sc-val" id="ovTask">0<small>/0</small></div><div class="sc-lab">今日任务</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✨</div><div class="sc-trend up">累计</div></div><div class="sc-val" id="ovDati">0<small>题</small></div><div class="sc-lab">大题刷题</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">☁️</div><div class="sc-trend up">累计</div></div><div class="sc-val" id="ovEq">0<small>个</small></div><div class="sc-lab">方程/公式</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">☁️</div><div class="sc-trend" id="ovWtTrend">—</div></div><div class="sc-val" id="ovWt">0<small>kg</small></div><div class="sc-lab">最新体重</div></div>
   </div>
 
   <!-- 本周走势 -->
   <div class="card">
-    <span class="cat-deco tr">🐾</span>
-    <div class="card-h"><span class="ic">📈</span><h3>本周学习走势</h3></div>
+    <span class="cat-deco tr">☁️</span>
+    <div class="card-h"><span class="ic">☁️</span><h3>本周学习走势</h3></div>
     <div id="weekChart" style="min-height:120px"></div>
   </div>
 
   <!-- 今日任务 -->
   <div class="card">
-    <div class="card-h"><span class="ic">✨</span><h3>今日任务</h3><span class="num" id="ovProg">0/0</span></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>今日任务</h3><span class="num" id="ovProg">0/0</span></div>
     <div class="checklist" id="ovTasks"></div>
     <div class="note">状态不好（熬夜/身体不适）？<b>自主减量完全OK</b> 💕</div>
+  </div>
+
+  <!-- 今日时间轴 -->
+  <div class="card">
+    <span class="cat-deco tr">☁️</span>
+    <div class="card-h"><span class="ic">☁️</span><h3>今日时间轴</h3><span class="more" onclick="goPage('daily')">去编辑</span></div>
+    <div id="ovTimeline" style="display:flex;flex-direction:column;gap:4px"></div>
   </div>
 
   <!-- 成就 -->
   <div class="card">
     <span class="cat-deco tr">🏆</span>
-    <div class="card-h"><span class="ic">🏅</span><h3>成就激励</h3></div>
+    <div class="card-h"><span class="ic">✨</span><h3>成就激励</h3></div>
     <div class="ach-grid" id="achGrid"></div>
   </div>
 </section>
@@ -301,17 +335,31 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">每日计划</div>
   <div class="page-sub">自动汇总当天所有学习任务，完成后自动统计</div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📋</div></div><div class="sc-val" id="dpTotal">0</div><div class="sc-lab">总任务</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">✅</div></div><div class="sc-val" id="dpDone">0</div><div class="sc-lab">已完成</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">⏳</div></div><div class="sc-val" id="dpTodo">0</div><div class="sc-lab">待完成</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📊</div></div><div class="sc-val" id="dpRate">0<small>%</small></div><div class="sc-lab">完成率</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">☁️</div></div><div class="sc-val" id="dpTotal">0</div><div class="sc-lab">总任务</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">☁️</div></div><div class="sc-val" id="dpDone">0</div><div class="sc-lab">已完成</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">☁️</div></div><div class="sc-val" id="dpTodo">0</div><div class="sc-lab">待完成</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">☁️</div></div><div class="sc-val" id="dpRate">0<small>%</small></div><div class="sc-lab">完成率</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📝</span><h3>今日任务清单</h3></div>
+    <div class="card-h"><span class="ic">✨</span><h3>今日任务清单</h3><span class="more">点击✓完成 · ✕删除</span></div>
+    <div class="row" style="margin-bottom:10px">
+      <input class="input" id="customTaskInput" placeholder="添加自己的任务（如：背作文模板）">
+      <button class="btn sm" style="flex:0 0 52px" onclick="addCustomTask()">+ 添加</button>
+    </div>
     <div class="checklist" id="dpTasks"></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">🗓️</span><h3>周复盘区域</h3><span class="more">每周日填写</span></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>今日时间线</h3><span class="more">记录一天做了什么</span></div>
+    <div class="muted" style="margin-bottom:10px">记录每个时间段做的事，回顾一天的时间分配</div>
+    <div class="row" style="margin-bottom:8px">
+      <input type="time" class="input" id="tlTime" style="flex:0 0 100px" placeholder="时间">
+      <input class="input" id="tlContent" placeholder="做了什么（如：背单词）" style="flex:1">
+      <button class="btn sm" style="flex:0 0 52px" onclick="addTimeline()">+ 记录</button>
+    </div>
+    <div id="dpTimeline" style="display:flex;flex-direction:column;gap:4px"></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">☁️</span><h3>周复盘区域</h3><span class="more">每周日填写</span></div>
     <label class="lab">本周完成情况</label><textarea class="textarea" id="wk_done" placeholder="完成的内容…"></textarea>
     <label class="lab">拖欠任务</label><textarea class="textarea" id="wk_owe" placeholder="欠下的…"></textarea>
     <label class="lab">下周调整方向</label><textarea class="textarea" id="wk_adj" placeholder="调整策略…"></textarea>
@@ -325,15 +373,15 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">英语</div>
   <div class="page-sub">刘晓艳单词10单元 · 基础阅读58篇 · 真题模式</div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📖</div></div><div class="sc-val" id="enWordPct">50<small>%</small></div><div class="sc-lab">单词单元</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">📚</div></div><div class="sc-val" id="enReadPct">0<small>%</small></div><div class="sc-lab">基础阅读</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📝</div></div><div class="sc-val" id="enZtPct">0<small>%</small></div><div class="sc-lab">真题阅读</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">🎧</div></div><div class="sc-val">4<small>节</small></div><div class="sc-lab">语法剩余</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">☁️</div></div><div class="sc-val" id="enWordPct">50<small>%</small></div><div class="sc-lab">单词单元</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">☁️</div></div><div class="sc-val" id="enReadPct">0<small>%</small></div><div class="sc-lab">基础阅读</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">✨</div></div><div class="sc-val" id="enZtPct">0<small>%</small></div><div class="sc-lab">真题阅读</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">💙</div></div><div class="sc-val">4<small>节</small></div><div class="sc-lab">语法剩余</div></div>
   </div>
 
   <div class="card">
-    <span class="cat-deco tr">🐾</span>
-    <div class="card-h"><span class="ic">📌</span><h3>单词规划（刘晓艳10单元）</h3></div>
+    <span class="cat-deco tr">☁️</span>
+    <div class="card-h"><span class="ic">☁️</span><h3>单词规划（刘晓艳10单元）</h3></div>
     <div class="muted" style="margin-bottom:8px">前五单元已熟练 · 每日不背单词APP 20min（新词100+复习100）。后五单元按艾宾浩斯复习。</div>
     <div class="row" style="margin-bottom:10px">
       <select class="select" id="unitSel" style="flex:0 0 90px"><option value="6">第6单元</option><option value="7">第7单元</option><option value="8">第8单元</option><option value="9">第9单元</option><option value="10">第10单元</option></select>
@@ -345,7 +393,7 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   </div>
 
   <div class="card">
-    <div class="card-h"><span class="ic">📊</span><h3>进度</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>进度</h3></div>
     <div class="prog"><div class="pl"><span>单词单元</span><b id="pWordTxt">5/10</b></div><div class="bar-wrap"><div class="bar-fill" id="pWordBar" style="width:50%"></div></div></div>
     <div class="prog"><div class="pl"><span>基础阅读</span><b id="pReadTxt">0/58</b></div><div class="bar-wrap"><div class="bar-fill blue" id="pReadBar" style="width:0%"></div></div></div>
     <div class="prog"><div class="pl"><span>真题阅读</span><b id="pZtTxt">0套</b></div><div class="bar-wrap"><div class="bar-fill gold" id="pZtBar" style="width:0%"></div></div></div>
@@ -355,6 +403,30 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
     <div class="sw-row"><div><b>真题阅读</b><div class="queued">一套3天 每周≥2篇</div></div><div style="text-align:right"><input type="number" class="input" id="ztDone" placeholder="已完成" style="width:70px;padding:5px 8px;font-size:11px"></div></div>
   </div>
   <div class="note"><b>⏰ 时间线</b>：8月下旬开阅读课→真题模式（做题/精读/单词巩固）→作文→小三门</div>
+
+
+  <div class="card">
+    <div class="card-h"><span class="ic">☁️</span><h3>自定义任务</h3></div>
+    <div class="row" style="margin-bottom:8px">
+      <input class="input" id="ct_en_input" placeholder="添加英语任务（如：背作文模板）">
+      <button class="btn sm" style="flex:0 0 52px" onclick="addSubjectTask('en')">+ 添加</button>
+    </div>
+    <div class="checklist" id="ct_en_list"></div>
+  </div>
+
+  <!-- 今日学习记录 -->
+  <div class="card">
+    <span class="cat-deco tr">📝</span>
+    <div class="card-h"><span class="ic">✨</span><h3>今日学习记录</h3></div>
+    <div class="row">
+      <div style="flex:1"><label class="lab">做题数</label><input class="input" id="sl_en_q" type="number" placeholder="0"></div>
+      <div style="flex:1"><label class="lab">正确数</label><input class="input" id="sl_en_r" type="number" placeholder="0"></div>
+    </div>
+    <label class="lab">心得 / 总结</label>
+    <textarea class="textarea" id="sl_en_note" placeholder="今天学到了什么、哪些点还不熟..."></textarea>
+    <button class="btn sm" style="margin-top:6px" onclick="addStudyLog('en')">提交今日记录</button>
+    <div id="sl_en_list" style="margin-top:10px;font-size:12px"></div>
+  </div>
 </section>
 
 <!-- ===== 无机化学页 ===== -->
@@ -362,13 +434,13 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">无机化学</div>
   <div class="page-sub">基础+元素资料成册 · 刷题背诵阶段 · 目标10月中旬前一轮</div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📖</div></div><div class="sc-val" id="wjChPct">0<small>%</small></div><div class="sc-lab">章节</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✏️</div></div><div class="sc-val" id="wjExNum">0<small>题</small></div><div class="sc-lab">习题</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">🧪</div></div><div class="sc-val" id="wjEqNum">0<small>个</small></div><div class="sc-lab">方程式</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">⚠️</div></div><div class="sc-val" id="wjWeakNum">0</div><div class="sc-lab">薄弱点</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">☁️</div></div><div class="sc-val" id="wjChPct">0<small>%</small></div><div class="sc-lab">章节</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✨</div></div><div class="sc-val" id="wjExNum">0<small>题</small></div><div class="sc-lab">习题</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">☁️</div></div><div class="sc-val" id="wjEqNum">0<small>个</small></div><div class="sc-lab">方程式</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">☁️</div></div><div class="sc-val" id="wjWeakNum">0</div><div class="sc-lab">薄弱点</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📊</span><h3>进度</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>进度</h3></div>
     <div class="prog"><div class="pl"><span>章节完成率</span><b id="wjChTxt">0/12</b></div><div class="bar-wrap"><div class="bar-fill" id="wjChBar" style="width:0%"></div></div></div>
     <div class="prog"><div class="pl"><span>习题完成率</span><b id="wjExTxt">0题</b></div><div class="bar-wrap"><div class="bar-fill blue" id="wjExBar" style="width:0%"></div></div></div>
     <div class="prog"><div class="pl"><span>方程式背诵</span><b id="wjEqTxt">0个</b></div><div class="bar-wrap"><div class="bar-fill gold" id="wjEqBar" style="width:0%"></div></div></div>
@@ -377,7 +449,7 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
 
   <div class="card">
     <span class="cat-deco tr">⚗️</span>
-    <div class="card-h"><span class="ic">📚</span><h3>每日任务区</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>每日任务区</h3></div>
     <div class="row"><div style="flex:1.3"><label class="lab">大题刷题打卡</label><input class="input" id="wj_dq_input" placeholder="如：振宇P12 配位滴定"></div><div style="flex:0 0 60px"><label class="lab">题量</label><input class="input" id="wj_dq_num" type="number" placeholder="3"></div></div>
     <button class="btn sm" style="margin-top:6px" onclick="addDaTi('wj')">+ 记录刷题</button>
     <div id="wj_dqList" style="margin-top:8px"></div>
@@ -393,17 +465,41 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   </div>
 
   <div class="card">
-    <div class="card-h"><span class="ic">🎬</span><h3>待决策栏（相图等2-3章）</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>待决策栏（相图等2-3章）</h3></div>
     <div class="chips" id="wj_courseChips"><div class="chip on" onclick="pickCourse('wj',this,'继续听课')">继续听课</div><div class="chip" onclick="pickCourse('wj',this,'直接刷题查漏补缺')">直接刷题查漏</div><div class="chip" onclick="pickCourse('wj',this,'待定')">待定</div></div>
   </div>
 
   <div class="card">
-    <div class="card-h"><span class="ic">📖</span><h3>错题记录本</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>错题记录本</h3></div>
     <textarea class="textarea" id="wj_err_q" placeholder="粘贴题目…"></textarea>
     <label class="lab">错误原因</label><input class="input" id="wj_err_r" placeholder="如：方程式记错">
     <label class="lab">思路总结</label><textarea class="textarea" id="wj_err_s" placeholder="正确思路…"></textarea>
     <div class="row" style="margin-top:6px"><button class="btn sm" onclick="addErr('wj')">+ 加入错题本</button><button class="btn ghost sm" onclick="genReview('wj')">📋 本周复盘卷</button></div>
     <div id="wj_errList" style="margin-top:10px"></div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-h"><span class="ic">☁️</span><h3>自定义任务</h3></div>
+    <div class="row" style="margin-bottom:8px">
+      <input class="input" id="ct_wj_input" placeholder="添加无机任务（如：复习晶体场理论）">
+      <button class="btn sm" style="flex:0 0 52px" onclick="addSubjectTask('wj')">+ 添加</button>
+    </div>
+    <div class="checklist" id="ct_wj_list"></div>
+  </div>
+
+  <!-- 今日学习记录 -->
+  <div class="card">
+    <span class="cat-deco tr">📝</span>
+    <div class="card-h"><span class="ic">✨</span><h3>今日学习记录</h3></div>
+    <div class="row">
+      <div style="flex:1"><label class="lab">做题数</label><input class="input" id="sl_wj_q" type="number" placeholder="0"></div>
+      <div style="flex:1"><label class="lab">正确数</label><input class="input" id="sl_wj_r" type="number" placeholder="0"></div>
+    </div>
+    <label class="lab">心得 / 总结</label>
+    <textarea class="textarea" id="sl_wj_note" placeholder="今天学到了什么、哪些点还不熟..."></textarea>
+    <button class="btn sm" style="margin-top:6px" onclick="addStudyLog('wj')">提交今日记录</button>
+    <div id="sl_wj_list" style="margin-top:10px;font-size:12px"></div>
   </div>
 </section>
 
@@ -412,13 +508,13 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">物理化学</div>
   <div class="page-sub">基础理论已学完 · 剩余2-3章未完成 · 目标10月中旬前一轮</div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📖</div></div><div class="sc-val" id="whChPct">0<small>%</small></div><div class="sc-lab">章节</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✏️</div></div><div class="sc-val" id="whExNum">0<small>题</small></div><div class="sc-lab">习题</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📝</div></div><div class="sc-val" id="whEqNum">0<small>个</small></div><div class="sc-lab">公式</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">⚠️</div></div><div class="sc-val" id="whWeakNum">0</div><div class="sc-lab">薄弱点</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">☁️</div></div><div class="sc-val" id="whChPct">0<small>%</small></div><div class="sc-lab">章节</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✨</div></div><div class="sc-val" id="whExNum">0<small>题</small></div><div class="sc-lab">习题</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">✨</div></div><div class="sc-val" id="whEqNum">0<small>个</small></div><div class="sc-lab">公式</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">☁️</div></div><div class="sc-val" id="whWeakNum">0</div><div class="sc-lab">薄弱点</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📊</span><h3>进度</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>进度</h3></div>
     <div class="prog"><div class="pl"><span>章节完成率</span><b id="whChTxt">0/12</b></div><div class="bar-wrap"><div class="bar-fill" id="whChBar" style="width:0%"></div></div></div>
     <div class="prog"><div class="pl"><span>习题完成率</span><b id="whExTxt">0题</b></div><div class="bar-wrap"><div class="bar-fill blue" id="whExBar" style="width:0%"></div></div></div>
     <div class="prog"><div class="pl"><span>公式背诵</span><b id="whEqTxt">0个</b></div><div class="bar-wrap"><div class="bar-fill gold" id="whEqBar" style="width:0%"></div></div></div>
@@ -426,7 +522,7 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   </div>
   <div class="card">
     <span class="cat-deco bl">📐</span>
-    <div class="card-h"><span class="ic">📚</span><h3>每日任务区</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>每日任务区</h3></div>
     <div class="row"><div style="flex:1.3"><label class="lab">大题刷题打卡</label><input class="input" id="wh_dq_input" placeholder="如：热力学ΔG计算"></div><div style="flex:0 0 60px"><label class="lab">题量</label><input class="input" id="wh_dq_num" type="number" placeholder="3"></div></div>
     <button class="btn sm" style="margin-top:6px" onclick="addDaTi('wh')">+ 记录刷题</button>
     <div id="wh_dqList" style="margin-top:8px"></div>
@@ -441,16 +537,40 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
     <div id="wh_weakList" style="margin-top:6px;font-size:12px;color:var(--pink-text)"></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">🎬</span><h3>待决策栏（剩余课程）</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>待决策栏（剩余课程）</h3></div>
     <div class="chips" id="wh_courseChips"><div class="chip on" onclick="pickCourse('wh',this,'继续听课')">继续听课</div><div class="chip" onclick="pickCourse('wh',this,'直接刷题查漏补缺')">直接刷题查漏</div><div class="chip" onclick="pickCourse('wh',this,'待定')">待定</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📖</span><h3>错题记录本</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>错题记录本</h3></div>
     <textarea class="textarea" id="wh_err_q" placeholder="粘贴题目…"></textarea>
     <label class="lab">错误原因</label><input class="input" id="wh_err_r" placeholder="如：公式套错">
     <label class="lab">思路总结</label><textarea class="textarea" id="wh_err_s" placeholder="正确思路…"></textarea>
     <div class="row" style="margin-top:6px"><button class="btn sm" onclick="addErr('wh')">+ 加入错题本</button><button class="btn ghost sm" onclick="genReview('wh')">📋 本周复盘卷</button></div>
     <div id="wh_errList" style="margin-top:10px"></div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-h"><span class="ic">☁️</span><h3>自定义任务</h3></div>
+    <div class="row" style="margin-bottom:8px">
+      <input class="input" id="ct_wh_input" placeholder="添加物化任务（如：复习相图）">
+      <button class="btn sm" style="flex:0 0 52px" onclick="addSubjectTask('wh')">+ 添加</button>
+    </div>
+    <div class="checklist" id="ct_wh_list"></div>
+  </div>
+
+  <!-- 今日学习记录 -->
+  <div class="card">
+    <span class="cat-deco tr">📝</span>
+    <div class="card-h"><span class="ic">✨</span><h3>今日学习记录</h3></div>
+    <div class="row">
+      <div style="flex:1"><label class="lab">做题数</label><input class="input" id="sl_wh_q" type="number" placeholder="0"></div>
+      <div style="flex:1"><label class="lab">正确数</label><input class="input" id="sl_wh_r" type="number" placeholder="0"></div>
+    </div>
+    <label class="lab">心得 / 总结</label>
+    <textarea class="textarea" id="sl_wh_note" placeholder="今天学到了什么、哪些点还不熟..."></textarea>
+    <button class="btn sm" style="margin-top:6px" onclick="addStudyLog('wh')">提交今日记录</button>
+    <div id="sl_wh_list" style="margin-top:10px;font-size:12px"></div>
   </div>
 </section>
 
@@ -459,22 +579,46 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">政治</div>
   <div class="page-sub">零碎时间刷肖1000 · 10月重心转政治 · 技巧班网课，冲刺/押题班再付费</div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">📝</div></div><div class="sc-val" id="polDoneNum">0<small>/1000</small></div><div class="sc-lab">肖1000题</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">🎯</div></div><div class="sc-val" id="polMasNum">0<small>%</small></div><div class="sc-lab">知识点掌握</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📅</div></div><div class="sc-val">10月</div><div class="sc-lab">重心转移</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">✅</div></div><div class="sc-val" id="polTodayNum">0</div><div class="sc-lab">今日打卡</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">✨</div></div><div class="sc-val" id="polDoneNum">0<small>/1000</small></div><div class="sc-lab">肖1000题</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">✨</div></div><div class="sc-val" id="polMasNum">0<small>%</small></div><div class="sc-lab">知识点掌握</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">☁️</div></div><div class="sc-val">10月</div><div class="sc-lab">重心转移</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">☁️</div></div><div class="sc-val" id="polTodayNum">0</div><div class="sc-lab">今日打卡</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📊</span><h3>进度</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>进度</h3></div>
     <div class="prog"><div class="pl"><span>肖1000题完成率</span><b id="polBarTxt">0/1000</b></div><div class="bar-wrap"><div class="bar-fill" id="polBarBar" style="width:0%"></div></div></div>
     <div class="prog"><div class="pl"><span>知识点掌握率</span><b id="polMasTxt">0%</b></div><div class="bar-wrap"><div class="bar-fill blue" id="polMasBar" style="width:0%"></div></div></div>
     <div class="row" style="margin-top:6px"><div style="flex:1"><label class="lab">肖1000已完成</label><input class="input" id="pol_done" type="number" placeholder="0"></div><div style="flex:1"><label class="lab">掌握率(%)</label><input class="input" id="pol_mas" type="number" placeholder="0"></div><button class="btn sm" style="flex:0 0 56px;align-self:flex-end" onclick="savePol()">设定</button></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">✏️</span><h3>每日打卡</h3></div>
+    <div class="card-h"><span class="ic">✨</span><h3>每日打卡</h3></div>
     <div class="row"><div style="flex:1"><label class="lab">今日刷题进度</label><input class="input" id="pol_num" type="number" placeholder="题数"></div><div style="flex:2"><label class="lab">易混淆知识点</label><input class="input" id="pol_conf" placeholder="如：资本有机构成 vs 技术构成"></div></div>
     <button class="btn sm" style="margin-top:6px" onclick="addPol()">打卡</button>
     <div id="polList" style="margin-top:8px;font-size:12px"></div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-h"><span class="ic">☁️</span><h3>自定义任务</h3></div>
+    <div class="row" style="margin-bottom:8px">
+      <input class="input" id="ct_pol_input" placeholder="添加政治任务（如：看技巧班网课）">
+      <button class="btn sm" style="flex:0 0 52px" onclick="addSubjectTask('pol')">+ 添加</button>
+    </div>
+    <div class="checklist" id="ct_pol_list"></div>
+  </div>
+
+  <!-- 今日学习记录 -->
+  <div class="card">
+    <span class="cat-deco tr">📝</span>
+    <div class="card-h"><span class="ic">✨</span><h3>今日学习记录</h3></div>
+    <div class="row">
+      <div style="flex:1"><label class="lab">做题数</label><input class="input" id="sl_pol_q" type="number" placeholder="0"></div>
+      <div style="flex:1"><label class="lab">正确数</label><input class="input" id="sl_pol_r" type="number" placeholder="0"></div>
+    </div>
+    <label class="lab">心得 / 总结</label>
+    <textarea class="textarea" id="sl_pol_note" placeholder="今天学到了什么、哪些点还不熟..."></textarea>
+    <button class="btn sm" style="margin-top:6px" onclick="addStudyLog('pol')">提交今日记录</button>
+    <div id="sl_pol_list" style="margin-top:10px;font-size:12px"></div>
   </div>
 </section>
 
@@ -483,16 +627,16 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">笔记日记</div>
   <div class="page-sub">资料库快捷入口 · 错题汇总</div>
   <div class="card">
-    <div class="card-h"><span class="ic">📁</span><h3>资料库快捷入口</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>资料库快捷入口</h3></div>
     <div class="row"><input class="input" id="res_name" placeholder="名称（无机考点/物化公式/思维导图）"><input class="input" id="res_url" placeholder="链接 https://" style="flex:1.5"><button class="btn sm" onclick="addRes()" style="flex:0 0 52px">加入</button></div>
     <div id="resList" style="margin-top:10px;font-size:12.5px"></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📖</span><h3>无机化学错题</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>无机化学错题</h3></div>
     <div id="notes_wj_err"></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📖</span><h3>物理化学错题</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>物理化学错题</h3></div>
     <div id="notes_wh_err"></div>
   </div>
 </section>
@@ -502,13 +646,13 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">理财记账</div>
   <div class="page-sub">固定负债总额 6000 元</div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">💸</div></div><div class="sc-val" id="finOut">0</div><div class="sc-lab">本月支出</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">💰</div></div><div class="sc-val" id="finIn">0</div><div class="sc-lab">本月收入</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">📉</div></div><div class="sc-val" id="finDebt">6000</div><div class="sc-lab">剩余负债</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">📊</div></div><div class="sc-val" id="finRate">0<small>%</small></div><div class="sc-lab">还款进度</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">☁️</div></div><div class="sc-val" id="finOut">0</div><div class="sc-lab">本月支出</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">💙</div></div><div class="sc-val" id="finIn">0</div><div class="sc-lab">本月收入</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">☁️</div></div><div class="sc-val" id="finDebt">6000</div><div class="sc-lab">剩余负债</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">☁️</div></div><div class="sc-val" id="finRate">0<small>%</small></div><div class="sc-lab">还款进度</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📉</span><h3>还款进度</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>还款进度</h3></div>
     <div class="prog"><div class="pl"><span>还款进度</span><b id="debtInfo">0 / 6000</b></div><div class="bar-wrap" style="height:14px"><div class="bar-fill" id="debtBar" style="width:0%"></div></div></div>
     <hr class="soft">
     <div class="row"><div style="flex:0 0 70px"><label class="lab">金额</label><input class="input" id="ex_amt" type="number" placeholder="0"></div><div style="flex:1"><label class="lab">分类</label><select class="select" id="ex_cat"><option>餐饮</option><option>油费</option><option>日用品</option><option>学习</option><option>交通</option><option>其他支出</option><option>还款（抵负债）</option><option>收入</option></select></div><div style="flex:1.3"><label class="lab">备注</label><input class="input" id="ex_note" placeholder="如：午餐"></div></div>
@@ -516,7 +660,7 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
     <div class="scroll" style="margin-top:10px"><table id="exTable"><thead><tr><th>日期</th><th>分类</th><th>金额</th><th>备注</th><th></th></tr></thead><tbody></tbody></table></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">🗓️</span><h3>月度预算</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>月度预算</h3></div>
     <div class="row"><input class="input" id="bud_in" type="number" placeholder="预算收入"><input class="input" id="bud_out" type="number" placeholder="预算支出"><button class="btn sm" style="flex:0 0 52px" onclick="saveBudget()">设定</button></div>
     <div class="muted" id="budInfo" style="margin-top:8px"></div>
   </div>
@@ -527,20 +671,20 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">饮食管理</div>
   <div class="page-sub">三餐打卡 · 热量估算</div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">🔥</div></div><div class="sc-val" id="dietKcal">0<small>kcal</small></div><div class="sc-lab">今日摄入</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">🍱</div></div><div class="sc-val" id="dietMeals">0<small>餐</small></div><div class="sc-lab">今日打卡</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">💧</div></div><div class="sc-val" id="dietWater">0<small>杯</small></div><div class="sc-lab">饮水</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">⚖️</div></div><div class="sc-val" id="dietWt">0<small>kg</small></div><div class="sc-lab">最新体重</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">💙</div></div><div class="sc-val" id="dietKcal">0<small>kcal</small></div><div class="sc-lab">今日摄入</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">☁️</div></div><div class="sc-val" id="dietMeals">0<small>餐</small></div><div class="sc-lab">今日打卡</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">💙</div></div><div class="sc-val" id="dietWater">0<small>杯</small></div><div class="sc-lab">饮水</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">☁️</div></div><div class="sc-val" id="dietWt">0<small>kg</small></div><div class="sc-lab">最新体重</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">🍱</span><h3>今日饮食</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>今日饮食</h3></div>
     <div class="row"><input class="input" id="meal_b" placeholder="早餐（如：鸡蛋+牛奶 ≈200kcal）"><input class="input" id="meal_l" placeholder="午餐"></div>
     <div class="row" style="margin-top:6px"><input class="input" id="meal_d" placeholder="晚餐"><button class="btn sm" style="flex:0 0 52px" onclick="addMeal()">打卡</button></div>
     <div class="muted" style="margin-top:4px">热量粗估：鸡蛋+牛奶≈200，正餐≈500-700</div>
     <div id="mealInfo" style="margin-top:8px;font-size:12px"></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">💧</span><h3>饮水打卡</h3></div>
+    <div class="card-h"><span class="ic">💙</span><h3>饮水打卡</h3></div>
     <div class="row"><button class="btn ghost sm" onclick="addWater(1)">+1杯</button><button class="btn ghost sm" onclick="addWater(-1)">-1杯</button><div class="muted" style="flex:1;align-self:center;text-align:right" id="waterInfo">今日 0 杯</div></div>
   </div>
 </section>
@@ -550,13 +694,13 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">健身打卡</div>
   <div class="page-sub">普拉提 · 跳舞 · 热量消耗</div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">🔥</div></div><div class="sc-val" id="fitKcal">0<small>kcal</small></div><div class="sc-lab">今日消耗</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">⏱️</div></div><div class="sc-val" id="fitMin">0<small>min</small></div><div class="sc-lab">今日时长</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">🏃</div></div><div class="sc-val" id="fitTimes">0</div><div class="sc-lab">累计次数</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">📊</div></div><div class="sc-val" id="fitTotalKcal">0</div><div class="sc-lab">累计消耗</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">💙</div></div><div class="sc-val" id="fitKcal">0<small>kcal</small></div><div class="sc-lab">今日消耗</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">💙</div></div><div class="sc-val" id="fitMin">0<small>min</small></div><div class="sc-lab">今日时长</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">💙</div></div><div class="sc-val" id="fitTimes">0</div><div class="sc-lab">累计次数</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">☁️</div></div><div class="sc-val" id="fitTotalKcal">0</div><div class="sc-lab">累计消耗</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">🏃</span><h3>运动记录</h3></div>
+    <div class="card-h"><span class="ic">💙</span><h3>运动记录</h3></div>
     <div class="muted">普拉提≈3.5kcal/min · 跳舞≈5kcal/min</div>
     <div class="row" style="margin-top:6px"><select class="select" id="sp_type" style="flex:0 0 88px"><option>普拉提</option><option>跳舞</option><option>其他</option></select><input class="input" id="sp_min" type="number" placeholder="时长(分钟)" style="flex:1"><button class="btn sm" style="flex:0 0 52px" onclick="addSport()">记录</button></div>
     <div id="spInfo" style="margin-top:8px;font-size:12px"></div>
@@ -568,18 +712,18 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">睡眠管理</div>
   <div class="page-sub">记录睡眠时长 · 保证备考精力</div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">😴</div></div><div class="sc-val" id="slToday">0<small>h</small></div><div class="sc-lab">昨晚睡眠</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">📊</div></div><div class="sc-val" id="slAvg">0<small>h</small></div><div class="sc-lab">本周平均</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">🌙</div></div><div class="sc-val" id="slQuality">—</div><div class="sc-lab">睡眠质量</div></div>
-    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">📅</div></div><div class="sc-val" id="slDays">0</div><div class="sc-lab">记录天数</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">☁️</div></div><div class="sc-val" id="slToday">0<small>h</small></div><div class="sc-lab">昨晚睡眠</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">☁️</div></div><div class="sc-val" id="slAvg">0<small>h</small></div><div class="sc-lab">本周平均</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">✨</div></div><div class="sc-val" id="slQuality">—</div><div class="sc-lab">睡眠质量</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">☁️</div></div><div class="sc-val" id="slDays">0</div><div class="sc-lab">记录天数</div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">😴</span><h3>今日睡眠记录</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>今日睡眠记录</h3></div>
     <div class="row"><div style="flex:1"><label class="lab">睡眠时长(小时)</label><input class="input" id="sl_hours" type="number" step="0.1" placeholder="如 7.5"></div><div style="flex:1"><label class="lab">睡眠质量</label><select class="select" id="sl_q"><option>好</option><option>一般</option><option>差</option></select></div><button class="btn sm" style="flex:0 0 52px;align-self:flex-end" onclick="addSleep()">记录</button></div>
     <div id="slList" style="margin-top:10px;font-size:12px"></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📊</span><h3>本周睡眠走势</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>本周睡眠走势</h3></div>
     <div id="slChart" style="min-height:100px"></div>
   </div>
   <div class="note">熬夜后第二天<b>自主减量</b>，备考是马拉松不是冲刺 🐱</div>
@@ -590,9 +734,75 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">习惯养成</div>
   <div class="page-sub">每日小习惯 · 坚持就是胜利</div>
   <div class="card">
-    <div class="card-h"><span class="ic">⭐</span><h3>我的习惯</h3></div>
+    <div class="card-h"><span class="ic">💙</span><h3>我的习惯</h3></div>
     <div class="row"><input class="input" id="hb_name" placeholder="如：早起、背单词、运动"><button class="btn sm" onclick="addHabit()" style="flex:0 0 52px">添加</button></div>
     <div id="hbList" style="margin-top:10px"></div>
+  </div>
+</section>
+
+
+<!-- ===== 打卡日历页 ===== -->
+<section class="page" id="page-calendar">
+  <div class="page-title">打卡日历</div>
+  <div class="page-sub">记录每日学习时长与连续打卡</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">☁️</div></div><div class="sc-val" id="calDays">0<small>天</small></div><div class="sc-lab">本月打卡</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">💙</div></div><div class="sc-val" id="calMonthH">0<small>h</small></div><div class="sc-lab">本月时长</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">💙</div></div><div class="sc-val" id="calTotalH">0<small>h</small></div><div class="sc-lab">累计时长</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">✨</div></div><div class="sc-val" id="calStreak">0<small>天</small></div><div class="sc-lab">连续打卡</div></div>
+  </div>
+  <div class="card">
+    <span class="cat-deco tr">📅</span>
+    <div class="card-h"><span class="ic">☁️</span><h3 id="calTitle">本月打卡</h3></div>
+    <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;font-size:11px;text-align:center"></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">☁️</span><h3>每日感想</h3><span class="more">一句话记录心情</span></div>
+    <div class="muted" style="margin-bottom:8px">写下今天的心情、感悟、烦恼或鼓励自己的话</div>
+    <div class="row" style="margin-bottom:8px">
+      <select class="select" id="moodSel" style="flex:0 0 80px">
+        <option value="😊">😊 开心</option>
+        <option value="😤">😤 烦躁</option>
+        <option value="😴">😴 疲惫</option>
+        <option value="🔥">🔥 干劲足</option>
+        <option value="🤔">🤔 迷茫</option>
+        <option value="😢">😢 低落</option>
+        <option value="✨">✨ 有收获</option>
+      </select>
+      <input class="input" id="moodText" placeholder="今天的一句话（如：终于搞懂配位滴定了！）" style="flex:1">
+      <button class="btn sm" style="flex:0 0 52px" onclick="saveMood()">保存</button>
+    </div>
+    <div id="moodList" style="display:flex;flex-direction:column;gap:6px"></div>
+  </div>
+</section>
+
+<!-- ===== 时长统计页 ===== -->
+<section class="page" id="page-timestat">
+  <div class="page-title">时长统计</div>
+  <div class="page-sub">各模块学习时长与走势</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--pink-soft)">💙</div></div><div class="sc-val" id="tsToday">0<small>h</small></div><div class="sc-lab">今日时长</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:var(--blue-soft)">☁️</div></div><div class="sc-val" id="tsWeek">0<small>h</small></div><div class="sc-lab">本周时长</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#fff3d8">☁️</div></div><div class="sc-val" id="tsMonth">0<small>h</small></div><div class="sc-lab">本月时长</div></div>
+    <div class="stat-card"><div class="sc-top"><div class="sc-ic" style="background:#e0f0e8">💙</div></div><div class="sc-val" id="tsTotal">0<small>h</small></div><div class="sc-lab">累计时长</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">☁️</span><h3>近7天学习时长</h3></div>
+    <div id="tsLineChart" style="min-height:120px"></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">☁️</span><h3>各模块累计时长</h3></div>
+    <div class="donut-wrap">
+      <svg id="tsDonut" width="120" height="120" viewBox="0 0 120 120"></svg>
+      <div class="donut-legend" id="tsLegend"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-h"><span class="ic">☁️</span><h3>补登学习时长</h3></div>
+    <div class="row"><div style="flex:1"><label class="lab">补登日期</label><input type="date" class="input" id="ts_back_date"></div><div style="flex:1"><label class="lab">时长(小时)</label><input class="input" id="ts_back_h" type="number" step="0.1" placeholder="如 2.5"></div></div>
+    <label class="lab">延迟原因</label>
+    <input class="input" id="ts_back_reason" placeholder="如：昨天身体不适未及时登记">
+    <button class="btn sm" style="margin-top:6px" onclick="backfillTime()">提交补登</button>
   </div>
 </section>
 
@@ -601,25 +811,25 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="page-title">设置</div>
   <div class="page-sub">个性化你的工作台</div>
   <div class="card">
-    <div class="card-h"><span class="ic">🎨</span><h3>外观</h3></div>
+    <div class="card-h"><span class="ic">💙</span><h3>外观</h3></div>
     <div class="sw-row"><div><b>考研倒计时</b><div class="queued">显示在总览页</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
     <div class="sw-row"><div><b>小猫装饰</b><div class="queued">板块角落点缀</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
     <div class="sw-row"><div><b>温馨提示</b><div class="queued">状态不好减量提醒</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">📅</span><h3>考研日期</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>考研日期</h3></div>
     <label class="lab">考研日期（用于倒计时）</label>
     <input type="date" class="input" id="examDate" onchange="saveExamDate()">
     <div class="muted" style="margin-top:6px">默认设为12月26日</div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">💾</span><h3>数据管理</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>数据管理</h3></div>
     <button class="btn ghost sm" onclick="exportData()">📥 导出全部数据</button>
     <button class="btn ghost sm" style="margin-left:6px;color:var(--pink-text)" onclick="clearData()">🗑️ 清空所有数据</button>
     <div class="muted" style="margin-top:8px">数据保存在本机浏览器，换设备需导出</div>
   </div>
   <div class="card">
-    <div class="card-h"><span class="ic">ℹ️</span><h3>关于</h3></div>
+    <div class="card-h"><span class="ic">☁️</span><h3>关于</h3></div>
     <div class="muted">小猫工作台 · 考研双专业版<br>无机化学+物理化学 · 英语 · 政治 · 财务 · 减脂<br>数据本地存储 · 支持添加到手机桌面</div>
   </div>
 </section>
@@ -630,11 +840,11 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
 </div>
 
 <nav class="tabbar">
-  <div class="tab active" data-page="overview" onclick="goPage('overview')"><span class="ic">📊</span>总览</div>
-  <div class="tab" data-page="daily" onclick="goPage('daily')"><span class="ic">📋</span>计划</div>
-  <div class="tab" data-page="english" onclick="goPage('english')"><span class="ic">📚</span>学习</div>
-  <div class="tab" data-page="finance" onclick="goPage('finance')"><span class="ic">💰</span>财务</div>
-  <div class="tab" data-page="diet" onclick="goPage('diet')"><span class="ic">🌿</span>生活</div>
+  <div class="tab active" data-page="overview" onclick="goPage('overview')"><span class="ic">☁️</span>总览</div>
+  <div class="tab" data-page="daily" onclick="goPage('daily')"><span class="ic">☁️</span>计划</div>
+  <div class="tab" data-page="english" onclick="goPage('english')"><span class="ic">☁️</span>学习</div>
+  <div class="tab" data-page="finance" onclick="goPage('finance')"><span class="ic">💙</span>财务</div>
+  <div class="tab" data-page="diet" onclick="goPage('diet')"><span class="ic">☁️</span>生活</div>
 </nav>
 
 <script>
@@ -657,6 +867,12 @@ function goPage(name){
   document.querySelector('.content').scrollTop=0;
   closeSidebar();
   if(name==='overview'){renderOverview();renderAchievements();}
+  if(name==='english'||name==='inorganic'||name==='physical'||name==='politics'){
+    const m={english:'en',inorganic:'wj',physical:'wh',politics:'pol'};
+    renderSubjectTask(m[name]);
+  }
+  if(name==='calendar')renderCalendar();
+  if(name==='timestat')renderTimeStats();
   DB.set('curPage',name);
 }
 
@@ -699,11 +915,63 @@ function todayTasks(){
 }
 function renderTasks(elId){
   const done=DB.get('today_done',{});const tasks=todayTasks();
-  document.getElementById(elId).innerHTML=tasks.map(t=>`<div class="task ${done[t.id]?'done':''}" onclick="toggleToday('${t.id}')"><div class="box"></div><div class="txt">${t.txt}<br><span class="muted" style="font-size:10px">${t.cat}</span></div><span class="tag ${t.tag}">${t.cat}</span></div>`).join('')||'<div class="muted">今天没有任务 🐾</div>';
-  return{cnt:tasks.filter(t=>done[t.id]).length,total:tasks.length};
+  const custom=DB.get('custom_tasks',[]).filter(c=>c.date===todayStr());
+  const hidden=DB.get('hidden_tasks',[]);
+  const visTasks=tasks.filter(t=>!hidden.includes(t.id));
+  let html=visTasks.map(t=>`<div class="task ${done[t.id]?'done':''}" onclick="toggleToday('${t.id}')"><div class="box"></div><div class="txt">${t.txt}<br><span class="muted" style="font-size:10px">${t.cat}</span></div><span class="tag ${t.tag}">${t.cat}</span><button class="btn ghost sm" style="margin-left:auto;padding:1px 6px;font-size:9px" onclick="event.stopPropagation();hideTask('${t.id}')">✕</button></div>`).join('');
+  html+=custom.map(c=>`<div class="task ${done[c.id]?'done':''}" onclick="toggleToday('${c.id}')"><div class="box"></div><div class="txt">${c.txt}<br><span class="muted" style="font-size:10px">自定义</span></div><span class="tag health">自定义</span><button class="btn ghost sm" style="margin-left:auto;padding:1px 6px;font-size:9px" onclick="event.stopPropagation();delCustomTask('${c.id}')">✕</button></div>`).join('');
+  if(!html)html='<div class="muted">今天没有任务 ☁️</div>';
+  document.getElementById(elId).innerHTML=html;
+  return{cnt:visTasks.filter(t=>done[t.id]).length+custom.filter(c=>done[c.id]).length,total:visTasks.length+custom.length};
+}
+function hideTask(id){
+  if(!confirm('删除这个任务？'))return;
+  const h=DB.get('hidden_tasks',[]);if(!h.includes(id))h.push(id);DB.set('hidden_tasks',h);
+  const done=DB.get('today_done',{});delete done[id];DB.set('today_done',done);
+  renderOverview();renderDaily();
+}
+function addCustomTask(){
+  const txt=document.getElementById('customTaskInput').value.trim();if(!txt)return;
+  const l=DB.get('custom_tasks',[]);const id='custom_'+Date.now();l.push({id,txt,date:todayStr()});DB.set('custom_tasks',l);
+  document.getElementById('customTaskInput').value='';renderOverview();renderDaily();
+}
+function delCustomTask(id){
+  if(!confirm('删除这个自定义任务？'))return;
+  DB.set('custom_tasks',DB.get('custom_tasks',[]).filter(c=>c.id!==id));
+  const done=DB.get('today_done',{});delete done[id];DB.set('today_done',done);
+  renderOverview();renderDaily();
 }
 function toggleToday(id){const d=DB.get('today_done',{});d[id]=!d[id];d.__date=todayStr();DB.set('today_done',d);renderOverview();renderDaily();renderAchievements()}
-function checkDailyReset(){const d=DB.get('today_done',{});if(d.__date&&d.__date!==todayStr())DB.set('today_done',{})}
+function checkDailyReset(){
+  const d=DB.get('today_done',{});if(d.__date&&d.__date!==todayStr())DB.set('today_done',{});
+  DB.set('custom_tasks',DB.get('custom_tasks',[]).filter(c=>c.date===todayStr()));
+  // 清理过期学科自定义任务
+  ['en','wj','wh','pol'].forEach(p=>{
+    DB.set('ct_'+p,DB.get('ct_'+p,[]).filter(c=>c.date===todayStr()));
+  });
+}
+
+/* 学科自定义任务 */
+function addSubjectTask(p){
+  const inp=document.getElementById('ct_'+p+'_input');const txt=inp.value.trim();if(!txt)return;
+  const l=DB.get('ct_'+p,[]);const id='ct_'+p+'_'+Date.now();
+  const catMap={en:'英语',wj:'无机',wh:'物化',pol:'政治'};
+  l.push({id,txt,date:todayStr(),cat:catMap[p]||'自定义'});DB.set('ct_'+p,l);
+  inp.value='';renderSubjectTask(p);
+}
+function delSubjectTask(p,id){
+  if(!confirm('删除这个任务？'))return;
+  DB.set('ct_'+p,DB.get('ct_'+p,[]).filter(c=>c.id!==id));
+  const done=DB.get('today_done',{});delete done[id];DB.set('today_done',done);
+  renderSubjectTask(p);renderOverview();renderDaily();
+}
+function renderSubjectTask(p){
+  const today=todayStr();const l=DB.get('ct_'+p,[]).filter(c=>c.date===today);
+  const done=DB.get('today_done',{});
+  const el=document.getElementById('ct_'+p+'_list');if(!el)return;
+  if(!l.length){el.innerHTML='<div class="muted">暂无自定义任务</div>';return}
+  el.innerHTML=l.map(c=>`<div class="task ${done[c.id]?'done':''}" onclick="toggleToday('${c.id}')"><div class="box"></div><div class="txt">${c.txt}<br><span class="muted" style="font-size:10px">${c.cat}</span></div><span class="tag ${p==='en'?'en':p==='wj'?'wj':p==='wh'?'wh':'pol'}">${c.cat}</span><button class="btn ghost sm" style="margin-left:auto;padding:1px 6px;font-size:9px" onclick="event.stopPropagation();delSubjectTask('${p}','${c.id}')">✕</button></div>`).join('');
+}
 
 /* 总览页 */
 function renderOverview(){
@@ -720,6 +988,13 @@ function renderOverview(){
   if(wt.length){const last=wt[wt.length-1];document.getElementById('ovWt').innerHTML=`${last.v}<small>kg</small>`;if(wt.length>=2){const d=last.v-wt[wt.length-2].v;const el=document.getElementById('ovWtTrend');el.textContent=d>0?'↑':'↓';el.className='sc-trend '+(d>0?'down':'up')}}
   const r=renderTasks('ovTasks');
   renderWeekChart();
+  // 模块概况百分比
+  const unitsDone=5+DB.get('units',[]).filter(u=>u.done.every(Boolean)).length;
+  const rd=DB.get('read_done',0);
+  const oe=document.getElementById('ovEnPct');if(oe)oe.innerHTML=Math.round(((unitsDone/10)+(rd/58))/2*100)+'<small>%</small>';
+  const wjc=DB.get('wj_ch',{done:0,total:12});const owj=document.getElementById('ovWjPct');if(owj)owj.innerHTML=Math.round(wjc.done/wjc.total*100)+'<small>%</small>';
+  const whc=DB.get('wh_ch',{done:0,total:12});const owh=document.getElementById('ovWhPct');if(owh)owh.innerHTML=Math.round(whc.done/whc.total*100)+'<small>%</small>';
+  const pp=DB.get('pol_prog',{done:0,mas:0});const op=document.getElementById('ovPolPct');if(op)op.innerHTML=Math.round(pp.done/1000*100)+'<small>%</small>';
 }
 function renderWeekChart(){
   // 本周每日完成率折线
@@ -745,6 +1020,35 @@ function renderDaily(){
   document.getElementById('dpRate').innerHTML=`${tasks.length?Math.round(cnt/tasks.length*100):0}<small>%</small>`;
   document.getElementById('navDaily').textContent=cnt+'/'+tasks.length;
   renderTasks('dpTasks');
+  renderTimeline();
+}
+/* 时间线 */
+function addTimeline(){
+  const time=document.getElementById('tlTime').value.trim();
+  const content=document.getElementById('tlContent').value.trim();
+  if(!content){alert('请输入做了什么');return}
+  const tl=DB.get('timelines',[]);const today=todayStr();
+  tl.push({id:'tl_'+Date.now(),date:today,time:time||'--:--',content});
+  DB.set('timelines',tl);
+  document.getElementById('tlTime').value='';document.getElementById('tlContent').value='';
+  renderTimeline();
+}
+function delTimeline(id){
+  DB.set('timelines',DB.get('timelines',[]).filter(t=>t.id!==id));
+  renderTimeline();
+}
+function renderTimeline(){
+  const today=todayStr();const tl=DB.get('timelines',[]).filter(t=>t.date===today).sort((a,b)=>a.time>b.time?1:-1);
+  const el=document.getElementById('dpTimeline');
+  if(!el)return;
+  if(!tl.length){el.innerHTML='<div class="muted" style="padding:6px 12px">还没有记录，开始记录你的时间吧 ☁️</div>';return}
+  el.innerHTML=tl.map(t=>`<div class="tl-item"><span class="tl-time">${t.time}</span><span class="tl-dot"></span><span class="tl-txt">${eh(t.content)}</span><span class="tl-del" onclick="delTimeline('${t.id}')">✕</span></div>`).join('');
+  // 同步渲染总览页时间轴
+  const ov=document.getElementById('ovTimeline');
+  if(ov){
+    if(!tl.length){ov.innerHTML='<div class="muted" style="padding:6px 12px">今日还没记录时间线</div>';return}
+    ov.innerHTML=tl.map(t=>`<div class="tl-item"><span class="tl-time">${t.time}</span><span class="tl-dot"></span><span class="tl-txt">${eh(t.content)}</span></div>`).join('');
+  }
 }
 
 /* 单词 */
@@ -868,7 +1172,7 @@ function renderHabits(){const l=DB.get('habits',[]);const el=document.getElement
 function checkHabit(i){const l=DB.get('habits',[]);const t=todayStr();if(l[i].lastDate===t){alert('今天已打卡');return}if(l[i].lastDate===addDays(t,-1))l[i].streak++;else l[i].streak=1;l[i].lastDate=t;DB.set('habits',l);renderHabits()}
 
 /* 成就 */
-const ACH=[{id:'wj100',ic:'🐱',n:'无机100题',c:()=>DB.get('wj_dati',[]).reduce((s,x)=>s+(x.num||0),0)>=100},{id:'wh100',ic:'😺',n:'物化100题',c:()=>DB.get('wh_dati',[]).reduce((s,x)=>s+(x.num||0),0)>=100},{id:'word30',ic:'😻',n:'单词30天',c:()=>DB.get('word_days',0)>=30},{id:'eq30',ic:'🐈',n:'背诵30个',c:()=>DB.get('wj_eqs',[]).length+DB.get('wh_eqs',[]).length>=30},{id:'read30',ic:'🐾',n:'阅读30篇',c:()=>DB.get('read_done',0)>=30},{id:'pol500',ic:'🇨🇳',n:'政治500题',c:()=>DB.get('pol_prog',{done:0}).done>=500},{id:'debt50',ic:'💰',n:'还款过半',c:()=>DB.get('exp',[]).filter(e=>e.cat==='还款（抵负债）').reduce((s,e)=>s+e.amt,0)>=3000},{id:'wt7',ic:'🌼',n:'称重7天',c:()=>DB.get('weights',[]).length>=7}];
+const ACH=[{id:'wj100',ic:'🐱',n:'无机100题',c:()=>DB.get('wj_dati',[]).reduce((s,x)=>s+(x.num||0),0)>=100},{id:'wh100',ic:'😺',n:'物化100题',c:()=>DB.get('wh_dati',[]).reduce((s,x)=>s+(x.num||0),0)>=100},{id:'word30',ic:'😻',n:'单词30天',c:()=>DB.get('word_days',0)>=30},{id:'eq30',ic:'🐈',n:'背诵30个',c:()=>DB.get('wj_eqs',[]).length+DB.get('wh_eqs',[]).length>=30},{id:'read30',ic:'🐾',n:'阅读30篇',c:()=>DB.get('read_done',0)>=30},{id:'pol500',ic:'☁️',n:'政治500题',c:()=>DB.get('pol_prog',{done:0}).done>=500},{id:'debt50',ic:'☁️',n:'还款过半',c:()=>DB.get('exp',[]).filter(e=>e.cat==='还款（抵负债）').reduce((s,e)=>s+e.amt,0)>=3000},{id:'wt7',ic:'🌼',n:'称重7天',c:()=>DB.get('weights',[]).length>=7}];
 function renderAchievements(){const el=document.getElementById('achGrid');if(!el)return;const done=DB.get('today_done',{});if(done.en_word){DB.set('word_days',DB.get('word_days',0)+1);done.en_word=false;DB.set('today_done',done)}el.innerHTML=ACH.map(a=>{const u=DB.get('ach_'+a.id,false)||a.c();DB.set('ach_'+a.id,u);return `<div class="ach ${u?'unlocked':''}"><div class="ach-ic">${a.ic}</div><div class="ach-n">${a.n}</div></div>`}).join('')}
 
 /* 数据管理 */
@@ -882,14 +1186,138 @@ function init(){
   renderPol();initPol();renderWeeks();renderRes();renderAllProgress();
   renderExp();renderBudget();renderFin();
   renderMeal();renderDiet();renderSport();renderFit();renderSleep();renderSlStats();renderHabits();
+  // 学科自定义任务
+  ['en','wj','wh','pol'].forEach(p=>renderSubjectTask(p));
   // 设置页考研日期
   const ed=DB.get('examDate',null);if(ed&&document.getElementById('examDate'))document.getElementById('examDate').value=ed;
   // 水杯
   const w=DB.get('water',0);const we=document.getElementById('waterInfo');if(we)we.textContent='今日 '+w+' 杯';
+  renderCalendar();renderTimeStats();
   goPage(DB.get('curPage','overview'));
 }
 init();
 setInterval(renderTopDate,60000);
+
+/* === 学习记录 === */
+function addStudyLog(p){
+  const q=parseInt(document.getElementById('sl_'+p+'_q').value)||0;
+  const r=parseInt(document.getElementById('sl_'+p+'_r').value)||0;
+  const note=document.getElementById('sl_'+p+'_note').value.trim();
+  if(!q){alert('请输入做题数');return}
+  const l=DB.get('studylog_'+p,[]);l.push({q,r,note,date:todayStr()});DB.set('studylog_'+p,l);
+  // 估算时长 每题5分钟
+  const h=parseFloat((q*5/60).toFixed(2));
+  const tl=DB.get('study_time',[]);tl.push({date:todayStr(),h,module:p});DB.set('study_time',tl);
+  document.getElementById('sl_'+p+'_q').value='';document.getElementById('sl_'+p+'_r').value='';document.getElementById('sl_'+p+'_note').value='';
+  renderStudyLog(p);renderOverview();renderTimeStats();renderCalendar();
+}
+function renderStudyLog(p){
+  const l=DB.get('studylog_'+p,[]).filter(x=>x.date===todayStr()).reverse();
+  const el=document.getElementById('sl_'+p+'_list');if(!el)return;
+  if(!l.length){el.innerHTML='<div class="muted">今日暂无记录</div>';return}
+  el.innerHTML=l.map(x=>`<div style="padding:6px 8px;background:var(--card-soft);border-radius:10px;margin-bottom:5px;font-size:12px"><b>${x.date}</b> · ${x.q}题 / 正确${x.r}题 · 正确率 ${x.q?Math.round(x.r/x.q*100):0}%${x.note?' · '+eh(x.note):''}</div>`).join('');
+}
+
+/* === 打卡日历 === */
+function renderCalendar(){
+  const now=new Date();const y=now.getFullYear(),m=now.getMonth();
+  const firstDay=new Date(y,m,1).getDay();const days=new Date(y,m+1,0).getDate();
+  const monthStr=`${y}-${String(m+1).padStart(2,'0')}`;
+  document.getElementById('calTitle').textContent=`${y}年${m+1}月打卡`;
+  const logs=DB.get('study_time',[]);const timeMap={};logs.forEach(x=>{timeMap[x.date]=(timeMap[x.date]||0)+x.h});
+  const moods=DB.get('moods',[]);const moodMap={};moods.forEach(x=>{moodMap[x.date]={emoji:x.emoji,text:x.text}});
+  const monthDays=Object.keys(timeMap).filter(d=>d.startsWith(monthStr));
+  const monthH=monthDays.reduce((s,d)=>s+timeMap[d],0);
+  const totalH=Object.values(timeMap).reduce((s,v)=>s+v,0);
+  let streak=0;let d=new Date();while(true){const ds=d.toISOString().slice(0,10);if(timeMap[ds]&&timeMap[ds]>0){streak++;d.setDate(d.getDate()-1)}else break}
+  const e1=document.getElementById('calDays');if(e1)e1.innerHTML=monthDays.length+'<small>天</small>';
+  const e2=document.getElementById('calMonthH');if(e2)e2.innerHTML=monthH.toFixed(1)+'<small>h</small>';
+  const e3=document.getElementById('calTotalH');if(e3)e3.innerHTML=totalH.toFixed(1)+'<small>h</small>';
+  const e4=document.getElementById('calStreak');if(e4)e4.innerHTML=streak+'<small>天</small>';
+  let html='<div style="padding:6px;color:var(--ink-faint)">日</div><div style="padding:6px;color:var(--ink-faint)">一</div><div style="padding:6px;color:var(--ink-faint)">二</div><div style="padding:6px;color:var(--ink-faint)">三</div><div style="padding:6px;color:var(--ink-faint)">四</div><div style="padding:6px;color:var(--ink-faint)">五</div><div style="padding:6px;color:var(--ink-faint)">六</div>';
+  for(let i=0;i<firstDay;i++)html+='<div></div>';
+  for(let i=1;i<=days;i++){
+    const ds=`${monthStr}-${String(i).padStart(2,'0')}`;const h=timeMap[ds]||0;
+    const mood=moodMap[ds];
+    const isToday=ds===todayStr();
+    let bg=h?`background:var(--blue-soft);color:var(--blue-text);font-weight:600`:'background:var(--card-soft);color:var(--ink-soft)';
+    if(isToday)bg=`background:var(--pink-soft);color:var(--pink-text);font-weight:700;border:2px solid var(--pink)`;
+    html+=`<div style="border-radius:8px;padding:6px 4px;${bg};cursor:pointer" onclick="viewMood('${ds}')">${i}${mood?`<br><span style="font-size:14px">${mood.emoji}</span>`:''}${h?`<br><span style="font-size:9px">${h.toFixed(1)}h</span>`:''}</div>`;
+  }
+  const el=document.getElementById('calGrid');if(el)el.innerHTML=html;
+  renderMoodList();
+}
+/* 每日感想 */
+function saveMood(){
+  const emoji=document.getElementById('moodSel').value;
+  const text=document.getElementById('moodText').value.trim();
+  if(!text){alert('写点什么吧');return}
+  const l=DB.get('moods',[]);const today=todayStr();
+  const ex=l.find(m=>m.date===today);
+  if(ex){ex.emoji=emoji;ex.text=text}else{l.push({date:today,emoji,text})}
+  DB.set('moods',l);
+  document.getElementById('moodText').value='';
+  renderCalendar();renderOverview();
+}
+function viewMood(date){
+  const m=DB.get('moods',[]).find(x=>x.date===date);
+  if(m)alert(`${m.date}\n${m.emoji} ${m.text}`);
+  else if(date===todayStr())alert('今天还没写感想，在下方记录吧');
+  else alert(`${date} 暂无感想记录`);
+}
+function renderMoodList(){
+  const el=document.getElementById('moodList');if(!el)return;
+  const l=DB.get('moods',[]).slice(-15).reverse();
+  if(!l.length){el.innerHTML='<div class="muted">暂无感想记录</div>';return}
+  el.innerHTML=l.map(m=>`<div class="mood-item"><span class="mood-emoji">${m.emoji}</span><span class="mood-date">${m.date.slice(5)}</span><span class="mood-txt">${eh(m.text)}</span><span class="mood-del" onclick="delMood('${m.date}')">✕</span></div>`).join('');
+}
+function delMood(date){
+  if(!confirm('删除这条感想？'))return;
+  DB.set('moods',DB.get('moods',[]).filter(m=>m.date!==date));
+  renderCalendar();
+}
+
+/* === 时长统计 === */
+function renderTimeStats(){
+  const logs=DB.get('study_time',[]);const today=todayStr();
+  const todayH=logs.filter(x=>x.date===today).reduce((s,x)=>s+x.h,0);
+  const now=new Date();let weekH=0;
+  for(let i=0;i<7;i++){const d=new Date(now);d.setDate(now.getDate()-i);const ds=d.toISOString().slice(0,10);weekH+=logs.filter(x=>x.date===ds).reduce((s,x)=>s+x.h,0)}
+  const month=today.slice(0,7);const monthH=logs.filter(x=>x.date.startsWith(month)).reduce((s,x)=>s+x.h,0);
+  const totalH=logs.reduce((s,x)=>s+x.h,0);
+  const e1=document.getElementById('tsToday');if(e1)e1.innerHTML=todayH.toFixed(1)+'<small>h</small>';
+  const e2=document.getElementById('tsWeek');if(e2)e2.innerHTML=weekH.toFixed(1)+'<small>h</small>';
+  const e3=document.getElementById('tsMonth');if(e3)e3.innerHTML=monthH.toFixed(1)+'<small>h</small>';
+  const e4=document.getElementById('tsTotal');if(e4)e4.innerHTML=totalH.toFixed(1)+'<small>h</small>';
+  // 折线
+  const days=[];const vals=[];
+  for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);const ds=d.toISOString().slice(0,10);days.push(ds);vals.push(logs.filter(x=>x.date===ds).reduce((s,x)=>s+x.h,0))}
+  const w=320,h=120,pad=20;const mx=Math.max(...vals,1);
+  const pts=vals.map((v,i)=>[pad+(i/6)*(w-2*pad),h-pad-(v/mx)*(h-2*pad)]);
+  const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const area=path+` L${pts[6][0].toFixed(1)} ${h-pad} L${pts[0][0].toFixed(1)} ${h-pad} Z`;
+  const lc=document.getElementById('tsLineChart');if(lc)lc.innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:${w}px"><defs><linearGradient id="tsg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a8b8" stop-opacity="0.4"/><stop offset="100%" stop-color="#f7a8b8" stop-opacity="0"/></linearGradient></defs><path d="${area}" fill="url(#tsg)"/><path d="${path}" fill="none" stroke="#e8849a" stroke-width="2" stroke-linejoin="round"/>${pts.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="#e8849a"/>`).join('')}</svg>`;
+  // 圆环
+  const cats=[{n:'英语',c:'#f7a8b8',k:'studylog_en'},{n:'无机',c:'#b5d4e0',k:'studylog_wj'},{n:'物化',c:'#e8c87a',k:'studylog_wh'},{n:'政治',c:'#a8d8c0',k:'studylog_pol'}];
+  const counts=cats.map(c=>DB.get(c.k,[]).length);const total=counts.reduce((s,v)=>s+v,0)||1;
+  let start=0;let svg='<circle cx="60" cy="60" r="24" fill="#fff"/>';let legend='';
+  cats.forEach((c,i)=>{const v=counts[i];const pct=v/total;const end=start+pct*Math.PI*2;
+    const x1=60+40*Math.cos(start),y1=60+40*Math.sin(start),x2=60+40*Math.cos(end),y2=60+40*Math.sin(end);
+    const large=end-start>Math.PI?1:0;
+    svg+=`<path d="M60 60 L${x1} ${y1} A40 40 0 ${large} 1 ${x2} ${y2} Z" fill="${c.c}" opacity="0.85"/>`;
+    legend+=`<div class="li"><span class="dot" style="background:${c.c}"></span>${c.n} ${Math.round(pct*100)}%</div>`;
+    start=end;
+  });
+  const dn=document.getElementById('tsDonut');if(dn)dn.innerHTML=svg;
+  const lg=document.getElementById('tsLegend');if(lg)lg.innerHTML=legend;
+}
+function backfillTime(){
+  const d=document.getElementById('ts_back_date').value;const h=parseFloat(document.getElementById('ts_back_h').value)||0;const r=document.getElementById('ts_back_reason').value.trim();
+  if(!d||!h){alert('请填写日期和时长');return}
+  const l=DB.get('study_time',[]);l.push({date:d,h,reason:r});DB.set('study_time',l);
+  document.getElementById('ts_back_date').value='';document.getElementById('ts_back_h').value='';document.getElementById('ts_back_reason').value='';
+  renderTimeStats();renderCalendar();renderOverview();
+}
 </script>
 </body>
 </html>
