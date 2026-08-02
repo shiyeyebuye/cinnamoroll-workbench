@@ -800,8 +800,9 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:12px 0}
   </div>
   <div class="card">
     <div class="card-h"><span class="ic">📝</span><h3>补登学习时长</h3></div>
-    <div class="row"><div style="flex:1"><label class="lab">补登日期</label><input type="date" class="input" id="ts_back_date"></div><div style="flex:1"><label class="lab">时长(小时)</label><input class="input" id="ts_back_h" type="number" step="0.1" placeholder="如 2.5"></div></div>
-    <label class="lab">延迟原因</label>
+    <div class="row"><div style="flex:1"><label class="lab">补登日期</label><input type="date" class="input" id="ts_back_date"></div><div style="flex:1"><label class="lab">时长(分钟)</label><input class="input" id="ts_back_min" type="number" step="1" placeholder="如 150"></div></div>
+    <div style="display:flex;gap:8px;margin-top:8px"><div style="flex:1"><label class="lab">所属模块</label><select class="select" id="ts_back_mod"><option value="en">英语</option><option value="wj">无机化学</option><option value="wh">物理化学</option><option value="pol">政治</option><option value="other">其他</option></select></div></div>
+    <label class="lab">延迟原因 / 备注</label>
     <input class="input" id="ts_back_reason" placeholder="如：昨天身体不适未及时登记">
     <button class="btn sm" style="margin-top:6px" onclick="backfillTime()">提交补登</button>
   </div>
@@ -1325,25 +1326,30 @@ function renderTimeStats(){
   const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
   const area=path+` L${pts[6][0].toFixed(1)} ${h-pad} L${pts[0][0].toFixed(1)} ${h-pad} Z`;
   const lc=document.getElementById('tsLineChart');if(lc)lc.innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:${w}px"><defs><linearGradient id="tsg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a8b8" stop-opacity="0.4"/><stop offset="100%" stop-color="#f7a8b8" stop-opacity="0"/></linearGradient></defs><path d="${area}" fill="url(#tsg)"/><path d="${path}" fill="none" stroke="#e8849a" stroke-width="2" stroke-linejoin="round"/>${pts.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="#e8849a"/>`).join('')}</svg>`;
-  // 圆环
-  const cats=[{n:'英语',c:'#f7a8b8',k:'studylog_en'},{n:'无机',c:'#b5d4e0',k:'studylog_wj'},{n:'物化',c:'#e8c87a',k:'studylog_wh'},{n:'政治',c:'#a8d8c0',k:'studylog_pol'}];
-  const counts=cats.map(c=>DB.get(c.k,[]).length);const total=counts.reduce((s,v)=>s+v,0)||1;
+  // 圆环 — 按各模块学习时长汇总
+  const cats=[{n:'英语',c:'#f7a8b8',m:'en'},{n:'无机',c:'#b5d4e0',m:'wj'},{n:'物化',c:'#e8c87a',m:'wh'},{n:'政治',c:'#a8d8c0',m:'pol'}];
+  const modH=cats.map(c=>logs.filter(x=>x.module===c.m).reduce((s,x)=>s+x.h,0));
+  const total=modH.reduce((s,v)=>s+v,0)||1;
   let start=0;let svg='<circle cx="60" cy="60" r="24" fill="#fff"/>';let legend='';
-  cats.forEach((c,i)=>{const v=counts[i];const pct=v/total;const end=start+pct*Math.PI*2;
+  cats.forEach((c,i)=>{const v=modH[i];const pct=v/total;const end=start+pct*Math.PI*2;
     const x1=60+40*Math.cos(start),y1=60+40*Math.sin(start),x2=60+40*Math.cos(end),y2=60+40*Math.sin(end);
     const large=end-start>Math.PI?1:0;
     svg+=`<path d="M60 60 L${x1} ${y1} A40 40 0 ${large} 1 ${x2} ${y2} Z" fill="${c.c}" opacity="0.85"/>`;
-    legend+=`<div class="li"><span class="dot" style="background:${c.c}"></span>${c.n} ${Math.round(pct*100)}%</div>`;
+    legend+=`<div class="li"><span class="dot" style="background:${c.c}"></span>${c.n} ${v.toFixed(1)}h (${Math.round(pct*100)}%)</div>`;
     start=end;
   });
   const dn=document.getElementById('tsDonut');if(dn)dn.innerHTML=svg;
   const lg=document.getElementById('tsLegend');if(lg)lg.innerHTML=legend;
 }
 function backfillTime(){
-  const d=document.getElementById('ts_back_date').value;const h=parseFloat(document.getElementById('ts_back_h').value)||0;const r=document.getElementById('ts_back_reason').value.trim();
-  if(!d||!h){alert('请填写日期和时长');return}
-  const l=DB.get('study_time',[]);l.push({date:d,h,reason:r});DB.set('study_time',l);
-  document.getElementById('ts_back_date').value='';document.getElementById('ts_back_h').value='';document.getElementById('ts_back_reason').value='';
+  const d=document.getElementById('ts_back_date').value;
+  const min=parseFloat(document.getElementById('ts_back_min').value)||0;
+  const mod=document.getElementById('ts_back_mod').value;
+  const r=document.getElementById('ts_back_reason').value.trim();
+  if(!d||!min){alert('请填写日期和时长');return}
+  const h=parseFloat((min/60).toFixed(2));
+  const l=DB.get('study_time',[]);l.push({date:d,h,module:mod,reason:r});DB.set('study_time',l);
+  document.getElementById('ts_back_date').value='';document.getElementById('ts_back_min').value='';document.getElementById('ts_back_reason').value='';
   renderTimeStats();renderCalendar();renderOverview();
 }
 </script>
