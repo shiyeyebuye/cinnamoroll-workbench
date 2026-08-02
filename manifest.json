@@ -1,8 +1,9 @@
 {
-  "name": "玉桂狗工作台",
-  "short_name": "玉桂狗工作台",
+  "name": "玉桂狗工作台 v2",
+  "short_name": "玉桂狗v2",
   "description": "考研学习 × 财务台账 × 减脂记录 三合一",
-  "start_url": "/cat-workbench/",
+  "start_url": "/cinnamoroll-workbench/",
+  "scope": "/cinnamoroll-workbench/",
   "display": "standalone",
   "background_color": "#f0f5fc",
   "theme_color": "#d8ebf7",
